@@ -30,3 +30,4 @@ npm run build
 
 ### Integrantes
 - Sobrino Julian
+- Rodriguez Alexander
