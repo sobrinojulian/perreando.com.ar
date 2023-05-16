@@ -1,6 +1,6 @@
 Proyecto:
     Sistema encargado de gestionar los paseos de perros para los clientes. A su vez, los paseadores podran gestionar los paseos realizados.
-
+    
 Finalidad/Objetivo:
     Facilitar la gestion y programacion de paseos para los clientes y paseadores.
 
