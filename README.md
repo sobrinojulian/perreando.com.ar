@@ -10,10 +10,10 @@ Sistema encargado de gestionar los paseos de perros para los clientes. A su vez,
         - Alta de Mascotas: El listado de mascotas de la que cada cliente es Dueño. Datos de Nombre, Tipo, Raza, Tamaño, Peso, Si esta Vacunado.
         - Busqueda de paseadores: Cada cliente puede realizar una busqueda filtrada (Zona y Turno Horario) y seleccionar el paseador que desee.
         - Contratar un paseador: Cada cliente puede, con el paseador seleccionado, contratar el servicio y se debe realizar el calculo del precio final dicho paseo.
-	- [Registro/Perfil de Paseador: Al registrarse ingrese sus datos personales (En el perfil los puede modificar; Nombre, Apellido, Dni, Email, Telefono, Fecha de Nacimiento). Adicional, tarifa basica. - Podemos precargarlo]
+    [Registro/Perfil de Paseador: Al registrarse ingrese sus datos personales (En el perfil los puede modificar; Nombre, Apellido, Dni, Email, Telefono, Fecha de Nacimiento). Adicional, tarifa basica. - Podemos precargarlo]
 	- Alta de horarios y zonas a cubrir: Puede ir generando sus turnos disponibles de paseos y el precio por cada turno (Algunos turnos especificos por demanda podrian ser mas caros)
 	- Listado de paseos programados: Un listado con los paseos que tiene asignados en los proximos dias.
-	- Historal de paseos: Tanto de clientes como de paseadores, ambos pueden ver los paseos realizados/contratados.
+    Historal de paseos: Tanto de clientes como de paseadores, ambos pueden ver los paseos realizados/contratados.
 
 # Tareas a desarrollar:
     Vista Login y reigstro de un usuario
