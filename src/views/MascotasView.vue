@@ -1,3 +1,7 @@
 <script setup></script>
 
-<template></template>
+<template>
+  <RouterLink class="navbar-brand" to="/mascotas/add">
+    <button>agregar mascota</button>
+  </RouterLink>
+</template>

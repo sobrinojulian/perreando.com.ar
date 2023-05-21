@@ -9,7 +9,7 @@ Facilitar la gestion y programacion de paseos para los clientes y paseadores.
 # Funcionalidades:
 - Login de usuario: Existen 2 perfiles (TIpos de usuarios) --> Clientes y Paseadores
 - [Registro/Perfil de cliente: Al registrarse ingrese sus datos personales (En el perfil los puede modificar; Nombre, Apellido, Dni, Email, Telefono). - Podemos precargarlo]
-    - Alta de Mascotas: El listado de mascotas de la que cada cliente es Dueño. Datos de Nombre, Tipo, Raza, Tamaño, Peso, Si esta Vacunado.
+    - Alta de Mascotas: El listado de mascotas de la que cada cliente es Dueño. Datos de Nombre, Tipo, Raza, Tamaño, Peso, Si esta Vacunado, dueño.
     - Busqueda de paseadores: Cada cliente puede realizar una busqueda filtrada (Zona y Turno Horario) y seleccionar el paseador que desee.
     - Contratar un paseador: Cada cliente puede, con el paseador seleccionado, contratar el servicio y se debe realizar el calculo del precio final dicho paseo.
 

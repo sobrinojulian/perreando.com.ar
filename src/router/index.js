@@ -18,6 +18,11 @@ const router = createRouter({
       path: '/mascotas',
       name: 'mascotas',
       component: () => import('../views/MascotasView.vue')
+    },
+    {
+      path: '/mascotas/add',
+      name: 'add',
+      component: () => import('../views/AddMascotasView.vue')
     }
   ]
 })
