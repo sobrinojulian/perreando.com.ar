@@ -13,53 +13,65 @@ defineProps({
 </script>
 
 <template>
-    <h1>Paseos de mascotas</h1><hr>
-    <RouterLink to="/">
-        <button>Pagina Principal</button>
-    </RouterLink>
-    <RouterLink v-if="user.username != ''" to="/user">
-        <button>Informacion Usuario</button>
-    </RouterLink>
-    <RouterLink v-if="user.username != ''" to="/paseosProgramados">
-        <button>Paseos Programados</button>
-    </RouterLink>
-    <RouterLink v-if="user.username != ''" to="/historialPaseos">
-        <button>Historial de Paseos</button>
-    </RouterLink>
+  <h1 class="mb-4">Paseos de mascotas</h1>
+  <hr>
 
-    <!-- Botones de Usuario (Cliente que contratan paseadores) -->
-    <RouterLink v-if="user.role == 'CLIENTE'" to="/mascotas">
-        <button>Mascotas</button>
-    </RouterLink>
-    <RouterLink v-if="user.role == 'CLIENTE'" to="/busquedaPaseadores">
-        <button>Buscar Paseadores</button>
-    </RouterLink>
-    <RouterLink v-if="user.role == 'CLIENTE'" to="/contratarPaseadores">
-        <button>Contratar Paseadores</button>
-    </RouterLink>
+  <RouterLink to="/" class="btn btn-primary mr-2">
+    Página Principal
+  </RouterLink>
 
-    <!-- Botones de Usuario (Paseadores de mascotas) -->
-    <RouterLink v-if="user.role == 'PASEADOR'" to="/horariosPaseador">
-        <button>Horario</button>
-    </RouterLink>
-    <RouterLink v-if="user.role == 'PASEADOR'" to="/zonasPaseador">
-        <button>Zonas</button>
-    </RouterLink>
+  <RouterLink v-if="user.username !== ''" to="/user" class="btn btn-primary mr-2">
+    Información Usuario
+  </RouterLink>
 
-    <!-- Botones de login/registro -->
-    <RouterLink v-if="user.username != ''" to="/">
-        <button v-on:click="user.username=''">Logout</button>
-    </RouterLink>
-    <RouterLink v-show="user.username == ''" to="/login">
-        <button>Login</button>
-    </RouterLink>
-    <RouterLink v-show="user.username == ''" to="/registrar">
-        <button>Registrar</button>
-    </RouterLink>
+  <RouterLink v-if="user.username !== ''" to="/paseosProgramados" class="btn btn-primary mr-2">
+    Paseos Programados
+  </RouterLink>
 
+  <RouterLink v-if="user.username !== ''" to="/historialPaseos" class="btn btn-primary mr-2">
+    Historial de Paseos
+  </RouterLink>
 
-    <h2 v-if="user.username != ''">{{ `Nombre: ${user.nombre}, ${user.apellido} - DNI: ${user.dni}` }}</h2>
-    <hr>
+  <!-- Botones de Usuario (Cliente que contratan paseadores) -->
+  <RouterLink v-if="user.role === 'CLIENTE'" to="/mascotas" class="btn btn-primary mr-2">
+    Mascotas
+  </RouterLink>
+
+  <RouterLink v-if="user.role === 'CLIENTE'" to="/busquedaPaseadores" class="btn btn-primary mr-2">
+    Buscar Paseadores
+  </RouterLink>
+
+  <RouterLink v-if="user.role === 'CLIENTE'" to="/contratarPaseadores" class="btn btn-primary mr-2">
+    Contratar Paseadores
+  </RouterLink>
+
+  <!-- Botones de Usuario (Paseadores de mascotas) -->
+  <RouterLink v-if="user.role === 'PASEADOR'" to="/horariosPaseador" class="btn btn-primary mr-2">
+    Horario
+  </RouterLink>
+
+  <RouterLink v-if="user.role === 'PASEADOR'" to="/zonasPaseador" class="btn btn-primary mr-2">
+    Zonas
+  </RouterLink>
+
+  <!-- Botones de login/registro -->
+  <RouterLink v-if="user.username !== ''" to="/" class="btn btn-primary" v-on:click="user.username = ''">
+    Logout
+  </RouterLink>
+
+  <RouterLink v-show="user.username === ''" to="/login" class="btn btn-primary mr-2">
+    Login
+  </RouterLink>
+
+  <RouterLink v-show="user.username === ''" to="/registrar" class="btn btn-primary">
+    Registrar
+  </RouterLink>
+
+  <h2 v-if="user.username !== ''" class="mt-4">{{ `Nombre: ${user.nombre}, ${user.apellido} - DNI: ${user.dni}` }}</h2>
+  <hr>
 </template>
+
+<style></style>
+
 
 <style></style>

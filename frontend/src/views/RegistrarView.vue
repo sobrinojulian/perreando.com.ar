@@ -28,7 +28,7 @@ export default {
   methods: {
     registrar: (user, vue) => {
       userService.register(user)
-      .then(response => {
+        .then(response => {
           vue.user.username = response.data.username
           vue.user.email = response.data.email
           vue.user.password = response.data.password
@@ -39,52 +39,59 @@ export default {
           alert('Usuario registrado correctamente.')
           vue.$router.push("/");
         })
-      .catch(error => {
+        .catch(error => {
           alert("Error: Valide los datos ingresados.");
           console.log(error);
-        }); 
-
+        });
     }
   }
 }
 </script>
 
-<template>    
-    <h2>Regitro de usuario</h2>
-    
-    <form @submit.prevent="registrar(user, vue)">
-        <label>Nombre de usuario:</label>
-        <br>
-        <input v-model="user.username" type="text" placeholder="Username">
-        <br>
-        <label>Email:</label>
-        <br>
-        <input v-model="user.email" type="email" placeholder="Email address">
-        <br>
-        <label>Contraseña:</label>
-        <br>
-        <input v-model="user.password" type="password" placeholder="Password">
-        <br>
-        <label>Nombre:</label>
-        <br>
-        <input v-model="user.nombre" type="text" placeholder="Name">
-        <br>
-        <label>Apellido:</label>
-        <br>
-        <input v-model="user.apellido" type="text" placeholder="LastName">
-        <br>
-        <label>Dni:</label>
-        <br>
-        <input v-model="user.dni" type="number" placeholder="Dni">
-        <br>
-        <label>Role:</label>
-        <br>
-        <select v-model="user.role">
-            <option value="CLIENTE">Cliente</option>
-            <option value="PASEADOR">Paseador</option>
-        </select>
-        <br>
+<template>
+  <div class="container">
+    <h2 class="mb-4">Registro de usuario</h2>
 
-        <button type="submit">Registrar</button>
+    <form @submit.prevent="registrar(user, vue)">
+      <div class="form-group">
+        <label for="username">Nombre de usuario:</label>
+        <input v-model="user.username" type="text" class="form-control" id="username" placeholder="Username">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input v-model="user.email" type="email" class="form-control" id="email" placeholder="Email address">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input v-model="user.password" type="password" class="form-control" id="password" placeholder="Password">
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input v-model="user.nombre" type="text" class="form-control" id="nombre" placeholder="Name">
+      </div>
+
+      <div class="form-group">
+        <label for="apellido">Apellido:</label>
+        <input v-model="user.apellido" type="text" class="form-control" id="apellido" placeholder="LastName">
+      </div>
+
+      <div class="form-group">
+        <label for="dni">DNI:</label>
+        <input v-model="user.dni" type="number" class="form-control" id="dni" placeholder="DNI">
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role:</label>
+        <select v-model="user.role" class="form-control" id="role">
+          <option value="CLIENTE">Cliente</option>
+          <option value="PASEADOR">Paseador</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
+  </div>
 </template>

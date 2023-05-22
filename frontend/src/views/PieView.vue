@@ -9,13 +9,11 @@
         <div class="col-md-6 text-md-right">
           <ul class="list-inline">
             <li class="list-inline-item">
-              <a href="">Inicio</a>
+              <RouterLink to="/">Inicio</RouterLink>
+              
             </li>
             <li class="list-inline-item">
-              <a href="">Acerca de</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="">Contacto</a>
+              <RouterLink to="/">Contacto</RouterLink>
             </li>
           </ul>
         </div>
