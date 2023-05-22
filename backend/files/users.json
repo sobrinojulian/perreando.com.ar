@@ -1,0 +1,52 @@
+[
+	{
+		"id": 1,
+		"username": "admin",
+		"email": "admin@gmail.com",
+		"password": "admin123",
+		"nombre": "Pedro",
+		"apellido": "Ramirez",
+		"dni": "66559922",
+		"role": "ADMINISTRADOR"
+	},
+	{
+		"id": 2,
+		"username": "paseador",
+		"email": "paseador@gmail.com",
+		"password": "paseador123",
+		"nombre": "Juan",
+		"apellido": "Perez",
+		"dni": "98521634",
+		"role": "PASEADOR"
+	},
+	{
+		"id": 3,
+		"username": "cliente",
+		"email": "cliente@gmail.com",
+		"password": "cliente123",
+		"nombre": "Roxana",
+		"apellido": "Lopez",
+		"dni": "96174825",
+		"role": "CLIENTE"
+	},
+	{
+		"id": 4,
+		"username": "testre",
+		"email": "testre@gmail.com",
+		"password": "test123",
+		"nombre": "Jose",
+		"apellido": "Mendoza",
+		"dni": "85136497",
+		"role": "ADMINISTRADOR"
+	},
+	{
+		"id": 5,
+		"username": "sebaTest",
+		"email": "sebatest@gmail.com",
+		"password": "test123",
+		"nombre": "Sebastian",
+		"apellido": "Mendez",
+		"dni": 32928172,
+		"role": "CLIENTE"
+	}
+]
