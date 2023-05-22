@@ -36,7 +36,7 @@ export default {
           vue.user.apellido = response.data.apellido
           vue.user.dni = response.data.dni
           vue.user.role = response.data.role
-          alert('Usuario registrado correctamente')
+          alert('Usuario registrado correctamente.')
           vue.$router.push("/");
         })
       .catch(error => {
