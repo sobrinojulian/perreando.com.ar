@@ -7,8 +7,9 @@ class ControllerUser {
     }
 
     loguearUsuario = async (req, res) => {
-        const user = req.body
-        const userLogin = await this.service.loguearUsuario(user)
+        const username = req.params.username
+        const password = req.params.password
+        const userLogin = await this.service.loguearUsuario(username, password)
 
         if(userLogin != null){
             res.json(userLogin)
@@ -43,18 +44,25 @@ class ControllerUser {
     }
 
     actualizarUsuario = async (req, res) => {
-        const username = req.params.username
-        const user = req.body
-        const userUpdated = await this.service.actualizarUsuario(username, user)
-
-        res.json(userUpdated)
+        try{
+            const user = req.body
+            const userUpdated = await this.service.actualizarUsuario(user)
+    
+            res.json(userUpdated)
+        }catch(error){
+            console.log('Error en ControllerUser.actualizarUsuario() --> ', error)
+        }
     }
 
     eliminarUsuario = async (req, res) => {
-        const username = req.params.username
-        const userDeleted = await this.service.eliminarUsuario(username)
-
-        res.json(userDeleted)
+        try{
+            const username = req.params.username
+            const userDeleted = await this.service.eliminarUsuario(username)
+    
+            res.json(userDeleted)
+        }catch(error){
+            console.log('Error en ControllerUser.eliminarUsuario() --> ', error)
+        }
     }
 
 }

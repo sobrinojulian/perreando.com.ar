@@ -24,6 +24,10 @@ defineProps({
     Información Usuario
   </RouterLink>
 
+  <!-- <RouterLink v-if="user.username !== ''" to="/editUser" class="btn btn-primary mr-2">
+    Editar Información Usuario
+  </RouterLink> -->
+
   <RouterLink v-if="user.username !== ''" to="/paseosProgramados" class="btn btn-primary mr-2">
     Paseos Programados
   </RouterLink>
@@ -55,7 +59,8 @@ defineProps({
   </RouterLink>
 
   <!-- Botones de login/registro -->
-  <RouterLink v-if="user.username !== ''" to="/" class="btn btn-primary" v-on:click="user.username = ''">
+  <RouterLink v-if="user.username !== ''" to="/" class="btn btn-primary" v-on:click="() => {user.username = ''
+                                                                                            user.role = ''}">
     Logout
   </RouterLink>
 
@@ -66,6 +71,8 @@ defineProps({
   <RouterLink v-show="user.username === ''" to="/registrar" class="btn btn-primary">
     Registrar
   </RouterLink>
+
+  <hr>
 
   <h2 v-if="user.username !== ''" class="mt-4">{{ `Nombre: ${user.nombre}, ${user.apellido} - DNI: ${user.dni}` }}</h2>
   <hr>

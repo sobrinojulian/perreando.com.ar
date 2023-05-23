@@ -6,11 +6,11 @@ class ServiceUser{
         this.model = new UserModel()
     }
 
-    loguearUsuario = async user => {
-        const userLogin = await this.model.obtenerUsuarios(user.username)
+    loguearUsuario = async (username, password) => {
+        const userLogin = await this.model.obtenerUsuarios(username)
 
         if(JSON.stringify(userLogin) != '{}'){
-            if(userLogin.username == user.username && userLogin.password == user.password){
+            if(userLogin.username === username && userLogin.password === password){
                 return userLogin
             }else{
                 console.log('Error: Password incorrecta')
@@ -24,9 +24,6 @@ class ServiceUser{
 
     registrarUsuario = async user => {
         const userRegistered = await this.model.guardarUsuario(user)
-
-        //Validacion de registro de usuario (PENDIENTE)
-
         return userRegistered
     }
 
@@ -40,14 +37,22 @@ class ServiceUser{
         return userSaved
     }
 
-    actualizarUsuario = async (username, user) => {
-        const userUpdated = await this.model.actualizarUsuario(username, user)
-        return userUpdated
+    actualizarUsuario = async user => {
+        try{
+            const userUpdated = await this.model.actualizarUsuario(user)
+            return userUpdated
+        }catch(error){
+            console.log('Error en ServiceUser.actualizarUsuario() --> ', error)
+        }
     }
 
     eliminarUsuario = async username => {
-        const userDeleted = await this.model.eliminarUsuario(username)
-        return userDeleted
+        try{
+            const userDeleted = await this.model.eliminarUsuario(username)
+            return userDeleted
+        }catch(error){
+            console.log('Error en ServiceUser.eliminarUsuario() --> ', error)
+        }
     }
 
 }

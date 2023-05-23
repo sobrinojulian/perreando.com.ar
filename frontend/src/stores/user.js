@@ -10,10 +10,13 @@ export const useUserStore = defineStore("user", {
                 nombre: "",
                 apellido: "",
                 dni: "",
+                fechaNacimiento: "",
+                telefono: "",
                 role: ""
             }
         }
-    }/*,
+    }
+    /*,
     actions: {
         cambiarNombre(user){
             this.user.nombre = user.nombre
