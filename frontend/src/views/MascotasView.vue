@@ -2,6 +2,6 @@
 
 <template>
   <RouterLink class="navbar-brand" to="/mascotas/add">
-    <button>agregar mascota</button>
+    <button class="btn btn-primary mb-4">agregar mascota</button>
   </RouterLink>
 </template>

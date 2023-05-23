@@ -18,7 +18,7 @@ class MascotasService {
     }
   }
 
-  static async get(id) {
+  static async get(id) {  
     try {
       const mascotas = await axios.get(`${config.backend.host}/api/${config.backend.apiVersion}/mascotas/${id}`, {
         headers: {
