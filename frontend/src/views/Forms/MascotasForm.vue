@@ -1,60 +1,56 @@
 
 <template>
-  <div>
-    <h1>Formulario de Mascota</h1>
+  <div class="container">
+    <h2 class="mb-4">Formulario de Mascota</h2>
 
     <form @submit="submitForm">
-      <div>
+      <div class="form-group">
         <label for="name">Nombre:</label>
-        <input type="text" id="name" v-model="formData.name" required>
+        <input type="text" id="name" v-model="formData.name" class="form-control" required>
       </div>
 
-      <div>
+      <div class="form-group">
         <label for="ownerId">ID del Propietario:</label>
-        <input type="text" id="ownerId" v-model="formData.ownerId" required>
+        <input type="text" id="ownerId" v-model="formData.ownerId" class="form-control" required>
       </div>
 
-      <div>
+      <div class="form-group">
         <label for="vaccinated">Vacunado:</label>
-        <input type="checkbox" id="vaccinated" v-model="formData.vaccinated">
+        <input type="checkbox" id="vaccinated" v-model="formData.vaccinated" class="form-check">
       </div>
 
-      <div>
+      <div class="form-group">
         <label for="size">Tamaño:</label>
-        <select id="size" v-model="formData.size" required>
+        <select id="size" v-model="formData.size" required class="form-select">
           <option value="small">Pequeño</option>
           <option value="medium">Mediano</option>
           <option value="big">Grande</option>
         </select>
       </div>
 
-      <div>
+      <div class="form-group">
         <label for="breed">Raza:</label>
-        <input type="text" id="breed" v-model="formData.breed" required>
+        <input type="text" id="breed" v-model="formData.breed" required class="form-control">
       </div>
 
-      <div>
+      <div class="form-group">
         <label for="weight">Peso:</label>
-        <input type="text" id="weight" v-model="formData.weight" required>
+        <input type="text" id="weight" v-model="formData.weight" required class="form-control">
       </div>
 
-      <button type="submit">Guardar</button>
+      <button type="submit" class="btn btn-primary mt-4">Guardar</button>
+      
+      
+      <div class="alert alert-danger mt-4" role="alert" v-if="msg">
+        {{msg}}
+      </div>
+      
     </form>
-
-    <div v-if="isSubmitted">
-      <h2>Información de la Mascota:</h2>
-      <p><strong>Nombre:</strong> {{ formData.name }}</p>
-      <p><strong>ID del Propietario:</strong> {{ formData.ownerId }}</p>
-      <p><strong>Vacunado:</strong> {{ formData.vaccinated ? 'Sí' : 'No' }}</p>
-      <p><strong>Tamaño:</strong> {{ formData.size }}</p>
-      <p><strong>Raza:</strong> {{ formData.breed }}</p>
-      <p><strong>Peso:</strong> {{ formData.weight }}</p>
-    </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import MascotasService from "../../services/mascotas-service";
 
 export default {
@@ -67,8 +63,11 @@ export default {
       breed: 'pastor aleman',
       weight: '19kg'
     });
-
-    const isSubmitted = ref(false);
+    
+    
+    const state = reactive({
+      msg: ''
+    });
 
     const isValidMascota = (mascotaData) => {
       //TODO: validar que los datos de la mascota sean validos.
@@ -77,20 +76,25 @@ export default {
 
     const submitForm = (event) => {
       event.preventDefault();
-      isSubmitted.value = true;
       const mascotaData = {
         ...formData.value
       }
+     
+      state.msg = "loading..."; //TODO: improve this message later.
+ 
       if(isValidMascota(mascotaData)){
-        MascotasService.create(mascotaData)
+        MascotasService.create(mascotaData).then(()=>{
+          state.msg = "La mascota ha sido agregada exitosamente."
+        }).catch((err)=>{
+          state.msg = "Se produjo un error al intentar guardar la mascota."
+        })
       } else {
-         //TODO: mostrar msj de error en el formulario.
+        state.msg = "Los datos introducidos para la mascota son invalidos."
       }
     };
 
     return {
       formData,
-      isSubmitted,
       submitForm
     };
   }
