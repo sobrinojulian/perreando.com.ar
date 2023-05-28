@@ -1,0 +1,29 @@
+[
+    {
+		"id": 1,
+		"zonaId": 2,
+		"clienteId": 1,
+        "horarioInicio": "20:00",
+        "cantidadHoras": 2,
+        "precio": 600,
+        "descuento": 100
+    },
+    {
+		"id": 2,
+		"zonaId": 1,
+		"clienteId": 3,
+        "horarioInicio": "20:00",
+        "cantidadHoras": 1,
+        "precio": 300,
+        "descuento": 100
+    },
+    {
+		"id": 3,
+		"zonaId": 3,
+		"clienteId": 5,
+        "horarioInicio": "20:00",
+        "cantidadHoras": 1,
+        "precio": 300,
+        "descuento": 100
+    }
+]

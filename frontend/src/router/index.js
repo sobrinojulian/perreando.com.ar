@@ -9,11 +9,34 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
+
+    //Rutas de Usuario
     {
       path: '/user',
       name: 'user',
       component: () => import('../views/UserView.vue')
     },
+    {
+      path: '/editUser',
+      name: 'editUser',
+      component: () => import('../views/EditUserView.vue')
+    },
+    {
+      path: '/deleteUser',
+      name: 'deleteUser',
+      component: () => import('../views/DeleteUserView.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue')
+    },
+    {
+      path: '/registrar',
+      name: 'registrar',
+      component: () => import('../views/RegistrarView.vue')
+    },
+
     {
       path: '/paseosProgramados',
       name: 'paseosProgramados',
@@ -35,11 +58,6 @@ const router = createRouter({
       component: () => import('../views/AddMascotasView.vue')
     },
     {
-      path: '/busquedaPaseadores',
-      name: 'busquedaPaseadores',
-      component: () => import('../views/BusquedaPaseadoresView.vue')
-    },
-    {
       path: '/contratarPaseadores',
       name: 'contratarPaseadores',
       component: () => import('../views/ContratarPaseadoresView.vue')
@@ -53,16 +71,6 @@ const router = createRouter({
       path: '/zonasPaseador',
       name: 'zonasPaseador',
       component: () => import('../views/ZonasPaseadorView.vue')
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/LoginView.vue')
-    },
-    {
-      path: '/registrar',
-      name: 'registrar',
-      component: () => import('../views/RegistrarView.vue')
     }
   ]
 })

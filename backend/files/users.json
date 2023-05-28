@@ -1,13 +1,15 @@
 [
 	{
 		"id": 1,
-		"username": "admin",
-		"email": "admin@gmail.com",
-		"password": "admin123",
+		"username": "grupo4-test",
+		"email": "grupo4-test@gmail.com",
+		"password": "grupo123",
 		"nombre": "Pedro",
 		"apellido": "Ramirez",
 		"dni": "66559922",
-		"role": "ADMINISTRADOR"
+		"fechaNacimiento": "1998-05-12",
+		"telefono": 1123985746,
+		"role": "CLIENTE"
 	},
 	{
 		"id": 2,
@@ -17,6 +19,8 @@
 		"nombre": "Juan",
 		"apellido": "Perez",
 		"dni": "98521634",
+		"fechaNacimiento": "1998-05-12",
+		"telefono": 1123985746,
 		"role": "PASEADOR"
 	},
 	{
@@ -24,9 +28,11 @@
 		"username": "cliente",
 		"email": "cliente@gmail.com",
 		"password": "cliente123",
-		"nombre": "Roxana",
+		"nombre": "Romina",
 		"apellido": "Lopez",
 		"dni": "96174825",
+		"fechaNacimiento": "1998-05-12",
+		"telefono": 1123985746,
 		"role": "CLIENTE"
 	},
 	{
@@ -37,7 +43,9 @@
 		"nombre": "Jose",
 		"apellido": "Mendoza",
 		"dni": "85136497",
-		"role": "ADMINISTRADOR"
+		"fechaNacimiento": "1998-05-12",
+		"telefono": 1123985746,
+		"role": "PASEADOR"
 	},
 	{
 		"id": 5,
@@ -47,6 +55,20 @@
 		"nombre": "Sebastian",
 		"apellido": "Mendez",
 		"dni": 32928172,
+		"fechaNacimiento": "1998-05-12",
+		"telefono": 1123985746,
+		"role": "CLIENTE"
+	},
+	{
+		"id": 6,
+		"username": "facundo123",
+		"email": "facundo@gmail.com",
+		"password": "facundo-123",
+		"nombre": "Facundo",
+		"apellido": "Ramirez",
+		"dni": 56748905,
+		"fechaNacimiento": "2023-05-10",
+		"telefono": 1164897258,
 		"role": "CLIENTE"
 	},
 	{

@@ -8,12 +8,7 @@ class User {
 
     getNewUserId = users =>{
         const longitud = users.length
-        console.log('longitud:' + longitud)
-
-        const newId = (users[longitud - 1]?.id || 0) + 1
-        //const newId = longitud? parseInt(users[longitud - 1]?.id || 0) + 1 : 1
-        console.log('newId:' + newId)
-    
+        const newId = (users[longitud - 1]?.id || 0) + 1    
         return newId
     }
 
@@ -53,13 +48,13 @@ class User {
         return newUser
     }
 
-    actualizarUsuario = async (username, user) => {
+    actualizarUsuario = async user => {
         let users = []
         try{
             users = JSON.parse(await this.readFile())
         }catch {}
 
-        const index = users.findIndex(u => u.username === username)
+        const index = users.findIndex(u => u.username === user.username)
         if(index != -1){ //Retorna -1 sino existe el id ingresado
             const oldUser = users[index]
             const newUser = {...oldUser, ...user}

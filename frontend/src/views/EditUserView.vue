@@ -15,21 +15,21 @@ export default {
     return {
       vue: this,
       user: {
-        username: "",
-        email: "",
-        password: "",
-        nombre: "",
-        apellido: "",
-        dni: "",
-        fechaNacimiento: "",
-        telefono: "",
-        role: ""
+        username: this.user.username,
+        email: this.user.email,
+        password: this.user.password,
+        nombre: this.user.nombre,
+        apellido: this.user.apellido,
+        dni: this.user.dni,
+        fechaNacimiento: this.user.fechaNacimiento,
+        telefono: this.user.telefono,
+        role: this.user.role
       }
     };
   },
   methods: {
-    registrar: (user, vue) => {
-      userService.register(user)
+    editar: (user, vue) => {
+      userService.editUser(user)
         .then(response => {
           vue.user.username = response.data.username
           vue.user.email = response.data.email
@@ -40,8 +40,8 @@ export default {
           vue.user.fechaNacimiento = response.data.fechaNacimiento
           vue.user.telefono = response.data.telefono
           vue.user.role = response.data.role
-          alert('Usuario registrado correctamente.')
-          vue.$router.push("/");
+          alert('Datos de usuario actualizado correctamente.')
+          vue.$router.push("/user");
         })
         .catch(error => {
           alert("Error: Valide los datos ingresados.");
@@ -54,21 +54,12 @@ export default {
 
 <template>
   <div class="container">
-    <h2 class="mb-4">Registro de usuario</h2><hr>
+    <h2 class="mb-4">Editar informacion de usuario</h2>
+    <hr>
 
-    <form @submit.prevent="registrar(user, vue)">
-      <div class="form-group">
-        <label for="username">Nombre de usuario:</label>
-        <input v-model="user.username" type="text" class="form-control" id="username" placeholder="Username">
-      </div>
-
-      <div class="form-group">
-        <label for="password">Contraseña:</label>
-        <input v-model="user.password" type="password" class="form-control" id="password" placeholder="Password">
-      </div>
+    <form @submit.prevent="editar(user, vue)">
 
       <!-- Datos Personales de usuario -->
-      <br>
       <h5 class="mb-4">Datos Personales</h5>
 
       <div class="form-group">
@@ -88,12 +79,13 @@ export default {
 
       <div class="form-group">
         <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-        <input v-model="user.fechaNacimiento" type="date" class="form-control" id="fechaNacimiento" placeholder="Date of Birth">
+        <input v-model="user.fechaNacimiento" type="date" class="form-control" id="fechaNacimiento"
+          placeholder="Date of Birth">
       </div>
 
       <!-- Datos de Contacto de usuario -->
       <br>
-      <h5 class="mb-4">Datos de Contacto</h5>      
+      <h5 class="mb-4">Datos de Contacto</h5>
 
       <div class="form-group">
         <label for="email">Email:</label>
@@ -118,7 +110,11 @@ export default {
       </div>
 
       <br>
-      <button type="submit" class="btn btn-primary">Registrar</button>
+      <button type="submit" class="btn btn-primary" style="margin-right: 10px">Editar</button>
+      <RouterLink to="/user">
+        <button class="btn btn-primary" style="margin-right: 10px">Volver</button>
+      </RouterLink>
     </form>
+
   </div>
 </template>
