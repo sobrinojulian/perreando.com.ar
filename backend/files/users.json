@@ -48,5 +48,15 @@
 		"apellido": "Mendez",
 		"dni": 32928172,
 		"role": "CLIENTE"
+	},
+	{
+		"id": 6,
+		"username": "",
+		"email": "",
+		"password": "",
+		"nombre": "",
+		"apellido": "",
+		"dni": "",
+		"role": ""
 	}
 ]
