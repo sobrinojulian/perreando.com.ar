@@ -54,7 +54,7 @@ export default {
 
 <template>
   <div class="container">
-    <h2 class="mb-4">Registro de usuario</h2>
+    <h2 class="mb-4">Registro de usuario</h2><hr>
 
     <form @submit.prevent="registrar(user, vue)">
       <div class="form-group">
@@ -117,7 +117,7 @@ export default {
         </select>
       </div>
 
-      <hr>
+      <br>
       <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
   </div>

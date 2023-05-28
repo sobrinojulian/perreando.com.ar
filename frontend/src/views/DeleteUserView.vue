@@ -47,14 +47,14 @@ export default {
 
 <template>
   <div class="container">
-    <h2 class="mb-4">Eliminar usuario</h2>
+    <h2 class="mb-4">Eliminar usuario</h2><hr>
 
     <form @submit.prevent="eliminar(username, userBlank, vue)">
       <div class="form-group">
         <label for="username">¿Esta seguro que desea eliminar su usuario <b>{{ username }}</b>?</label>
       </div>
 
-      <hr>
+      <br>
       <button type="submit" class="btn btn-primary" style="margin-right: 10px">Si</button>
       <RouterLink to="/user">
         <button class="btn btn-primary" style="margin-right: 10px">No</button>

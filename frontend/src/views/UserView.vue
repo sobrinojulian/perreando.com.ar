@@ -18,13 +18,11 @@ export default {
 }
 </script>
 
-<template>
-    
+<template>    
   <div class="container">
-    <h2 class="mb-4">Informacion de usuario</h2>
+    <h2 class="mb-4">Informacion de usuario</h2><hr>
 
-    <form>
-      
+    <form>      
       <h5 class="mb-4">El rol del usuario <b>{{ vue.user.username }}</b> es: <b>{{ vue.user.role }}</b></h5>
 
       <!-- Datos Personales de usuario -->
@@ -45,7 +43,7 @@ export default {
 
       <!-- Datos de Contacto de usuario -->
       <br>
-      <h5 class="mb-4">Datos de Contacto</h5>      
+      <h5 class="mb-4">Datos de Contacto</h5>
 
       <div class="form-group">
         <label for="email">Email: <b>{{ vue.user.email }}</b></label>
@@ -55,7 +53,7 @@ export default {
       </div>
     </form>
     
-    <hr>
+    <br>
     <RouterLink to="/editUser">
         <button class="btn btn-primary" style="margin-right: 10px">Editar</button>
     </RouterLink>

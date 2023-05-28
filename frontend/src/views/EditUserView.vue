@@ -31,21 +31,21 @@ export default {
     editar: (user, vue) => {
       userService.editUser(user)
         .then(response => {
-            vue.user.username = response.data.username
-            vue.user.email = response.data.email
-            vue.user.password = response.data.password
-            vue.user.nombre = response.data.nombre
-            vue.user.apellido = response.data.apellido
-            vue.user.dni = response.data.dni
-            vue.user.fechaNacimiento = response.data.fechaNacimiento
-            vue.user.telefono = response.data.telefono
-            vue.user.role = response.data.role
-            alert('Datos de usuario actualizado correctamente.')
-            vue.$router.push("/user");
+          vue.user.username = response.data.username
+          vue.user.email = response.data.email
+          vue.user.password = response.data.password
+          vue.user.nombre = response.data.nombre
+          vue.user.apellido = response.data.apellido
+          vue.user.dni = response.data.dni
+          vue.user.fechaNacimiento = response.data.fechaNacimiento
+          vue.user.telefono = response.data.telefono
+          vue.user.role = response.data.role
+          alert('Datos de usuario actualizado correctamente.')
+          vue.$router.push("/user");
         })
         .catch(error => {
-            alert("Error: Valide los datos ingresados.");
-            console.log(error);
+          alert("Error: Valide los datos ingresados.");
+          console.log(error);
         });
     }
   }
@@ -55,6 +55,7 @@ export default {
 <template>
   <div class="container">
     <h2 class="mb-4">Editar informacion de usuario</h2>
+    <hr>
 
     <form @submit.prevent="editar(user, vue)">
 
@@ -78,12 +79,13 @@ export default {
 
       <div class="form-group">
         <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-        <input v-model="user.fechaNacimiento" type="date" class="form-control" id="fechaNacimiento" placeholder="Date of Birth">
+        <input v-model="user.fechaNacimiento" type="date" class="form-control" id="fechaNacimiento"
+          placeholder="Date of Birth">
       </div>
 
       <!-- Datos de Contacto de usuario -->
       <br>
-      <h5 class="mb-4">Datos de Contacto</h5>      
+      <h5 class="mb-4">Datos de Contacto</h5>
 
       <div class="form-group">
         <label for="email">Email:</label>
@@ -107,12 +109,12 @@ export default {
         </select>
       </div>
 
-      <hr>
+      <br>
       <button type="submit" class="btn btn-primary" style="margin-right: 10px">Editar</button>
       <RouterLink to="/user">
         <button class="btn btn-primary" style="margin-right: 10px">Volver</button>
       </RouterLink>
     </form>
-    
+
   </div>
 </template>

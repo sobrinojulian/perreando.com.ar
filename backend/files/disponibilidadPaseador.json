@@ -1,0 +1,37 @@
+[
+    {
+		"disponibilidadId": 1,
+		"zona": "Caballito",
+		"horario": "09:00",
+        "precio": "300",
+		"paseadorId": 4
+    },
+    {
+		"disponibilidadId": 2,
+		"zona": "Almagro",
+		"horario": "10:00",
+        "precio": "300",
+		"paseadorId": 4
+    },
+    {
+		"disponibilidadId": 3,
+		"zona": "Avellaneda",
+		"horario": "19:00",
+        "precio": "500",
+		"paseadorId": 2
+    },
+    {
+		"disponibilidadId": 4,
+		"zona": "Quilmes",
+		"horario": "20:00",
+        "precio": "500",
+		"paseadorId": 2
+    },
+    {
+		"disponibilidadId": 5,
+		"zona": "Flores",
+		"horario": "11:00",
+        "precio": "300",
+		"paseadorId": 4
+    }
+]

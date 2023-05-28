@@ -58,11 +58,6 @@ const router = createRouter({
       component: () => import('../views/AddMascotasView.vue')
     },
     {
-      path: '/busquedaPaseadores',
-      name: 'busquedaPaseadores',
-      component: () => import('../views/BusquedaPaseadoresView.vue')
-    },
-    {
       path: '/contratarPaseadores',
       name: 'contratarPaseadores',
       component: () => import('../views/ContratarPaseadoresView.vue')

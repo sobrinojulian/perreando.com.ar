@@ -47,7 +47,7 @@ export default {
 
 <template>
   <div class="container">
-    <h2 class="mb-4">Iniciar sesión</h2>
+    <h2 class="mb-4">Iniciar sesión</h2><hr>
 
     <form @submit.prevent="loguear(user, vue)">
       <div class="form-group">
@@ -60,6 +60,7 @@ export default {
         <input v-model="user.password" type="password" class="form-control" id="password" placeholder="Password">
       </div>
 
+      <br>
       <button type="submit" class="btn btn-primary">Ingresar</button>
     </form>
   </div>
