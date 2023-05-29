@@ -70,5 +70,15 @@
 		"fechaNacimiento": "2023-05-10",
 		"telefono": 1164897258,
 		"role": "CLIENTE"
+	},
+	{
+		"id": 6,
+		"username": "",
+		"email": "",
+		"password": "",
+		"nombre": "",
+		"apellido": "",
+		"dni": "",
+		"role": ""
 	}
 ]
