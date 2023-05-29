@@ -121,4 +121,5 @@ export default {
       <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
   </div>
+  <br><br><br><br>
 </template>
