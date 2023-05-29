@@ -4,6 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import App from './App.vue'
 import router from './router'
+import { ErrorMessage, Field, Form } from 'vee-validate'
 
 const app = createApp(App)
 const firebaseConfig = {

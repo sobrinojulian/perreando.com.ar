@@ -3,25 +3,35 @@
   <div class="container">
     <h2 class="mb-4">Formulario de Mascota</h2>
 
-    <form @submit="submitForm">
+    <Form @submit="submitForm" v-slot="{ errors }">
       <div class="form-group">
         <label for="name">Nombre:</label>
-        <input type="text" id="name" v-model="formData.name" class="form-control" required>
+        <Field name="name" type="text" id="name" v-model="formData.data.name" class="form-control" :class="{'is-invalid': errors.name}" :rules="isRequired"/>
+        <ErrorMessage name="name" v-slot="{ message }">
+            <div class="alert alert-danger">
+              <span>{{ message }}</span>
+            </div>
+        </ErrorMessage>
       </div>
 
       <div class="form-group">
         <label for="ownerId">ID del Propietario:</label>
-        <input type="text" id="ownerId" v-model="formData.ownerId" class="form-control" required>
+        <Field name="ownerId" type="text" id="ownerId" v-model="formData.data.ownerId" class="form-control" :class="{'is-invalid': errors.ownerId}" :rules="isRequired"/>
+        <ErrorMessage name="ownerId" v-slot="{ message }">
+            <div class="alert alert-danger">
+              <span>{{ message }}</span>
+            </div>
+        </ErrorMessage>
       </div>
 
       <div class="form-group">
         <label for="vaccinated">Vacunado:</label>
-        <input type="checkbox" id="vaccinated" v-model="formData.vaccinated" class="form-check">
+        <Field name="vaccinated" type="checkbox" id="vaccinated" v-model="formData.data.vaccinated" class="form-check"/>
       </div>
 
       <div class="form-group">
         <label for="size">Tamaño:</label>
-        <select id="size" v-model="formData.size" required class="form-select">
+        <select id="size" v-model="formData.data.size" required class="form-select">
           <option value="small">Pequeño</option>
           <option value="medium">Mediano</option>
           <option value="big">Grande</option>
@@ -30,66 +40,99 @@
 
       <div class="form-group">
         <label for="breed">Raza:</label>
-        <input type="text" id="breed" v-model="formData.breed" required class="form-control">
+        <Field name="breed" type="text" id="breed" v-model="formData.data.breed" required class="form-control" :class="{'is-invalid': errors.breed}" :rules="isRequired"/>
+        <ErrorMessage name="breed" v-slot="{ message }">
+            <div class="alert alert-danger">
+              <span>{{ message }}</span>
+            </div>
+        </ErrorMessage>
       </div>
 
       <div class="form-group">
         <label for="weight">Peso:</label>
-        <input type="text" id="weight" v-model="formData.weight" required class="form-control">
+        <Field name="weight" type="text" id="weight" v-model="formData.data.weight" required class="form-control" :class="{'is-invalid': errors.weight}" :rules="isRequired"/>
+        <ErrorMessage name="weight" v-slot="{ message }">
+            <div class="alert alert-danger">
+              <span>{{ message }}</span>
+            </div>
+        </ErrorMessage>
       </div>
 
-      <button type="submit" class="btn btn-primary mt-4">Guardar</button>
+      <button type="submit" :disabled="formData.status.loading" class="btn btn-primary mt-4">Guardar</button>
       
-      
-      <div class="alert alert-danger mt-4" role="alert" v-if="msg">
-        {{msg}}
+      <div class="alert mt-4" 
+      :class="{'alert-warning': formData.status.loading, 'alert-danger': formData.status.error, 'alert-success': !formData.status.error && !formData.status.loading}" 
+      role="alert" v-if="formData.status.msg">
+        <p>{{formData.status.msg}}</p>
       </div>
       
-    </form>
+    </Form>
   </div>
 </template>
 
 <script>
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 import MascotasService from "../../services/mascotas-service";
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../../stores/user';
+import { Field, Form, ErrorMessage } from 'vee-validate';
+
 
 export default {
+  components: {
+    Form,
+    Field,
+    ErrorMessage
+  },
   setup() {
+    const storeUser = useUserStore()
+    const { user } = storeToRefs(storeUser)
     const formData = ref({
-      name: 'Teddy',
-      ownerId: '0',
-      vaccinated: true,
-      size: 'big',
-      breed: 'pastor aleman',
-      weight: '19kg'
-    });
-    
-    
-    const state = reactive({
-      msg: ''
+      data:{
+        name: 'Teddy',
+        ownerId: '0',
+        vaccinated: true,
+        size: 'big',
+        breed: 'pastor aleman',
+        weight: '19kg'
+      },
+      status: {
+        loading: false,
+        error: false,
+        msg: ''
+      }
     });
 
-    const isValidMascota = (mascotaData) => {
-      //TODO: validar que los datos de la mascota sean validos.
-      return true; 
+
+    const isValidMascota = async (mascotaData) => {
+      return true;
     }
 
+
     const submitForm = (event) => {
-      event.preventDefault();
+      //TODO: Leer el ownerId del usuario logueado cuando cargue la sesion.
       const mascotaData = {
-        ...formData.value
+        ...formData.value.data,
+        ownerId: user.dni
       }
-     
-      state.msg = "loading..."; //TODO: improve this message later.
- 
+      
+      
+      formData.value.status.msg = "loading..."; //TODO: improve this message later.
+      formData.value.status.loading = true;
+      
       if(isValidMascota(mascotaData)){
         MascotasService.create(mascotaData).then(()=>{
-          state.msg = "La mascota ha sido agregada exitosamente."
+          formData.value.status.msg = "La mascota ha sido agregada exitosamente."
+          formData.value.status.error = false;
         }).catch((err)=>{
-          state.msg = "Se produjo un error al intentar guardar la mascota."
+          formData.value.status.msg = "Se produjo un error al intentar guardar la mascota."
+          formData.value.status.error = true;
+        }).finally(() => {
+          formData.value.status.loading = false;
         })
       } else {
-        state.msg = "Los datos introducidos para la mascota son invalidos."
+        formData.value.status.msg = "Los datos introducidos para la mascota son invalidos."
+        formData.value.status.type = "alert-danger";
       }
     };
 
@@ -97,6 +140,21 @@ export default {
       formData,
       submitForm
     };
+  },
+  methods: {
+    isRequired(value){
+      if(value){
+        return true;
+      }
+      return 'El campo es requerido.';
+    },
+    // isValidName(value){
+    //   console.log("valor:", value, /([a-zA-Z ]){0,50}/.test(value));
+    //   if(value && /([a-zA-Z ]){0,50}/.test(value)){
+    //     return true;
+    //   }
+    //   return 'Debe ingresar un dato válido.';
+    // },
   }
 };
 </script>
