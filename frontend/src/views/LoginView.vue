@@ -52,12 +52,12 @@ export default {
     <form @submit.prevent="loguear(user, vue)">
       <div class="form-group">
         <label for="username">Nombre de usuario:</label>
-        <input v-model="user.username" type="text" class="form-control" id="username" placeholder="Username">
+        <input v-model="user.username" type="text" class="form-control" id="username" placeholder="Username" required>
       </div>
 
       <div class="form-group">
         <label for="password">Contraseña:</label>
-        <input v-model="user.password" type="password" class="form-control" id="password" placeholder="Password">
+        <input v-model="user.password" type="password" class="form-control" id="password" placeholder="Password" required>
       </div>
 
       <br>

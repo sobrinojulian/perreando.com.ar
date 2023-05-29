@@ -21,32 +21,32 @@ export default {
         };
     },
     methods: {
-        buscar: (zona, horario, vue) => {
-            vue.busquedaRealizada = true
-            vue.textoSearch = (zona != '' && horario != '') ? "Zona y Horario" : (zona != '') ? "Zona" : (horario != '') ? "Horario" : ""
-        }
         // buscar: (zona, horario, vue) => {
-        //     paseadorService.busquedaPaseadores(zona, horario)
-        //         .then(response => {
-        //             vue.textoSearch = vue.textoSearch || (zona != '' && horario != '') ? "zona y horario" : (zona != '') ? "zona" : (horario != '') ? "horario" : ""
-
-        //             vue.paseador.paseadorId = response.data.paseadorId
-        //             vue.paseador.nombre = response.data.nombre
-        //             vue.paseador.apellido = response.data.apellido
-        //             vue.paseador.dni = response.data.dni
-        //             vue.paseador.email = response.data.email
-        //             vue.paseador.telefono = response.data.telefono
-        //             vue.paseador.zona = response.data.zona
-        //             vue.paseador.horario = response.data.horario
-        //             vue.paseador.precio = response.data.precio
-        //             vue.paseador.disponibilidadId = response.data.disponibilidadId
-        //             vue.busquedaRealizada = true
-        //         })
-        //         .catch(error => {
-        //             alert("Error: No se pudo realizar la busqueda.");
-        //             console.log(error);
-        //         });
+        //     vue.busquedaRealizada = true
+        //     vue.textoSearch = (zona != '' && horario != '') ? "Zona y Horario" : (zona != '') ? "Zona" : (horario != '') ? "Horario" : ""
         // }
+        buscar: (zona, horario, vue) => {
+            paseadorService.busquedaPaseadores(zona, horario)
+                .then(response => {
+                    vue.textoSearch = vue.textoSearch || (zona != '' && horario != '') ? "zona y horario" : (zona != '') ? "zona" : (horario != '') ? "horario" : ""
+
+                    vue.paseador.paseadorId = response.data.paseadorId
+                    vue.paseador.nombre = response.data.nombre
+                    vue.paseador.apellido = response.data.apellido
+                    vue.paseador.dni = response.data.dni
+                    vue.paseador.email = response.data.email
+                    vue.paseador.telefono = response.data.telefono
+                    vue.paseador.zona = response.data.zona
+                    vue.paseador.horario = response.data.horario
+                    vue.paseador.precio = response.data.precio
+                    vue.paseador.disponibilidadId = response.data.disponibilidadId
+                    vue.busquedaRealizada = true
+                })
+                .catch(error => {
+                    alert("Error: No se pudo realizar la busqueda." + error);
+                    console.log(error);
+                });
+        }
     }
 }
 </script>

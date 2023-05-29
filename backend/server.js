@@ -20,6 +20,6 @@ app.use('/api/paseador', new PaseadorRouter().start())
 // Inicializacion del servidor
 // ---------------------------------------
 const PORT = config.PORT
-const server = app.listen(PORT, () => console.log(`Servidor http express escuchando en el puerto http://localhost:${PORT}`))
+const server = app.listen(PORT, () => console.log(`Servidor escuchando en http://localhost:${PORT}`))
 server.on('Error', error => console.log(`Error en servidor: ${error.message}`))
 // ---------------------------------------

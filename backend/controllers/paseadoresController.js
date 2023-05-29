@@ -8,6 +8,7 @@ class ControllerPaseador {
 
     filtrarPaseadores = async (req, res) => {
         try{
+            console.log(req.params.zona + ' - ' + req.params.horario);
             const zona = req.params.zona
             const horario = req.params.horario
             const paseadores = await this.service.filtrarPaseadores(zona, horario)

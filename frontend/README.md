@@ -33,3 +33,50 @@ Historal de paseos: Tanto de clientes como de paseadores, ambos pueden ver los p
 - Backend para la generacion de turnos disponibles
 - Vista listado de paseos programados para el paseador + Consulta en el backend
 - Vista Historial de los paseos, indistinto por tipo de usuario + Consulta en el backend
+
+# Curso de tareas
+Tareas realizadas:
+
+	Usuario
+	- Login de usuario
+	- Registro de usuario
+	- Informacion de usuario
+	- Editar usuario
+	- Eliminar usuario
+	Contratacion
+	- Busqueda paseadores con disitintos filtros
+	Mascota
+	- Carga de mascotas
+	- Validacion de campos en la carga usando Vee validated
+	- Validor si se cargo o no correctamente
+	- Inhabilitar para que se guarde correctamente
+
+----------------------
+
+Tareas en curso:
+
+	Contratacion
+	- Contratacion de paseadores
+	Mascota
+	- Vinculacion del Cliente con cada mascota
+
+----------------------
+
+Tareas finalizadas:
+
+	Contratacion (Seba)
+	- Alta de paseo contratado
+	- Seleccionar mascota/s a pasear
+	- Aumento de ganancia en Paseadores
+	Mascota (Judith)
+	- Mostrar Mascotas (De cada cliente)
+	- Baja de mascota
+	Pagina Principal (Ale)
+	- Diseño de la pantalla (Animaciones, etc)
+	Paseos programados (Julian)
+	- Listados del dia de la fecha (En adelante)
+	Historial de paseos (Julian)
+	- Listados de paseos antiguos
+	Disponibilidad Paseadores (Zonas y horarios)
+	- Armar vista de disponibilidad
+	- Carga automatica basado en un rango horario y duracion de cada paseo

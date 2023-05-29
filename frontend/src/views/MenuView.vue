@@ -15,7 +15,7 @@ defineProps({
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="#">Paseos de mascotas</a>
+      <a class="navbar-brand">Paseos de mascotas</a>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
