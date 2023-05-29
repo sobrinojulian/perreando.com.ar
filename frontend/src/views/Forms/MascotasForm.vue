@@ -16,7 +16,7 @@
 
       <div class="form-group">
         <label for="ownerId">ID del Propietario:</label>
-        <input name="ownerId" type="text" id="ownerId" v-model="formData.data.ownerId" class="form-control" :class="{'is-invalid': errors.ownerId}" :rules="isRequired"/>
+        <Field name="ownerId" type="text" id="ownerId" v-model="formData.data.ownerId" class="form-control" :class="{'is-invalid': errors.ownerId}" :rules="isRequired"/>
         <ErrorMessage name="ownerId" v-slot="{ message }">
             <div class="alert alert-danger">
               <span>{{ message }}</span>
@@ -26,7 +26,7 @@
 
       <div class="form-group">
         <label for="vaccinated">Vacunado:</label>
-        <input name="vaccinated" type="checkbox" id="vaccinated" v-model="formData.data.vaccinated" class="form-check"/>
+        <Field name="vaccinated" type="checkbox" id="vaccinated" v-model="formData.data.vaccinated" class="form-check"/>
       </div>
 
       <div class="form-group">
@@ -40,7 +40,7 @@
 
       <div class="form-group">
         <label for="breed">Raza:</label>
-        <input name="breed" type="text" id="breed" v-model="formData.data.breed" required class="form-control" :class="{'is-invalid': errors.breed}" :rules="isRequired"/>
+        <Field name="breed" type="text" id="breed" v-model="formData.data.breed" required class="form-control" :class="{'is-invalid': errors.breed}" :rules="isRequired"/>
         <ErrorMessage name="breed" v-slot="{ message }">
             <div class="alert alert-danger">
               <span>{{ message }}</span>
@@ -50,7 +50,7 @@
 
       <div class="form-group">
         <label for="weight">Peso:</label>
-        <input name="weight" type="text" id="weight" v-model="formData.data.weight" required class="form-control" :class="{'is-invalid': errors.weight}" :rules="isRequired"/>
+        <Field name="weight" type="text" id="weight" v-model="formData.data.weight" required class="form-control" :class="{'is-invalid': errors.weight}" :rules="isRequired"/>
         <ErrorMessage name="weight" v-slot="{ message }">
             <div class="alert alert-danger">
               <span>{{ message }}</span>
