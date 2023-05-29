@@ -56,7 +56,7 @@ Tareas realizadas:
 Tareas en curso:
 
 	Contratacion
-	- Contratacion de paseadores
+	- Contratación de paseadores
 	Mascota
 	- Vinculacion del Cliente con cada mascota
 
