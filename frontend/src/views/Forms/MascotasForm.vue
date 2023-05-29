@@ -3,7 +3,7 @@
   <div class="container">
     <h2 class="mb-4">Formulario de Mascota</h2>
 
-    <Form @submit.prevent="submitForm" v-slot="{ errors }">
+    <Form @submit="submitForm" v-slot="{ errors }">
       <div class="form-group">
         <label for="name">Nombre:</label>
         <Field name="name" type="text" id="name" v-model="formData.data.name" class="form-control" :class="{'is-invalid': errors.name}" :rules="isRequired"/>
@@ -110,7 +110,7 @@ export default {
 
 
     const submitForm = (event) => {
-      event.preventDefault();
+      //TODO: Leer el ownerId del usuario logueado cuando cargue la sesion.
       const mascotaData = {
         ...formData.value.data,
         ownerId: user.dni
