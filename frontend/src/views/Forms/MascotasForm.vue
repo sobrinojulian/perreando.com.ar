@@ -3,20 +3,30 @@
   <div class="container">
     <h2 class="mb-4">Formulario de Mascota</h2>
 
-    <form @submit="submitForm">
+    <Form @submit.prevent="submitForm" v-slot="{ errors }">
       <div class="form-group">
         <label for="name">Nombre:</label>
-        <input type="text" id="name" v-model="formData.data.name" class="form-control" required>
+        <Field name="name" type="text" id="name" v-model="formData.data.name" class="form-control" :class="{'is-invalid': errors.name}" :rules="isRequired"/>
+        <ErrorMessage name="name" v-slot="{ message }">
+            <div class="alert alert-danger">
+              <span>{{ message }}</span>
+            </div>
+        </ErrorMessage>
       </div>
 
       <div class="form-group">
         <label for="ownerId">ID del Propietario:</label>
-        <input type="text" id="ownerId" v-model="formData.data.ownerId" class="form-control" required>
+        <input name="ownerId" type="text" id="ownerId" v-model="formData.data.ownerId" class="form-control" :class="{'is-invalid': errors.ownerId}" :rules="isRequired"/>
+        <ErrorMessage name="ownerId" v-slot="{ message }">
+            <div class="alert alert-danger">
+              <span>{{ message }}</span>
+            </div>
+        </ErrorMessage>
       </div>
 
       <div class="form-group">
         <label for="vaccinated">Vacunado:</label>
-        <input type="checkbox" id="vaccinated" v-model="formData.data.vaccinated" class="form-check">
+        <input name="vaccinated" type="checkbox" id="vaccinated" v-model="formData.data.vaccinated" class="form-check"/>
       </div>
 
       <div class="form-group">
@@ -30,12 +40,22 @@
 
       <div class="form-group">
         <label for="breed">Raza:</label>
-        <input type="text" id="breed" v-model="formData.data.breed" required class="form-control">
+        <input name="breed" type="text" id="breed" v-model="formData.data.breed" required class="form-control" :class="{'is-invalid': errors.breed}" :rules="isRequired"/>
+        <ErrorMessage name="breed" v-slot="{ message }">
+            <div class="alert alert-danger">
+              <span>{{ message }}</span>
+            </div>
+        </ErrorMessage>
       </div>
 
       <div class="form-group">
         <label for="weight">Peso:</label>
-        <input type="text" id="weight" v-model="formData.data.weight" required class="form-control">
+        <input name="weight" type="text" id="weight" v-model="formData.data.weight" required class="form-control" :class="{'is-invalid': errors.weight}" :rules="isRequired"/>
+        <ErrorMessage name="weight" v-slot="{ message }">
+            <div class="alert alert-danger">
+              <span>{{ message }}</span>
+            </div>
+        </ErrorMessage>
       </div>
 
       <button type="submit" :disabled="formData.status.loading" class="btn btn-primary mt-4">Guardar</button>
@@ -46,16 +66,27 @@
         <p>{{formData.status.msg}}</p>
       </div>
       
-    </form>
+    </Form>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue';
 import MascotasService from "../../services/mascotas-service";
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../../stores/user';
+import { Field, Form, ErrorMessage } from 'vee-validate';
+
 
 export default {
+  components: {
+    Form,
+    Field,
+    ErrorMessage
+  },
   setup() {
+    const storeUser = useUserStore()
+    const { user } = storeToRefs(storeUser)
     const formData = ref({
       data:{
         name: 'Teddy',
@@ -71,17 +102,18 @@ export default {
         msg: ''
       }
     });
-    
 
-    const isValidMascota = (mascotaData) => {
-      //TODO: validar que los datos de la mascota sean validos.
-      return true; 
+
+    const isValidMascota = async (mascotaData) => {
+      return true;
     }
+
 
     const submitForm = (event) => {
       event.preventDefault();
       const mascotaData = {
-        ...formData.value.data
+        ...formData.value.data,
+        ownerId: user.dni
       }
       
       
@@ -108,6 +140,21 @@ export default {
       formData,
       submitForm
     };
+  },
+  methods: {
+    isRequired(value){
+      if(value){
+        return true;
+      }
+      return 'El campo es requerido.';
+    },
+    // isValidName(value){
+    //   console.log("valor:", value, /([a-zA-Z ]){0,50}/.test(value));
+    //   if(value && /([a-zA-Z ]){0,50}/.test(value)){
+    //     return true;
+    //   }
+    //   return 'Debe ingresar un dato válido.';
+    // },
   }
 };
 </script>
