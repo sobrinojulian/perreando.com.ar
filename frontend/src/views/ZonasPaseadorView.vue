@@ -9,34 +9,47 @@
     <!-- Listado de zonas -->
     <ul>
       <li v-for="(zona, index) in zonas" :key="index">
-        {{ zona }}
-        <button @click="eliminarZona(index)">Eliminar</button>
+        {{ zona.nombre }}
+        <button @click="eliminarZona(zona.id)">Eliminar</button>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import { useZonaStore } from '../stores/zona';
+import { ref, onMounted } from 'vue';
+import { getFirestore, collection, addDoc, deleteDoc } from 'firebase/firestore';
 
 export default {
   setup() {
-    const zonaStore = useZonaStore();
-
     const nombreZona = ref('');
+    const zonas = ref([]);
 
-    const agregarZona = () => {
-      zonaStore.agregarZona(nombreZona.value);
+    const db = getFirestore();
+
+    const cargarZonas = async () => {
+      const zonasCollection = collection(db, 'zonas');
+      const snapshot = await getDocs(zonasCollection);
+      zonas.value = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    };
+
+    const agregarZona = async () => {
+      const nuevaZona = { nombre: nombreZona.value };
+      await addDoc(collection(db, 'zonas'), nuevaZona);
       nombreZona.value = '';
+      await cargarZonas();
     };
 
-    const eliminarZona = (index) => {
-      zonaStore.eliminarZona(index);
+    const eliminarZona = async (id) => {
+      await deleteDoc(doc(db, 'zonas', id));
+      await cargarZonas();
     };
+
+    onMounted(cargarZonas);
 
     return {
       nombreZona,
-      zonas: zonaStore.zonas,
+      zonas,
       agregarZona,
       eliminarZona,
     };
