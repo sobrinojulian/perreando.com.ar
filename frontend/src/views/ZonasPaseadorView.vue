@@ -33,7 +33,8 @@ export default {
       zonas.value = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     };
 
-    const agregarZona = async () => {
+    const agregarZona = async (event) => {
+      event.preventDefault(); // Evitar recarga de la página
       const nuevaZona = { nombre: nombreZona.value };
       await addDoc(collection(db, 'zonas'), nuevaZona);
       nombreZona.value = '';
