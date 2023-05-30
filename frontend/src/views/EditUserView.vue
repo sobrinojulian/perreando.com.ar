@@ -23,12 +23,14 @@ export default {
         dni: this.user.dni,
         fechaNacimiento: this.user.fechaNacimiento,
         telefono: this.user.telefono,
-        role: this.user.role
+        role: this.user.role,
+        saldo: 0
       }
     };
   },
   methods: {
     editar: (user, vue) => {
+      user.saldo = user.saldo + vue.user.saldo
       userService.editUser(user)
         .then(response => {
           vue.user.username = response.data.username
@@ -40,6 +42,7 @@ export default {
           vue.user.fechaNacimiento = response.data.fechaNacimiento
           vue.user.telefono = response.data.telefono
           vue.user.role = response.data.role
+          vue.user.saldo = response.data.saldo
           alert('Datos de usuario actualizado correctamente.')
           vue.$router.push("/user");
         })
@@ -98,7 +101,7 @@ export default {
       </div>
 
       <!-- Asignar Rol del usuario -->
-      <br>
+      <!-- <br>
       <h5 class="mb-4">Rol del Usuario</h5>
 
       <div class="form-group">
@@ -107,6 +110,14 @@ export default {
           <option value="CLIENTE">Cliente</option>
           <option value="PASEADOR">Paseador</option>
         </select>
+      </div> -->
+
+      <!-- Asignar Saldo del usuario -->
+      <br>
+      <div class="form-group" v-if="user.role == 'CLIENTE'">
+        <h5 class="mb-4">Saldo en cuenta del Cliente</h5>
+        <input v-model="user.saldo" type="number" class="form-control" id="saldo" placeholder="Saldo">
+        <small id="help" class="form-text text-muted">Solo puede aumentar el importe.</small>
       </div>
 
       <br>

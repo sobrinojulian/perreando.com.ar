@@ -17,30 +17,20 @@ export default {
             zona: "",
             horario: "",
             busquedaRealizada: false,
-            textoSearch: ""
+            textoSearch: "",
+            paseadores: [],
+            textHelp: ""
         };
     },
     methods: {
-        // buscar: (zona, horario, vue) => {
-        //     vue.busquedaRealizada = true
-        //     vue.textoSearch = (zona != '' && horario != '') ? "Zona y Horario" : (zona != '') ? "Zona" : (horario != '') ? "Horario" : ""
-        // }
         buscar: (zona, horario, vue) => {
             paseadorService.busquedaPaseadores(zona, horario)
                 .then(response => {
-                    vue.textoSearch = vue.textoSearch || (zona != '' && horario != '') ? "zona y horario" : (zona != '') ? "zona" : (horario != '') ? "horario" : ""
-
-                    vue.paseador.paseadorId = response.data.paseadorId
-                    vue.paseador.nombre = response.data.nombre
-                    vue.paseador.apellido = response.data.apellido
-                    vue.paseador.dni = response.data.dni
-                    vue.paseador.email = response.data.email
-                    vue.paseador.telefono = response.data.telefono
-                    vue.paseador.zona = response.data.zona
-                    vue.paseador.horario = response.data.horario
-                    vue.paseador.precio = response.data.precio
-                    vue.paseador.disponibilidadId = response.data.disponibilidadId
+                    vue.paseadores = response.data
+                    console.log(vue.paseadores);
+                    vue.textoSearch = (zona != '' && horario != '') ? "zona y horario" : (zona != '') ? "zona" : (horario != '') ? "horario" : ""
                     vue.busquedaRealizada = true
+                    vue.textHelp = vue.paseadores.length == 0 ? 'No existen paseos disponibles en la zona y/o horario solicitado.' : 'Se listan los paseos disponibles para contratar.'
                 })
                 .catch(error => {
                     alert("Error: No se pudo realizar la busqueda." + error);
@@ -52,7 +42,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">        
+    <div class="container">
         <h2 class="mb-4">Busqueda</h2>
         <hr>
 
@@ -77,7 +67,8 @@ export default {
 
         <!-- Seleccionar de paseadores filtrados -->
         <form v-show="busquedaRealizada">
-            <h5 class="mb-4">Paseadores (<a v-if="textoSearch != ''">Busqueda realizada por </a>{{ textoSearch }})</h5>
+            <h6 class="mb-4">Paseadores (<a v-if="textoSearch != ''">Busqueda realizada por </a>{{ textoSearch }})</h6>
+            <small id="help" class="form-text text-muted">{{ textHelp }}</small>
             <table class="table">
                 <thead class="text-light bg-primary">
                     <tr>
@@ -93,48 +84,29 @@ export default {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row"><button type="button" class="btn btn-light">+</button></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><button type="button" class="btn btn-light">+</button></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><button type="button" class="btn btn-light">+</button></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr v-for="p in paseadores">
+                        <th scope="row">
+                            <RouterLink to="/contratarPaseador">
+                                <button type="submit" class="btn btn-primary">Contratar</button>
+                            </RouterLink>
+                        </th>
+                        <td>{{ p.nombre }}</td>
+                        <td>{{ p.apellido }}</td>
+                        <td>{{ p.dni }}</td>
+                        <td>{{ p.telefono }}</td>
+                        <td>{{ p.email }}</td>
+                        <td>{{ p.zona }}</td>
+                        <td>{{ p.horario }}</td>
+                        <td>{{ p.precio }}</td>
                     </tr>
                 </tbody>
             </table>
-
-            <br>
-            <button type="submit" class="btn btn-primary" style="margin-right: 10px">Contratar</button>
         </form>
-
-
-
+        <button class="btn btn-primary" v-show="busquedaRealizada" v-on:click="busquedaRealizada=false;
+                                                                                                        zona='';
+                                                                                                        horario='';
+                                                                                                        textHelp='';
+                                                                                                        textoSearch=''">Volver</button>
 
     </div>
 </template>

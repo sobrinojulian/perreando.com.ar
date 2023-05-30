@@ -51,6 +51,11 @@ export default {
       <div class="form-group">
         <label for="telefono">Telefono: <b>{{ vue.user.telefono }}</b></label>
       </div>
+
+      <!-- Datos de Saldo de usuario -->
+      <br>
+      <h5 class="mb-4">Saldo: $<b>{{ vue.user.saldo }}</b></h5>
+
     </form>
     
     <br>

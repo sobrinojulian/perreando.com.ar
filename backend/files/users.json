@@ -9,7 +9,8 @@
 		"dni": "66559922",
 		"fechaNacimiento": "1998-05-12",
 		"telefono": 1123985746,
-		"role": "CLIENTE"
+		"role": "CLIENTE",
+		"saldo": 200
 	},
 	{
 		"id": 2,
@@ -21,7 +22,8 @@
 		"dni": "98521634",
 		"fechaNacimiento": "1998-05-12",
 		"telefono": 1123985746,
-		"role": "PASEADOR"
+		"role": "PASEADOR",
+		"saldo": 0
 	},
 	{
 		"id": 3,
@@ -33,7 +35,8 @@
 		"dni": "96174825",
 		"fechaNacimiento": "1998-05-12",
 		"telefono": 1123985746,
-		"role": "CLIENTE"
+		"role": "CLIENTE",
+		"saldo": 100
 	},
 	{
 		"id": 4,
@@ -45,7 +48,8 @@
 		"dni": "85136497",
 		"fechaNacimiento": "1998-05-12",
 		"telefono": 1123985746,
-		"role": "PASEADOR"
+		"role": "PASEADOR",
+		"saldo": 0
 	},
 	{
 		"id": 5,
@@ -57,7 +61,8 @@
 		"dni": 32928172,
 		"fechaNacimiento": "1998-05-12",
 		"telefono": 1123985746,
-		"role": "CLIENTE"
+		"role": "CLIENTE",
+		"saldo": 300
 	},
 	{
 		"id": 6,
@@ -69,16 +74,20 @@
 		"dni": 56748905,
 		"fechaNacimiento": "2023-05-10",
 		"telefono": 1164897258,
-		"role": "CLIENTE"
+		"role": "CLIENTE",
+		"saldo": 4030
 	},
 	{
-		"id": 6,
-		"username": "",
-		"email": "",
-		"password": "",
-		"nombre": "",
-		"apellido": "",
-		"dni": "",
-		"role": ""
+		"id": 7,
+		"username": "test1",
+		"email": "test1@gmail.com",
+		"password": "test1",
+		"nombre": "test1",
+		"apellido": "test12",
+		"dni": 1212,
+		"fechaNacimiento": "2023-05-24",
+		"telefono": 1212,
+		"role": "CLIENTE",
+		"saldo": 560
 	}
 ]

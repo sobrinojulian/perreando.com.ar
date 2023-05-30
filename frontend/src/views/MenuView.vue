@@ -46,7 +46,7 @@ defineProps({
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink v-if="user.role === 'CLIENTE'" to="/contratarPaseadores" class="nav-link" href="#">
+            <RouterLink v-if="user.role === 'CLIENTE'" to="/busquedaPaseadores" class="nav-link" href="#">
               Contratar Paseadores
             </RouterLink>
           </li>

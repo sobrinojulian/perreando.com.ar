@@ -12,7 +12,8 @@ export const useUserStore = defineStore("user", {
                 dni: "",
                 fechaNacimiento: "",
                 telefono: "",
-                role: ""
+                role: "",
+                saldo: 0
             }
         }
     }

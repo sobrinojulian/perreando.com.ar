@@ -33,6 +33,7 @@ export default {
           vue.user.fechaNacimiento = response.data.fechaNacimiento
           vue.user.telefono = response.data.telefono
           vue.user.role = response.data.role
+          vue.user.saldo = response.data.saldo
           vue.$router.push("/");
         })
       .catch(error => {

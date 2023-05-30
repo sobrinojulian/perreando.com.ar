@@ -35,7 +35,7 @@ Historal de paseos: Tanto de clientes como de paseadores, ambos pueden ver los p
 - Vista Historial de los paseos, indistinto por tipo de usuario + Consulta en el backend
 
 # Curso de tareas
-Tareas realizadas:
+Tareas finalizadas:
 
 	Usuario
 	- Login de usuario
@@ -62,7 +62,7 @@ Tareas en curso:
 
 ----------------------
 
-Tareas finalizadas:
+Tareas a realizar:
 
 	Contratacion (Seba)
 	- Alta de paseo contratado

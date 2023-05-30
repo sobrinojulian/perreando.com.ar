@@ -10,7 +10,7 @@ class PaseadorRouter {
 
     start(){
         // ---- Metodos ----
-        this.router.get('/:zona/:horario', this.controller.filtrarPaseadores)
+        this.router.get('/:zona?/:horario?', this.controller.filtrarPaseadores)
 
         return this.router
     }

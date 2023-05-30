@@ -4,6 +4,7 @@
 		"zona": "Caballito",
 		"horario": "09:00",
         "precio": "300",
+		"estado": 0,
 		"paseadorId": 4
     },
     {
@@ -11,6 +12,7 @@
 		"zona": "Almagro",
 		"horario": "10:00",
         "precio": "300",
+		"estado": 0,
 		"paseadorId": 4
     },
     {
@@ -18,6 +20,7 @@
 		"zona": "Avellaneda",
 		"horario": "19:00",
         "precio": "500",
+		"estado": 0,
 		"paseadorId": 2
     },
     {
@@ -25,6 +28,7 @@
 		"zona": "Quilmes",
 		"horario": "20:00",
         "precio": "500",
+		"estado": 0,
 		"paseadorId": 2
     },
     {
@@ -32,6 +36,7 @@
 		"zona": "Flores",
 		"horario": "11:00",
         "precio": "300",
+		"estado": 0,
 		"paseadorId": 4
     }
 ]

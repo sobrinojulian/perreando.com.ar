@@ -1,57 +1,33 @@
 import fs from 'fs'
 
 class PaseadorModel {
-    
-    constructor(){
-        this.role = 'PASEADOR'
+
+    constructor() {
         this.USERFILE = '../backend/files/users.json'
         this.DISPONIBILIDADFILE = '../backend/files/disponibilidadPaseador.json'
     }
 
-    async readFile(path){
+    async readFile(path) {
         return await fs.promises.readFile(path, 'utf-8')
     }
 
-    obtenerPaseadores = async () => {
-        let paseadoresCompleto = []
+    obtenerUsuarios = async () => {
         try {
-            let paseadores = JSON.parse(await this.readFile(this.USERFILE)).filter(u => u.role === this.role)
-            let disponibilidad = JSON.parse(await this.readFile(this.DISPONIBILIDADFILE))
-
-            paseadores.forEach(paseador => {
-                let disponibilidades = disponibilidad.filter(d => d.paseadorId === paseador.id)
-                disponibilidades.forEach(dp => {
-                    paseadoresCompleto = { paseador, ...dp }
-                })
-            })
-
-            return paseadoresCompleto
-        }catch(error){
-            console.log('Error en Paseo.obtenerPaseos() --> ', error)
-            return paseadoresCompleto
+            const usuarios = JSON.parse(await this.readFile(this.USERFILE))
+            return usuarios
+        } catch (error) {
+            console.log('Error en Paseo.obtenerUsuarios() --> ', error)
+            return []
         }
     }
 
-    obtenerPaseosFiltrados = async (zona, horario) => {
-        let paseadoresFiltrados = []
-
+    obtenerDisponibilidades = async () => {
         try {
-            const paseadores = await this.obtenerPaseadores()
-            paseadoresFiltrados = paseadores
-
-            //Filtar por Horario
-            if(horario){
-                paseadoresFiltrados = paseadores.filter(p => p.horario === horario)
-            }
-            //Filtrar por Zona
-            if(zona){
-                paseadoresFiltrados = paseadores.filter(p => p.zona === zona)
-            }
-            
-            return paseadoresFiltrados
-        }catch(error){
-            console.log('Error en Paseo.obtenerPaseosFiltrados() --> ', error)
-            return paseadoresFiltrados
+            const desponibilidades = JSON.parse(await this.readFile(this.DISPONIBILIDADFILE))
+            return desponibilidades
+        } catch (error) {
+            console.log('Error en Paseo.obtenerDisponibilidades() --> ', error)
+            return []
         }
     }
 

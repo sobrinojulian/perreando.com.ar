@@ -58,9 +58,14 @@ const router = createRouter({
       component: () => import('../views/AddMascotasView.vue')
     },
     {
-      path: '/contratarPaseadores',
-      name: 'contratarPaseadores',
-      component: () => import('../views/ContratarPaseadoresView.vue')
+      path: '/busquedaPaseadores',
+      name: 'busquedaPaseadores',
+      component: () => import('../views/BusquedaPaseadoresView.vue')
+    },
+    {
+      path: '/contratarPaseador',
+      name: 'contratarPaseador',
+      component: () => import('../views/ContratarPaseadorView.vue')
     },
     {
       path: '/horariosPaseador',

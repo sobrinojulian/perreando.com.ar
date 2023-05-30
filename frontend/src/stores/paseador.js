@@ -13,6 +13,7 @@ export const usePaseadorStore = defineStore("paseador", {
                 zona: "",
                 horario: "",
                 precio: "",
+                estado: "",
                 disponibilidadId: ""
             }
         }

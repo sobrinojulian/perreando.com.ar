@@ -11,6 +11,7 @@ class MascotasService {
           "content-type": "application/json"
         }
       });
+      alert(mascotas)
       return mascotas.data;
     } catch (err) {
       console.log(err);

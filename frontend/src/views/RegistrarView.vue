@@ -23,7 +23,8 @@ export default {
         dni: "",
         fechaNacimiento: "",
         telefono: "",
-        role: ""
+        role: "",
+        saldo: 0
       }
     };
   },
@@ -40,6 +41,7 @@ export default {
           vue.user.fechaNacimiento = response.data.fechaNacimiento
           vue.user.telefono = response.data.telefono
           vue.user.role = response.data.role
+          vue.user.saldo = response.data.saldo
           alert('Usuario registrado correctamente.')
           vue.$router.push("/");
         })
@@ -54,7 +56,8 @@ export default {
 
 <template>
   <div class="container">
-    <h2 class="mb-4">Registro de usuario</h2><hr>
+    <h2 class="mb-4">Registro de usuario</h2>
+    <hr>
 
     <form @submit.prevent="registrar(user, vue)">
       <div class="form-group">
@@ -88,12 +91,13 @@ export default {
 
       <div class="form-group">
         <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-        <input v-model="user.fechaNacimiento" type="date" class="form-control" id="fechaNacimiento" placeholder="Date of Birth" required>
+        <input v-model="user.fechaNacimiento" type="date" class="form-control" id="fechaNacimiento"
+          placeholder="Date of Birth" required>
       </div>
 
       <!-- Datos de Contacto de usuario -->
       <br>
-      <h5 class="mb-4">Datos de Contacto</h5>      
+      <h5 class="mb-4">Datos de Contacto</h5>
 
       <div class="form-group">
         <label for="email">Email:</label>
@@ -102,7 +106,8 @@ export default {
 
       <div class="form-group">
         <label for="telefono">Telefono:</label>
-        <input v-model="user.telefono" type="number" class="form-control" id="telefono" placeholder="Phone Number" required>
+        <input v-model="user.telefono" type="number" class="form-control" id="telefono" placeholder="Phone Number"
+          required>
       </div>
 
       <!-- Asignar Rol del usuario -->
@@ -115,6 +120,18 @@ export default {
           <option value="CLIENTE">Cliente</option>
           <option value="PASEADOR">Paseador</option>
         </select>
+      </div>
+
+      <!-- Asignar Saldo del usuario -->
+      <br>
+      <h5 class="mb-4">Saldo en cuenta del Usuario</h5>
+      <div class="form-group" v-if="user.role == 'PASEADOR'">
+        <p>Al registrarse como paseador, el saldo inicial es 0</p>
+      </div>
+      <div class="form-group" v-if="user.role == 'CLIENTE'">
+        <p>Al registrarse como cliente, debe ingresar el monto con el que puede operar para contratar los paseos. Puede
+          aumentar el importe en cualquier momento.</p>
+        <input v-model="user.saldo" type="number" class="form-control" id="saldo" placeholder="Saldo" required>
       </div>
 
       <br>
