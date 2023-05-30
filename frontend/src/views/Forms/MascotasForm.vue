@@ -15,16 +15,6 @@
       </div>
 
       <div class="form-group">
-        <label for="ownerId">ID del Propietario:</label>
-        <Field name="ownerId" type="text" id="ownerId" v-model="formData.data.ownerId" class="form-control" :class="{'is-invalid': errors.ownerId}" :rules="isRequired"/>
-        <ErrorMessage name="ownerId" v-slot="{ message }">
-            <div class="alert alert-danger">
-              <span>{{ message }}</span>
-            </div>
-        </ErrorMessage>
-      </div>
-
-      <div class="form-group">
         <label for="vaccinated">Vacunado:</label>
         <Field name="vaccinated" type="checkbox" id="vaccinated" v-model="formData.data.vaccinated" class="form-check"/>
       </div>
@@ -90,7 +80,6 @@ export default {
     const formData = ref({
       data:{
         name: 'Teddy',
-        ownerId: '0',
         vaccinated: true,
         size: 'big',
         breed: 'pastor aleman',
@@ -113,11 +102,10 @@ export default {
       //TODO: Leer el ownerId del usuario logueado cuando cargue la sesion.
       const mascotaData = {
         ...formData.value.data,
-        ownerId: user.dni
+        ownerId: user.value.dni
       }
-      
-      
-      formData.value.status.msg = "loading..."; //TODO: improve this message later.
+     
+      formData.value.status.msg = "loading..."; 
       formData.value.status.loading = true;
       
       if(isValidMascota(mascotaData)){
