@@ -8,7 +8,8 @@ export default {
     const storeUser = useUserStore()
     const { user } = storeToRefs(storeUser)
     return {
-      user
+      user,
+      storeUser
     }
   },
   data() {
@@ -21,7 +22,7 @@ export default {
     };
   },
   methods: {
-    loguear: (user, vue) => {
+    loguear: (user, vue, storeUser) => {
       userService.login(user)
       .then(response => {
           vue.user.username = response.data.username
@@ -34,6 +35,7 @@ export default {
           vue.user.telefono = response.data.telefono
           vue.user.role = response.data.role
           vue.user.saldo = response.data.saldo
+          storeUser.updateUser(vue.user)
           vue.$router.push("/");
         })
       .catch(error => {
@@ -50,7 +52,7 @@ export default {
   <div class="container">
     <h2 class="mb-4">Iniciar sesión</h2><hr>
 
-    <form @submit.prevent="loguear(user, vue)">
+    <form @submit.prevent="loguear(user, vue, storeUser)">
       <div class="form-group">
         <label for="username">Nombre de usuario:</label>
         <input v-model="user.username" type="text" class="form-control" id="username" placeholder="Username" required>

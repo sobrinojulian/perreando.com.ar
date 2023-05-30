@@ -16,11 +16,11 @@ export const useUserStore = defineStore("user", {
                 saldo: 0
             }
         }
-    }
-    /*,
+    },
     actions: {
-        cambiarNombre(user){
-            this.user.nombre = user.nombre
+        updateUser(user){
+            console.log('user:', user)
+            this.user = user
         }
-    }*/
+    }
 })
