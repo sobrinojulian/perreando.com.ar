@@ -8,8 +8,8 @@ class ControllerMascota {
 
     obtenerMascotas = async (req, res) => {
         try{
-            const id = req.params.id
-            const mascotas = await this.service.obtenerMascotas(id)            
+            const ownerId = req.params.id
+            const mascotas = await this.service.obtenerMascotas(ownerId)            
             res.json(mascotas)
         }catch(error){
             console.log('Error en ControllerMascota.obtenerMascotas() --> ', error)

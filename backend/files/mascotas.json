@@ -1,21 +1,65 @@
-[    
-    {
-        "id": 1,
-        "nombre": "Teddy",
-        "vacunado": "true",
-        "tamanio": "big",
-        "raza": "Pastor Aleman",
-        "peso": "19kg",
-        "ownerId": 2
-    },
-    {
-        "id": 2,
-        "nombre": "Pity",
-        "vacunado": "true",
-        "tamanio": "small",
-        "raza": "Dogo",
-        "peso": "21kg",
-        "ownerId": 2
-    }
-    
+[
+	{
+		"id": 1,
+		"nombre": "Teddy",
+		"vacunado": 1,
+		"tamanio": "small",
+		"raza": "Pastor Aleman",
+		"peso": 15,
+		"ownerId": 2
+	},
+	{
+		"id": 2,
+		"nombre": "Piti",
+		"vacunado": 1,
+		"tamanio": "medium",
+		"raza": "Dogo",
+		"peso": 22,
+		"ownerId": 2
+	},
+	{
+		"id": 3,
+		"nombre": "Perla",
+		"vacunado": 1,
+		"tamanio": "small",
+		"raza": "Caniche",
+		"peso": 5,
+		"ownerId": 4
+	},
+	{
+		"id": 4,
+		"nombre": "Lucas",
+		"vacunado": 1,
+		"tamanio": "small",
+		"raza": "Salchicha",
+		"peso": 10,
+		"ownerId": 4
+	},
+	{
+		"id": 5,
+		"nombre": "Felix",
+		"vacunado": 1,
+		"tamanio": "medium",
+		"raza": "Sachicha",
+		"peso": 10,
+		"ownerId": 2
+	},
+	{
+		"id": 6,
+		"nombre": "Goofy",
+		"vacunado": 0,
+		"tamanio": "small",
+		"raza": "Caniche",
+		"peso": 3,
+		"ownerId": 2
+	},
+	{
+		"id": 7,
+		"nombre": "Pirlo",
+		"vacunado": 0,
+		"tamanio": "medium",
+		"raza": "Dogo",
+		"peso": 21,
+		"ownerId": 6
+	}
 ]

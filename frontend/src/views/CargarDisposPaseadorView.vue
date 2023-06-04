@@ -27,11 +27,11 @@ export default {
         cargar: (vue) => {
             paseadorService.cargarDisponibilidad(vue.dispo)
                 .then(response => {
-                    alert('Disponibilidades generadas correctamente.')
+                    alert('Disponibilidad generada correctamente.')
                     vue.$router.push("/disponibilidadPaseador");
                 })
                 .catch(error => {
-                    alert("Error: No se generaron las disponibilidades.");
+                    alert("Error: No se genero la disponibilidad.");
                     console.log(error);
                 });
         }
@@ -69,8 +69,5 @@ export default {
                 <button class="btn btn-primary" style="margin-right: 10px">Volver</button>
             </RouterLink>
         </form>
-
-
-
     </div>
 </template>

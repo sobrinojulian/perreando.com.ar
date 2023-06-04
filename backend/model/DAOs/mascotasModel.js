@@ -20,19 +20,19 @@ class Mascota {
         await fs.promises.writeFile(this.MASCOTASFILE, JSON.stringify(mascotas, null, '\t'))
     }
 
-    obtenerMascotas = async id => {
+    obtenerMascotas = async ownerId => {
         try {
             const mascotas = JSON.parse(await this.readFile())
 
-            if (id) {
-                const mascota = mascotas.find(m => m.id == id)
+            if (ownerId) {
+                const mascota = mascotas.filter(m => m.ownerId == ownerId)
                 return mascota || {}
             } else {
                 return mascotas
             }
         } catch (error) {
             console.log('Error en Mascota.obtenerMascotas() --> ', error)
-            return id ? {} : []
+            return ownerId ? {} : []
         }
     }
 
@@ -45,6 +45,7 @@ class Mascota {
 
             const id = this.getNewId(mascotas)
             const newMascota = { id, ...mascota }
+            newMascota.vacunado = parseInt(newMascota.vacunado)
             mascotas.push(newMascota)
             await this.writeFile(mascotas)
             return newMascota
@@ -62,10 +63,12 @@ class Mascota {
                 mascotas = JSON.parse(await this.readFile())
             } catch { }
 
-            const index = mascotas.findIndex(m => m.id === mascota.id)
+            console.log(mascota);
+            const index = mascotas.findIndex(m => m.id == mascota.id)
             if (index != -1) { //Retorna -1 sino existe el id ingresado
                 const oldMascota = mascotas[index]
                 const newMascota = { ...oldMascota, ...mascota }
+                newMascota.vacunado = parseInt(newMascota.vacunado)
                 mascotas.splice(index, 1, newMascota)
                 await this.writeFile(mascotas)
                 return newMascota
@@ -85,7 +88,7 @@ class Mascota {
                 mascotas = JSON.parse(await this.readFile())
             } catch { }
 
-            const index = mascotas.findIndex(m => m.id === id)
+            const index = mascotas.findIndex(m => m.id == id)
             if (index != -1) { //Retorna -1 sino existe el id ingresado
                 const mascota = mascotas.splice(index, 1)[0]
                 await this.writeFile(mascotas)

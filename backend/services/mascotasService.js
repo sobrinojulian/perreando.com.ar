@@ -6,9 +6,9 @@ class ServiceMascota {
         this.model = new MascotaModel()
     }
 
-    obtenerMascotas = async id => {
+    obtenerMascotas = async ownerId => {
         try {
-            const mascotas = await this.model.obtenerMascotas(id)
+            const mascotas = await this.model.obtenerMascotas(ownerId)
             return mascotas
         } catch (error) {
             console.log('Error en ServiceMascota.obtenerMascotas() --> ', error)

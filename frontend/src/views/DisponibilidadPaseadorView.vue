@@ -24,7 +24,6 @@ export default {
                 .then(response => {
                     vue.disponibilidades = response.data
                     vue.dispoExists = true
-                    console.log(vue.disponibilidades);
                 })
                 .catch(error => {
                     alert("Error: No se pudo obtener las disponibilidades del paseador.");
