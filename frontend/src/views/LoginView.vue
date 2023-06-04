@@ -25,6 +25,7 @@ export default {
     loguear: (user, vue, storeUser) => {
       userService.login(user)
       .then(response => {
+          vue.user.id = response.data.id
           vue.user.username = response.data.username
           vue.user.email = response.data.email
           vue.user.password = response.data.password

@@ -52,13 +52,8 @@ defineProps({
           </li>
           <!-- Botones de Usuario (Paseadores de mascotas) -->
           <li class="nav-item">
-            <RouterLink v-if="user.role === 'PASEADOR'" to="/horariosPaseador" class="nav-link" href="#">
-              Horarios
-            </RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink v-if="user.role === 'PASEADOR'" to="/zonasPaseador" class="nav-link" href="#">
-              Zonas
+            <RouterLink v-if="user.role === 'PASEADOR'" to="/disponibilidadPaseador" class="nav-link" href="#">
+              Alta de Disponibilidad Paseos
             </RouterLink>
           </li>
           <!-- Botones de login/registro -->
@@ -84,7 +79,7 @@ defineProps({
       </div>
 
     </div>
-    <a v-if="user.username !== ''" class="navbar-brand">{{ `${user.apellido}, ${user.nombre} (${user.dni})` }}</a>
+    <a v-if="user.username !== ''" class="navbar-brand">{{ `${user.role}: ${user.apellido}, ${user.nombre} (${user.dni})` }}</a>
   </nav><br>
 
   <!-- 

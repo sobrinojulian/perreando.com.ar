@@ -27,15 +27,28 @@ export default {
             paseadorService.busquedaPaseadores(zona, horario)
                 .then(response => {
                     vue.paseadores = response.data
-                    console.log(vue.paseadores);
                     vue.textoSearch = (zona != '' && horario != '') ? "zona y horario" : (zona != '') ? "zona" : (horario != '') ? "horario" : ""
                     vue.busquedaRealizada = true
                     vue.textHelp = vue.paseadores.length == 0 ? 'No existen paseos disponibles en la zona y/o horario solicitado.' : 'Se listan los paseos disponibles para contratar.'
                 })
                 .catch(error => {
-                    alert("Error: No se pudo realizar la busqueda." + error);
+                    alert("Error: No se pudo realizar la busqueda.");
                     console.log(error);
                 });
+        },
+        guardarPosibleContrato: (dispoId, vue) => {
+            const paseador = vue.paseadores.find(p => p.disponibilidadId === dispoId)
+            vue.paseador.paseadorId = paseador.paseadorId
+            vue.paseador.nombre = paseador.nombre
+            vue.paseador.apellido = paseador.apellido
+            vue.paseador.dni = paseador.dni
+            vue.paseador.email = paseador.email
+            vue.paseador.telefono = paseador.telefono
+            vue.paseador.zona = paseador.zona
+            vue.paseador.horario = paseador.horario
+            vue.paseador.precio = paseador.precio
+            vue.paseador.estado = paseador.estado
+            vue.paseador.disponibilidadId = paseador.disponibilidadId
         }
     }
 }
@@ -67,8 +80,8 @@ export default {
 
         <!-- Seleccionar de paseadores filtrados -->
         <form v-show="busquedaRealizada">
-            <h6 class="mb-4">Paseadores (<a v-if="textoSearch != ''">Busqueda realizada por </a>{{ textoSearch }})</h6>
-            <small id="help" class="form-text text-muted">{{ textHelp }}</small>
+            <h5 class="mb-4">Paseadores (<a v-if="textoSearch != ''">Busqueda realizada por </a>{{ textoSearch }})</h5>
+            <p id="help" class="form-text text-muted">{{ textHelp }}</p>
             <table class="table">
                 <thead class="text-light bg-primary">
                     <tr>
@@ -87,7 +100,7 @@ export default {
                     <tr v-for="p in paseadores">
                         <th scope="row">
                             <RouterLink to="/contratarPaseador">
-                                <button type="submit" class="btn btn-primary">Contratar</button>
+                                <button type="submit" class="btn btn-primary" v-on:click="guardarPosibleContrato(p.disponibilidadId, vue)">Contratar</button>
                             </RouterLink>
                         </th>
                         <td>{{ p.nombre }}</td>
@@ -102,11 +115,12 @@ export default {
                 </tbody>
             </table>
         </form>
-        <button class="btn btn-primary" v-show="busquedaRealizada" v-on:click="busquedaRealizada=false;
-                                                                                                        zona='';
-                                                                                                        horario='';
-                                                                                                        textHelp='';
-                                                                                                        textoSearch=''">Volver</button>
+        <br>
+        <button class="btn btn-primary" v-show="busquedaRealizada" v-on:click="busquedaRealizada = false;
+        zona = '';
+        horario = '';
+        textHelp = '';
+        textoSearch = ''">Volver</button>
 
     </div>
 </template>

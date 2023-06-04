@@ -1,42 +1,106 @@
 [
-    {
+	{
 		"disponibilidadId": 1,
-		"zona": "Caballito",
+		"zona": "Almagro",
 		"horario": "09:00",
-        "precio": "300",
+		"precio": 650,
 		"estado": 0,
-		"paseadorId": 4
-    },
-    {
+		"paseadorId": 1
+	},
+	{
 		"disponibilidadId": 2,
 		"zona": "Almagro",
 		"horario": "10:00",
-        "precio": "300",
+		"precio": 650,
 		"estado": 0,
-		"paseadorId": 4
-    },
-    {
+		"paseadorId": 1
+	},
+	{
 		"disponibilidadId": 3,
-		"zona": "Avellaneda",
-		"horario": "19:00",
-        "precio": "500",
-		"estado": 0,
-		"paseadorId": 2
-    },
-    {
-		"disponibilidadId": 4,
-		"zona": "Quilmes",
-		"horario": "20:00",
-        "precio": "500",
-		"estado": 0,
-		"paseadorId": 2
-    },
-    {
-		"disponibilidadId": 5,
-		"zona": "Flores",
+		"zona": "Almagro",
 		"horario": "11:00",
-        "precio": "300",
+		"precio": 650,
 		"estado": 0,
-		"paseadorId": 4
-    }
+		"paseadorId": 1
+	},
+	{
+		"disponibilidadId": 4,
+		"zona": "Almagro",
+		"horario": "12:00",
+		"precio": 650,
+		"estado": 0,
+		"paseadorId": 1
+	},
+	{
+		"disponibilidadId": 5,
+		"zona": "Almagro",
+		"horario": "13:00",
+		"precio": 650,
+		"estado": 0,
+		"paseadorId": 1
+	},
+	{
+		"disponibilidadId": 6,
+		"zona": "Almagro",
+		"horario": "14:00",
+		"precio": 650,
+		"estado": 1,
+		"paseadorId": 1
+	},
+	{
+		"disponibilidadId": 7,
+		"zona": "Floresta",
+		"horario": "15:00",
+		"precio": 800,
+		"estado": 0,
+		"paseadorId": 1
+	},
+	{
+		"disponibilidadId": 8,
+		"zona": "Floresta",
+		"horario": "16:00",
+		"precio": 800,
+		"estado": 0,
+		"paseadorId": 1
+	},
+	{
+		"disponibilidadId": 9,
+		"zona": "Floresta",
+		"horario": "17:00",
+		"precio": 800,
+		"estado": 1,
+		"paseadorId": 1
+	},
+	{
+		"disponibilidadId": 10,
+		"zona": "Recoleta",
+		"horario": "18:00",
+		"precio": 1500,
+		"estado": 0,
+		"paseadorId": 1
+	},
+	{
+		"disponibilidadId": 11,
+		"zona": "Recoleta",
+		"horario": "19:00",
+		"precio": 1500,
+		"estado": 0,
+		"paseadorId": 1
+	},
+	{
+		"disponibilidadId": 12,
+		"zona": "Recoleta",
+		"horario": "20:00",
+		"precio": 1500,
+		"estado": 0,
+		"paseadorId": 1
+	},
+	{
+		"disponibilidadId": 13,
+		"zona": "Recoleta",
+		"horario": "21:00",
+		"precio": 1500,
+		"estado": 0,
+		"paseadorId": 1
+	}
 ]

@@ -68,14 +68,14 @@ const router = createRouter({
       component: () => import('../views/ContratarPaseadorView.vue')
     },
     {
-      path: '/horariosPaseador',
-      name: 'horariosPaseador',
-      component: () => import('../views/HorariosPaseadorView.vue')
+      path: '/disponibilidadPaseador',
+      name: 'disponibilidadPaseador',
+      component: () => import('../views/DisponibilidadPaseadorView.vue')
     },
     {
-      path: '/zonasPaseador',
-      name: 'zonasPaseador',
-      component: () => import('../views/ZonasPaseadorView.vue')
+      path: '/addDisponibilidades',
+      name: 'addDisponibilidades',
+      component: () => import('../views/CargarDisposPaseadorView.vue')
     }
   ]
 })

@@ -1,0 +1,21 @@
+[    
+    {
+        "id": 1,
+        "nombre": "Teddy",
+        "vacunado": "true",
+        "tamanio": "big",
+        "raza": "Pastor Aleman",
+        "peso": "19kg",
+        "ownerId": 2
+    },
+    {
+        "id": 2,
+        "nombre": "Pity",
+        "vacunado": "true",
+        "tamanio": "small",
+        "raza": "Dogo",
+        "peso": "21kg",
+        "ownerId": 2
+    }
+    
+]

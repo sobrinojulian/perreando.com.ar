@@ -23,7 +23,6 @@ class User {
     obtenerUsuarios = async username => {
         try {
             const users = JSON.parse(await this.readFile())
-            console.log(users);
 
             if(username){
                 const user = users.find(u => u.username == username)
