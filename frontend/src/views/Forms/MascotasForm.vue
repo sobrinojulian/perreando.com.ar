@@ -16,7 +16,7 @@
 
       <div class="form-group">
         <label for="vaccinated">Vacunado:</label>
-        <Field name="vaccinated" type="checkbox" id="vaccinated" v-model="formData.data.vaccinated" class="form-check"/>
+        <input name="vaccinated" type="checkbox" id="vaccinated" v-model="formData.data.vaccinated" class="form-check"/>
       </div>
 
       <div class="form-group">
@@ -104,11 +104,12 @@ export default {
         ...formData.value.data,
         ownerId: user.value.dni
       }
-     
+      
       formData.value.status.msg = "loading..."; 
       formData.value.status.loading = true;
       
       if(isValidMascota(mascotaData)){
+        console.log("mascota data:", mascotaData, formData.value.data);
         MascotasService.create(mascotaData).then(()=>{
           formData.value.status.msg = "La mascota ha sido agregada exitosamente."
           formData.value.status.error = false;

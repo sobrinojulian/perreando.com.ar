@@ -21,7 +21,7 @@ export default {
     const storeUser = useUserStore();
     const storeRef = storeToRefs(storeUser);
     const user = storeRef.user.value;
-    console.log("My user:" , user);
+    // console.log("My user:" , user);
     const mascotasList = ref([]);
     const mascotasListStatus = ref({
       msg: '',
@@ -57,7 +57,7 @@ export default {
     const getMascotas = () => {
         
       mascotasListStatus.value.loading = true;
-        console.log(user.dni);
+        
         MascotasService.getAll().then((mascotasListResponse)=>{
           mascotasListStatus.value.msg = ""
           mascotasListStatus.value.error = false;
