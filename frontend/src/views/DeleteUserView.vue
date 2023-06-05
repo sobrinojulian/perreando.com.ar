@@ -37,7 +37,7 @@ export default {
             vue.$router.push("/login");
         })
         .catch(error => {
-            alert("Error: Fallo al querer eliminar su usuario." + error);
+            alert("Error: No se pudo eliminar su usuario.");
             console.log(error);
         });
     }

@@ -10,7 +10,10 @@ class PaseadorRouter {
 
     start(){
         // ---- Metodos ----
+        this.router.get('/:id', this.controller.obtenerPaseadorDisponibilidades)
         this.router.get('/:zona?/:horario?', this.controller.filtrarPaseadores)
+        this.router.delete('/delete/:id', this.controller.eliminarDisponibilidad)
+        this.router.post('/cargar', this.controller.cargarDisponibilidades)
 
         return this.router
     }

@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>    
-  <div class="container">
+  <div class="container mt-4">
     <h2 class="mb-4">Informacion de usuario</h2><hr>
 
     <form>      
@@ -63,7 +63,7 @@ export default {
         <button class="btn btn-primary" style="margin-right: 10px">Editar</button>
     </RouterLink>
     <RouterLink to="/deleteUser">
-        <button class="btn btn-primary" style="margin-right: 10px">Eliminar</button>
+        <button class="btn btn-danger" style="margin-right: 10px">Eliminar</button>
     </RouterLink>
   </div>
 </template>
