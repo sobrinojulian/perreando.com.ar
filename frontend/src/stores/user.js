@@ -20,7 +20,7 @@ export const useUserStore = defineStore("user", {
     },
     actions: {
         updateUser(user){
-            console.log('user:', user)
+            // console.log('user:', user)
             this.user = user
         }
     }

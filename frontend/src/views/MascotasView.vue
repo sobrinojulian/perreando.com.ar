@@ -19,7 +19,9 @@ export default {
   },
   setup() {
     const storeUser = useUserStore();
-    const { user } = storeToRefs(storeUser);
+    const storeRef = storeToRefs(storeUser);
+    const user = storeRef.user.value;
+    console.log("My user:" , user);
     const mascotasList = ref([]);
     const mascotasListStatus = ref({
       msg: '',
@@ -60,7 +62,7 @@ export default {
           mascotasListStatus.value.msg = ""
           mascotasListStatus.value.error = false;
           mascotasList.value = mascotasListResponse.filter((pet)=>{
-            return pet.ownerId != user.dni;
+            return pet.ownerId == user.dni;
           });
           //console.log("mascotas list response", mascotasListResponse)
         }).catch((err)=>{
@@ -86,7 +88,7 @@ export default {
           mascotasListStatus.value.error = true;
       }).finally(()=> {
         modalStatus.value.open = false;
-        modalStatus.value.id = false;
+        modalStatus.value.id = -1;
       }) 
 
     }
@@ -109,10 +111,6 @@ export default {
     function cancelEditMascota(mascotaId){
       editionMode.value.active = false;
       editionMode.value.id = -1;
-    }
-
-    function updateMascota(mascotaId){
-      console.log('Update mascota');
     }
 
     function submitForm(){
@@ -147,8 +145,7 @@ export default {
       formData,
       editMascota,
       submitForm,
-      cancelEditMascota,
-      updateMascota
+      cancelEditMascota
     };
 
    
