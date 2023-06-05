@@ -11,7 +11,6 @@ class MascotasService {
           "content-type": "application/json"
         }
       });
-      alert(mascotas)
       return mascotas.data;
     } catch (err) {
       console.log(err);
@@ -50,7 +49,7 @@ class MascotasService {
 
   static async update(mascotaData) {
     try {
-      const mascotas = await axios.put(`${config.backend.host}/api/${config.backend.apiVersion}/mascotas`, mascotaData,
+      const mascotas = await axios.put(`${config.backend.host}/api/${config.backend.apiVersion}/mascotas/${mascotaData.id}`, mascotaData,
         {
           headers: {
             "content-type": "application/json"
@@ -62,6 +61,21 @@ class MascotasService {
       return err;
     }
   }
+
+  static async delete(id) {  
+    try {
+      const mascotas = await axios.delete(`${config.backend.host}/api/${config.backend.apiVersion}/mascotas/${id}`, {
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+      return mascotas.data;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
 }
 
 export default MascotasService;
