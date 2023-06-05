@@ -1,11 +1,15 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+
 import App from './App.vue'
 import router from './router'
-import { ErrorMessage, Field, Form } from 'vee-validate'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.js'
+
+// Firebase
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 const app = createApp(App)
 const firebaseConfig = {
     apiKey: "AIzaSyCONx_tOsNSNWahCIu56c7eAnz47VepVKk",
@@ -18,6 +22,7 @@ const firebaseConfig = {
   };
 const firebaseApp = initializeApp(firebaseConfig);  
 const db = getFirestore(firebaseApp);
+// EoFirebase
 
 app.use(createPinia())
 app.use(router)

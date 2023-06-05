@@ -55,7 +55,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container mt-4">
         <h2 class="mb-4">Busqueda</h2>
         <hr>
 

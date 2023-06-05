@@ -36,7 +36,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container mt-4">
         <h2 class="mb-4">Historial de paseos (DNI: {{ user.dni }})</h2>
         <button class="btn btn-primary" :disabled="paseoExists" v-on:click="obtenerPaseos(user, vue)">Buscar
             paseos</button>

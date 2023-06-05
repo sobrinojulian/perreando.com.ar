@@ -53,7 +53,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container mt-4">
         <h2 class="mb-4">Disponibilidades de paseador (DNI: {{ user.dni }})</h2>
         <button class="btn btn-primary" :disabled="dispoExists"
             v-on:click="obtenerPaseadorDisponibilidades(user.id, vue)">Buscar disponibilidades</button>

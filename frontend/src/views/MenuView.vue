@@ -15,50 +15,47 @@ defineProps({
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand">Paseos de mascotas</a>
+      <RouterLink to="/" class="navbar-brand">
+        <img src="/perrando-logo-horizontal-blanco.png" alt="Perreando Logo" height="24">
+      </RouterLink>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <RouterLink to="/" class="nav-link" href="#">
-              Página Principal
-            </RouterLink>
-          </li>
           <li class="nav-item">
-            <RouterLink v-if="user.username !== ''" to="/paseosProgramados" class="nav-link" href="#">
+            <RouterLink v-if="user.username !== ''" to="/paseosProgramados" class="nav-link">
               Paseos Programados
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink v-if="user.username !== ''" to="/historialPaseos" class="nav-link" href="#">
+            <RouterLink v-if="user.username !== ''" to="/historialPaseos" class="nav-link">
               Historial de Paseos
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink v-if="user.username !== ''" to="/user" class="nav-link" href="#">
+            <RouterLink v-if="user.username !== ''" to="/user" class="nav-link">
               Información Usuario
             </RouterLink>
           </li>
           <!-- Botones de Usuario (Cliente que contratan paseadores) -->
           <li class="nav-item">
-            <RouterLink v-if="user.role === 'CLIENTE'" to="/mascotas" class="nav-link" href="#">
+            <RouterLink v-if="user.role === 'CLIENTE'" to="/mascotas" class="nav-link">
               Mascotas
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink v-if="user.role === 'CLIENTE'" to="/busquedaPaseadores" class="nav-link" href="#">
+            <RouterLink v-if="user.role === 'CLIENTE'" to="/busquedaPaseadores" class="nav-link">
               Contratar Paseadores
             </RouterLink>
           </li>
           <!-- Botones de Usuario (Paseadores de mascotas) -->
           <li class="nav-item">
-            <RouterLink v-if="user.role === 'PASEADOR'" to="/disponibilidadPaseador" class="nav-link" href="#">
+            <RouterLink v-if="user.role === 'PASEADOR'" to="/disponibilidadPaseador" class="nav-link">
               Alta de Disponibilidad Paseos
             </RouterLink>
           </li>
           <!-- Botones de login/registro -->
           <li class="nav-item">
-            <RouterLink v-if="user.username !== ''" to="/" class="nav-link" href="#" v-on:click="() => {
+            <RouterLink v-if="user.username !== ''" to="/" class="nav-link" v-on:click="() => {
                 user.username = ''
                 user.role = ''
               }">
@@ -66,12 +63,12 @@ defineProps({
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink v-show="user.username === ''" to="/login" class="nav-link" href="#">
+            <RouterLink v-show="user.username === ''" to="/login" class="nav-link">
               Login
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink v-show="user.username === ''" to="/registrar" class="nav-link" href="#">
+            <RouterLink v-show="user.username === ''" to="/registrar" class="nav-link">
               Registrar
             </RouterLink>
           </li>
@@ -81,69 +78,4 @@ defineProps({
     </div>
     <a v-if="user.username !== ''" class="navbar-brand">{{ `${user.role}: ${user.apellido}, ${user.nombre} (${user.dni})` }}</a>
   </nav>
-
-
-  <!-- 
-  <h1 class="mb-4">Paseos de mascotas</h1>
-  <hr>
-
-  <RouterLink to="/" class="btn btn-primary mr-2">
-    Página Principal
-  </RouterLink>
-
-  <RouterLink v-if="user.username !== ''" to="/user" class="btn btn-primary mr-2">
-    Información Usuario
-  </RouterLink>
-
-  <RouterLink v-if="user.username !== ''" to="/paseosProgramados" class="btn btn-primary mr-2">
-    Paseos Programados
-  </RouterLink>
-
-  <RouterLink v-if="user.username !== ''" to="/historialPaseos" class="btn btn-primary mr-2">
-    Historial de Paseos
-  </RouterLink>
-
-  <RouterLink v-if="user.role === 'CLIENTE'" to="/mascotas" class="btn btn-primary mr-2">
-    Mascotas
-  </RouterLink>
-
-  <RouterLink v-if="user.role === 'CLIENTE'" to="/busquedaPaseadores" class="btn btn-primary mr-2">
-    Buscar Paseadores
-  </RouterLink>
-
-  <RouterLink v-if="user.role === 'CLIENTE'" to="/contratarPaseadores" class="btn btn-primary mr-2">
-    Contratar Paseadores
-  </RouterLink>
-
-  <RouterLink v-if="user.role === 'PASEADOR'" to="/horariosPaseador" class="btn btn-primary mr-2">
-    Horario
-  </RouterLink>
-
-  <RouterLink v-if="user.role === 'PASEADOR'" to="/zonasPaseador" class="btn btn-primary mr-2">
-    Zonas
-  </RouterLink>
-
-  <RouterLink v-if="user.username !== ''" to="/" class="btn btn-primary" v-on:click="() => {user.username = ''
-                                                                                            user.role = ''}">
-    Logout
-  </RouterLink>
-
-  <RouterLink v-show="user.username === ''" to="/login" class="btn btn-primary mr-2">
-    Login
-  </RouterLink>
-
-  <RouterLink v-show="user.username === ''" to="/registrar" class="btn btn-primary">
-    Registrar
-  </RouterLink>
-
-  <hr>
-
-  <h2 v-if="user.username !== ''" class="mt-4">{{ `Nombre: ${user.nombre}, ${user.apellido} - DNI: ${user.dni}` }}</h2>
-  <hr>
--->
 </template>
-
-<style></style>
-
-
-<style></style>
