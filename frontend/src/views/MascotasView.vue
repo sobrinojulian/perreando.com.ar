@@ -158,8 +158,8 @@ export default {
 
 
 <template>
-  <div>
-    <h2>
+  <div class="container mt-4">
+    <h2 class="mb-4">
       Mis Mascotas
     </h2>
     <Form @submit="submitForm" v-slot="{ errors }">
@@ -215,10 +215,10 @@ export default {
             </td>
             <td>{{mascota.vaccinated?'Si':'No'}}</td>
             <td>
-                <button @click="askForDeletion(mascota.id)" class="btn btn-danger">Eliminar</button>
-                <button v-if="!editionMode.active" @click="editMascota(mascota.id, index)" class="btn btn-primary">Editar</button>
-                <button v-if="editionMode.id == mascota.id && editionMode.active" @click="cancelEditMascota(mascota.id, index)" class="btn btn-primary">Cancelar</button>
-                <button v-if="editionMode.id == mascota.id && editionMode.active" type="submit" class="btn btn-primary">Salvar</button>
+                <button @click="askForDeletion(mascota.id)" class="btn btn-danger me-2">Eliminar</button>
+                <button v-if="!editionMode.active" @click="editMascota(mascota.id, index)" class="btn btn-primary me-2">Editar</button>
+                <button v-if="editionMode.id == mascota.id && editionMode.active" @click="cancelEditMascota(mascota.id, index)" class="btn btn-primary me-2">Cancelar</button>
+                <button v-if="editionMode.id == mascota.id && editionMode.active" type="submit" class="btn btn-primary me-2">Salvar</button>
             </td>
 
           </tr>
@@ -245,7 +245,7 @@ export default {
       </template>
 
     </modal-view>
-    <pre> {{ mascotasList }} </pre>
+    <!-- <pre> {{ mascotasList }} </pre> -->
 
     <RouterLink class="navbar-brand" to="/mascotas/add">
       <button class="btn btn-primary mb-4">agregar mascota</button>
