@@ -47,6 +47,9 @@ const router = createRouter({
       name: 'historialPaseos',
       component: () => import('../views/HistorialPaseosView.vue')
     },
+
+
+
     {
       path: '/mascotas',
       name: 'mascotas',
@@ -57,6 +60,25 @@ const router = createRouter({
       name: 'add',
       component: () => import('../views/AddMascotasView.vue')
     },
+    
+    // {
+    //   path: '/mascotas',
+    //   name: 'mascotas',
+    //   component: () => import('../views/MascotasABMView.vue')
+    // },
+    // {
+    //   path: '/agregarMascota',
+    //   name: 'agregarMascota',
+    //   component: () => import('../views/MascotasABMViewAdd.vue')
+    // },
+    // {
+    //   path: '/editarMascota',
+    //   name: 'editarMascota',
+    //   component: () => import('../views/MascotasABMViewEdit.vue')
+    // },
+
+
+
     {
       path: '/busquedaPaseadores',
       name: 'busquedaPaseadores',

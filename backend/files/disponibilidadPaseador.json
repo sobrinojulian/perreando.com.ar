@@ -36,7 +36,7 @@
 		"zona": "Almagro",
 		"horario": "13:00",
 		"precio": 650,
-		"estado": 0,
+		"estado": 1,
 		"paseadorId": 1
 	},
 	{
@@ -92,14 +92,14 @@
 		"zona": "Recoleta",
 		"horario": "20:00",
 		"precio": 1500,
-		"estado": 0,
+		"estado": 1,
 		"paseadorId": 1
 	},
 	{
 		"disponibilidadId": 13,
-		"zona": "Recoleta",
+		"zona": "Parque Chacabuco",
 		"horario": "21:00",
-		"precio": 1500,
+		"precio": 2000,
 		"estado": 0,
 		"paseadorId": 1
 	}

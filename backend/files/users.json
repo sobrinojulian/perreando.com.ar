@@ -5,12 +5,12 @@
 		"email": "sebameendez@gmail.com",
 		"password": "paseador123",
 		"nombre": "Sebastián",
-		"apellido": "Mendoza",
+		"apellido": "Mendez",
 		"dni": 98521634,
 		"fechaNacimiento": "1998-05-12",
 		"telefono": 1123985745,
 		"role": "PASEADOR",
-		"saldo": 1595
+		"saldo": 3960
 	},
 	{
 		"id": 2,
@@ -23,7 +23,7 @@
 		"fechaNacimiento": "1998-05-12",
 		"telefono": 1123985746,
 		"role": "CLIENTE",
-		"saldo": 3805
+		"saldo": 2155
 	},
 	{
 		"id": 3,
@@ -49,7 +49,7 @@
 		"fechaNacimiento": "1998-05-12",
 		"telefono": 1123985746,
 		"role": "CLIENTE",
-		"saldo": 4000
+		"saldo": 3285
 	},
 	{
 		"id": 5,

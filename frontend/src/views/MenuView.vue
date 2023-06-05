@@ -22,6 +22,11 @@ defineProps({
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
+            <RouterLink v-if="user.username !== ''" to="/user" class="nav-link">
+              Información Usuario
+            </RouterLink>
+          </li>
+          <li class="nav-item">
             <RouterLink v-if="user.username !== ''" to="/paseosProgramados" class="nav-link">
               Paseos Programados
             </RouterLink>
@@ -29,11 +34,6 @@ defineProps({
           <li class="nav-item">
             <RouterLink v-if="user.username !== ''" to="/historialPaseos" class="nav-link">
               Historial de Paseos
-            </RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink v-if="user.username !== ''" to="/user" class="nav-link">
-              Información Usuario
             </RouterLink>
           </li>
           <!-- Botones de Usuario (Cliente que contratan paseadores) -->
