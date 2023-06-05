@@ -33,9 +33,62 @@ const { user } = storeToRefs(store);
                     <span class="visually-hidden">Siguiente</span>
                 </button>
         </div>
+        <div id="contacto" class="container-fluid bg-light py-5">
+  <div class="row">
+    <!-- Datos de contacto -->
+    <div class="col-md-3">
+      <div class="py-4">
+        <h4 class="border-bottom pb-2">Contáctenos</h4>
+        <p>Su consulta no nos molesta!</p>
+        <p><i class="bi bi-phone"></i> +54 11 5888 9499</p>
+        <p><i class="bi bi-whatsapp"></i> +54 11 5888 2999</p>
+        <p><i class="bi bi-envelope"></i> atclientes@perreando.com.ar</p>
+      </div>
+    </div>
+    
+    <!-- Información sobre paseos de perros -->
+    <div id="divInformacion" class="col-md-9">
+      <h2>¿Le estás dando a tu perro lo que realmente necesita?</h2>
+      <p>El paseo diario es una actividad fundamental para la calidad de vida de tu perro</p>
+      
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img src="/public/ejerciciomascota.jpg" class="card-img-top" alt="Ejercicio" width="150px" height="150px">
+            <div class="card-body">
+              <h5 class="card-title">Ejercicio</h5>
+              <p class="card-text">Un perro sin ejercicio tiene energía de sobra, y salir sólo para usar el baño no es suficiente</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card">
+            <img src="/public/sociabilizarmascota.jpg" class="card-img-top" alt="Sociabilización" width="150px" height="150px">
+            <div class="card-body">
+              <h5 class="card-title">Sociabilización</h5>
+              <p class="card-text">Muchos problemas de conducta y salud de los perros se deben a que pasan muchas horas en soledad.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card">
+            <img src="/public/rutinamascota.png" class="card-img-top" alt="Rutina" width="150px" height="150px">
+            <div class="card-body">
+              <h5 class="card-title">Rutina</h5>
+              <p class="card-text">Mantener una rutina diaria significa mejor comportamiento y mayor inteligencia para tu perro.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
 
-    <div v-if="user.role === 'PASEADOR' || user.role === 'CLIENTE'">
+    <div v-if="user.role === 'PASEADOR' || user.role === 'CLIENTE'" class ="container">
         <div id="servicios" class="claseServ">
             <h2 style="text-align: center; color: black;">SERVICIOS</h2>
             <p style="text-align: center; color: black;" v-if="user.role === 'PASEADOR'">COMO PASEADOR PODRAS DISFRUTAR DE LOS SIGUENTES SERVICIOS</p>
@@ -112,6 +165,9 @@ const { user } = storeToRefs(store);
     </div>
     </div>
 
+   
+
+
 </template>
 
 <style>
@@ -136,7 +192,12 @@ const { user } = storeToRefs(store);
             height: 85vh;
         }
     }
+    
+  
 
+.card {
+  margin-bottom: 20px;
+}
 </style>
 
 <script>
