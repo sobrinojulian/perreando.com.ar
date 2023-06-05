@@ -80,7 +80,8 @@ defineProps({
 
     </div>
     <a v-if="user.username !== ''" class="navbar-brand">{{ `${user.role}: ${user.apellido}, ${user.nombre} (${user.dni})` }}</a>
-  </nav><br>
+  </nav>
+
 
   <!-- 
   <h1 class="mb-4">Paseos de mascotas</h1>

@@ -1,4 +1,5 @@
 <template>
+  <br><br><br>
   <footer class="footer bg-dark text-light">
     <div class="container">
       <div class="row">
@@ -7,12 +8,11 @@
         </div>
         <div class="col-md-6 text-md-right">
           <ul class="list-inline">
-            <li class="list-inline-item">
-              <RouterLink to="/">Inicio</RouterLink>
-            </li>
-            <li class="list-inline-item">
-              <RouterLink to="/">Contacto</RouterLink>
-            </li>
+            <li class="nav-item active">
+            <RouterLink to="/" class="nav-link" href="#">
+              Inicio
+            </RouterLink>
+          </li>
           </ul>
         </div>
       </div>
