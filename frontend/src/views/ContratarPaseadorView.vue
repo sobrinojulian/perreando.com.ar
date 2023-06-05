@@ -3,6 +3,8 @@ import { storeToRefs } from 'pinia'
 import { usePaseadorStore } from '../stores/paseador.js'
 import { useUserStore } from '../stores/user.js'
 import paseoService from '../services/paseoService.js'
+import mascotaService from '../services/mascotas-service.js'
+//import mascotaService from '../services/mascotaService.js'
 
 export default {
     setup() {
@@ -36,27 +38,32 @@ export default {
                 total: 0,
                 fecha: ""
             },
-            mascotas: [
-                {
-                    id: 1,
-                    nombre: 'Teddy',
-                    vacunado: true,
-                    tamanio: 'big',
-                    raza: 'Pastor Aleman',
-                    peso: '19kg'
-                },
-                {
-                    id: 2,
-                    nombre: 'Pity',
-                    vacunado: true,
-                    tamanio: 'small',
-                    raza: 'Dogo',
-                    peso: '21kg'
-                }
-            ]
+            mascotas: [],
+            mascotaExist: false
         };
     },
     methods: {
+        obtenerMascotas: (ownerId, vue) => {
+            mascotaService.getAll()
+                .then(response => {
+                    vue.mascotas = response.filter((pet) => {
+                        return pet.ownerId == ownerId;
+                    });
+                })
+                .catch(error => {
+                    alert("Error: No se pudo obtener las mascotas del paseador.");
+                    console.log(error)
+                });
+            // mascotaService.obtenerMascotas(ownerId)
+            //     .then(response => {
+            //         vue.mascotas = response.data
+            //         vue.mascotaExist = true
+            //     })
+            //     .catch(error => {
+            //         alert("Error: No se pudo obtener las mascotas del paseador.");
+            //         console.log(error)
+            //     });
+        },
         seleccionarMascota: (id, nombre, vue) => {
             vue.mascotaSeleccionada.id = id
             vue.mascotaSeleccionada.nombre = nombre
@@ -141,6 +148,10 @@ export default {
 
         <div class="form-group">
             <h5 for="select">Seleccionar mascota</h5>
+            <button class="btn btn-primary" v-on:click="obtenerMascotas(user.dni, vue)" style="margin-bottom: 10px"
+                :disabled="mascotaExist">Search</button>
+            <br>
+
             <table class="table" v-if="mascotas.length != 0">
                 <thead class="text-light bg-primary">
                     <tr>
@@ -154,17 +165,18 @@ export default {
                 </thead>
                 <tbody>
                     <tr v-for="m in mascotas">
-                        <th scope="row"><button class="btn btn-primary" v-on:click="seleccionarMascota(m.id, m.nombre, vue)"
+                        <th scope="row"><button class="btn btn-primary" v-on:click="seleccionarMascota(m.id, m.name, vue)"
                                 :disabled="seleccion">+</button></th>
-                        <td>{{ m.nombre }}</td>
-                        <td>{{ m.raza }}</td>
-                        <td>{{ m.vacunado }}</td>
-                        <td>{{ m.tamanio }}</td>
-                        <td>{{ m.peso }}</td>
+                        <td>{{ m.name }}</td>
+                        <td>{{ m.breed }}</td>
+                        <td>{{ m.vaccinated?'Si':'No' }}</td>
+                        <td>{{ m.size }}</td>
+                        <td>{{ m.weight }}</td>
                     </tr>
                 </tbody>
             </table>
-            <p v-else="mascotas.length != 0">No puede avanzar con la contratacion porque usted no tiene Mascotas.</p>
+            <p v-if="mascotaExist && mascotas.length == 0">No puede avanzar con la contratacion porque usted no tiene
+                Mascotas.</p>
         </div>
 
         <p v-if="seleccion">

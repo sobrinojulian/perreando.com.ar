@@ -104,7 +104,7 @@ export default {
         ...formData.value.data,
         ownerId: user.value.dni
       }
-     
+
       formData.value.status.msg = "loading..."; 
       formData.value.status.loading = true;
       

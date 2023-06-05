@@ -24,5 +24,31 @@
 		"mascotaId": 2,
 		"total": 715,
 		"fecha": "4/6/2023"
+	},
+	{
+		"id": 3,
+		"clienteId": 2,
+		"paseadorId": 1,
+		"disponibilidadId": 12,
+		"horario": "20:00",
+		"zona": "Recoleta",
+		"precio": 1500,
+		"recargo": 150,
+		"mascotaId": 6,
+		"total": 1650,
+		"fecha": "5/6/2023"
+	},
+	{
+		"id": 4,
+		"clienteId": 4,
+		"paseadorId": 1,
+		"disponibilidadId": 5,
+		"horario": "13:00",
+		"zona": "Almagro",
+		"precio": 650,
+		"recargo": 65,
+		"mascotaId": 3,
+		"total": 715,
+		"fecha": "5/6/2023"
 	}
 ]
