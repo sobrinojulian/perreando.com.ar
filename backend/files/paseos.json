@@ -8,7 +8,7 @@
 		"zona": "Floresta",
 		"precio": 800,
 		"recargo": 80,
-		"mascotaId": 1,
+		"mascotaId": 43,
 		"total": 880,
 		"fecha": "4/6/2023"
 	},
@@ -21,7 +21,7 @@
 		"zona": "Almagro",
 		"precio": 650,
 		"recargo": 65,
-		"mascotaId": 2,
+		"mascotaId": 46,
 		"total": 715,
 		"fecha": "4/6/2023"
 	},
@@ -34,7 +34,7 @@
 		"zona": "Recoleta",
 		"precio": 1500,
 		"recargo": 150,
-		"mascotaId": 6,
+		"mascotaId": 47,
 		"total": 1650,
 		"fecha": "5/6/2023"
 	},
@@ -47,7 +47,20 @@
 		"zona": "Almagro",
 		"precio": 650,
 		"recargo": 65,
-		"mascotaId": 3,
+		"mascotaId": 42,
+		"total": 715,
+		"fecha": "5/6/2023"
+	},
+	{
+		"id": 5,
+		"clienteId": 2,
+		"paseadorId": 1,
+		"disponibilidadId": 1,
+		"horario": "09:00",
+		"zona": "Almagro",
+		"precio": 650,
+		"recargo": 65,
+		"mascotaId": 43,
 		"total": 715,
 		"fecha": "5/6/2023"
 	}

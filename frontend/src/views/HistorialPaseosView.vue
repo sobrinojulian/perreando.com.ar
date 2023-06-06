@@ -4,6 +4,8 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from '../stores/user.js'
 import paseoService from '../services/paseoService.js'
 
+import MascotasService from "../services/mascotas-service"; //Mascota
+
 export default {
   setup() {
     const storeUser = useUserStore()
@@ -18,6 +20,20 @@ export default {
         .obtenerPaseosHistorial(user.value.role, user.value.id)
         .then(response => {
           paseos.value = response.data
+          
+          //Mascota
+          paseos.value.forEach(p => {
+            MascotasService.get(p.mascotaId)
+              .then(mResponse => {
+                p.nombreMascota = mResponse.name
+              })
+              .catch(error => {
+                alert('Error: No se pudo obtener el nombre de la mascota' + error)
+                console.log(error)
+              })
+          })
+          //--------
+          
           paseoExists.value = true
         })
         .catch(error => {

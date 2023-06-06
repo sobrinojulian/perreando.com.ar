@@ -46,16 +46,18 @@ class ServicePaseo {
             paseos = paseos.filter(p => p.clienteId == id)
             paseos.forEach(p => {
                 let persona = this.agregarDatosPersona(p.paseadorId, usuarios)
-                let mascota = this.agregarDatosMascota(p.mascotaId, mascotas)
-                p = { ...p, ...persona, ...mascota }
+                //let mascota = this.agregarDatosMascota(p.mascotaId, mascotas)
+                //p = { ...p, ...persona, ...mascota }
+                p = { ...p, ...persona }
                 paseosFilter.push(p)
             })
         }else if(role == 'PASEADOR'){
             paseos = paseos.filter(p => p.paseadorId == id)
             paseos.forEach(p => {
                 let persona = this.agregarDatosPersona(p.clienteId, usuarios)
-                let mascota = this.agregarDatosMascota(p.mascotaId, mascotas)
-                p = { ...p, ...persona, ...mascota }
+                //let mascota = this.agregarDatosMascota(p.mascotaId, mascotas)
+                //p = { ...p, ...persona, ...mascota }
+                p = { ...p, ...persona }
                 paseosFilter.push(p)
             })
         }
