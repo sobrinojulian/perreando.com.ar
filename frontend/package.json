@@ -8,6 +8,16 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sebaasmendez/paseoMascotas.git"
+  },
+  "author": "PNT2",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sebaasmendez/paseoMascotas/issues"
+  },
+  "homepage": "https://github.com/Sebaasmendez/paseoMascotas#readme",
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "axios": "^1.4.0",
