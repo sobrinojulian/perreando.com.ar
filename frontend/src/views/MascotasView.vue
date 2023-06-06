@@ -21,7 +21,7 @@ export default {
     const storeUser = useUserStore();
     const storeRef = storeToRefs(storeUser);
     const user = storeRef.user.value;
-    console.log("My user:" , user);
+    // console.log("My user:" , user);
     const mascotasList = ref([]);
     const mascotasListStatus = ref({
       msg: '',
@@ -57,7 +57,7 @@ export default {
     const getMascotas = () => {
         
       mascotasListStatus.value.loading = true;
-        console.log(user.dni);
+        
         MascotasService.getAll().then((mascotasListResponse)=>{
           mascotasListStatus.value.msg = ""
           mascotasListStatus.value.error = false;
@@ -210,7 +210,10 @@ export default {
             </div>
             <p v-if="editionMode.id != mascota.id">{{mascota.weight}}</p>
             </td>
-            <td>{{mascota.vaccinated?'Si':'No'}}</td>
+            <td>
+              <p v-if="editionMode.id != mascota.id"> {{mascota.vaccinated?'Si':'No'}} </p>
+              <input v-if="editionMode.id == mascota.id" name="vaccinated" type="checkbox" id="vaccinated" v-model="formData.data.vaccinated" class="form-check"/>
+            </td>
             <td>
                 <button @click="askForDeletion(mascota.id)" class="btn btn-danger me-2">Eliminar</button>
                 <button v-if="!editionMode.active" @click="editMascota(mascota.id, index)" class="btn btn-primary me-2">Editar</button>
