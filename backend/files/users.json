@@ -10,7 +10,7 @@
 		"fechaNacimiento": "1998-05-12",
 		"telefono": 1123985745,
 		"role": "PASEADOR",
-		"saldo": 4675
+		"saldo": 6875
 	},
 	{
 		"id": 2,
@@ -23,7 +23,7 @@
 		"fechaNacimiento": "1998-05-12",
 		"telefono": 1123985746,
 		"role": "CLIENTE",
-		"saldo": 1440
+		"saldo": 1240
 	},
 	{
 		"id": 3,

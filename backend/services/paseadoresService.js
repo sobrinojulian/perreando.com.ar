@@ -28,14 +28,22 @@ class ServicePaseador {
                 })
             })
 
-            //Filtrar por Horario
-            if (horario != 0) {
+            //Filtrar por Zona y Horario
+            if (horario != 0 && zona != 0) {
+                console.log(1);
+                paseadoresFiltrados = paseadoresFiltrados.concat(listaPaseadores.filter(p => p.horario === horario && p.zona === zona))
+            }else if (horario != 0) {
+                console.log(2);
                 paseadoresFiltrados = paseadoresFiltrados.concat(listaPaseadores.filter(p => p.horario === horario))
-            }
-            //Filtrar por Zona
-            if (zona != 0) {
+            }else if (zona != 0) {
+                console.log(3);
                 paseadoresFiltrados = paseadoresFiltrados.concat(listaPaseadores.filter(p => p.zona === zona))
+            }else {
+                console.log(4);
+                paseadoresFiltrados = listaPaseadores
             }
+
+            console.log(paseadoresFiltrados);
 
             return paseadoresFiltrados
         } catch (error) {
