@@ -10,9 +10,11 @@ class MascotaRouter {
 
     start(){
         // ---- Metodos ----
-        this.router.get('/:id?', this.controller.obtenerMascotas)
+        this.router.get('/:ownerId', this.controller.obtenerMascotasByOwner)
+        this.router.get('/:id', this.controller.obtenerMascotasById)
+        this.router.get('/', this.controller.obtenerMascotas)
         this.router.post('/', this.controller.guardarMascota)
-        this.router.put('/', this.controller.actualizarMascota)
+        this.router.put('/:id', this.controller.actualizarMascota)
         this.router.delete('/:id', this.controller.eliminarMascota)
 
         return this.router

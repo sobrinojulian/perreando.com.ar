@@ -1,16 +1,16 @@
 import express from 'express'
-import PaseadorController from '../controllers/paseadoresController.js'
+import DisponibilidadController from '../controllers/disponibilidadesController.js'
 
-class PaseadorRouter {
+class DisponibilidadRouter {
 
     constructor(){
         this.router = express.Router()
-        this.controller = new PaseadorController()
+        this.controller = new DisponibilidadController()
     }
 
     start(){
         // ---- Metodos ----
-        this.router.get('/:id', this.controller.obtenerPaseadorDisponibilidades)
+        this.router.get('/:paseadorId', this.controller.obtenerDisponibilidadesByPaseador)
         this.router.get('/:zona?/:horario?', this.controller.filtrarPaseadores)
         this.router.delete('/delete/:id', this.controller.eliminarDisponibilidad)
         this.router.post('/cargar', this.controller.cargarDisponibilidades)
@@ -20,4 +20,4 @@ class PaseadorRouter {
 
 }
 
-export default PaseadorRouter
+export default DisponibilidadRouter

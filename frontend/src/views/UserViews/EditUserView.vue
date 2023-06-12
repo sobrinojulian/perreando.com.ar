@@ -1,7 +1,7 @@
 <script>
 import { storeToRefs } from 'pinia'
-import { useUserStore } from '../stores/user.js'
-import userService from '../services/userService.js'
+import { useUserStore } from '../../stores/user.js'
+import userService from '../../services/userService.js'
 
 export default {
   setup() {
@@ -23,6 +23,7 @@ export default {
         dni: this.user.dni,
         fechaNacimiento: this.user.fechaNacimiento,
         telefono: this.user.telefono,
+        direccion: this.user.direccion,
         role: this.user.role,
         saldo: 0
       }
@@ -31,20 +32,25 @@ export default {
   methods: {
     editar: (user, vue) => {
       user.saldo = user.saldo + vue.user.saldo
-      userService.editUser(user)
+      userService.editUser(vue.user.id, user)
         .then(response => {
-          vue.user.username = response.data.username
-          vue.user.email = response.data.email
-          vue.user.password = response.data.password
-          vue.user.nombre = response.data.nombre
-          vue.user.apellido = response.data.apellido
-          vue.user.dni = response.data.dni
-          vue.user.fechaNacimiento = response.data.fechaNacimiento
-          vue.user.telefono = response.data.telefono
-          vue.user.role = response.data.role
-          vue.user.saldo = response.data.saldo
-          alert('Datos de usuario actualizado correctamente.')
-          vue.$router.push("/user");
+          if (response.data.respuesta) {
+            vue.user.username = response.data.username
+            vue.user.email = response.data.email
+            vue.user.password = response.data.password
+            vue.user.nombre = response.data.nombre
+            vue.user.apellido = response.data.apellido
+            vue.user.dni = response.data.dni
+            vue.user.fechaNacimiento = response.data.fechaNacimiento
+            vue.user.telefono = response.data.telefono
+            vue.user.direccion = response.data.direccion
+            vue.user.role = response.data.role
+            vue.user.saldo = response.data.saldo
+            alert('Datos de usuario actualizado correctamente.')
+            vue.$router.push("/user");
+          } else {
+            alert(response.data.error)
+          }
         })
         .catch(error => {
           alert("Error: Valide los datos ingresados.");
@@ -98,6 +104,15 @@ export default {
       <div class="form-group">
         <label for="telefono">Telefono:</label>
         <input v-model="user.telefono" type="number" class="form-control" id="telefono" placeholder="Phone Number">
+      </div>
+
+      <!-- Datos de Direccion de usuario -->
+      <br>
+      <h5 class="mb-4">Ubicacion</h5>
+
+      <div class="form-group">
+        <label for="direccion">Direccion:</label>
+        <input v-model="user.direccion" type="text" class="form-control" id="direccion" placeholder="Direccion">
       </div>
 
       <!-- Asignar Rol del usuario -->

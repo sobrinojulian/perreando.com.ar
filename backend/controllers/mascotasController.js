@@ -3,13 +3,35 @@ import MascotaService from '../services/mascotasService.js'
 class ControllerMascota {
 
     constructor(){
-        this.service = new MascotaService()
+        this.serviceMascota = new MascotaService()
+    }
+
+    obtenerMascotasByOwner = async (req, res) => {
+        try{
+            const ownerId = req.params.ownerId
+            const mascotas = await this.serviceMascota.obtenerMascotasByOwner(ownerId)        
+
+            res.json(mascotas)
+        }catch(error){
+            console.log('Error en ControllerMascota.obtenerMascotasByOwner() --> ', error)
+        }
+    }
+
+    obtenerMascotasById = async (req, res) => {
+        try{
+            const id = req.params.id
+            const mascotas = await this.serviceMascota.obtenerMascotasById(id)        
+
+            res.json(mascotas)
+        }catch(error){
+            console.log('Error en ControllerMascota.obtenerMascotasById() --> ', error)
+        }
     }
 
     obtenerMascotas = async (req, res) => {
         try{
-            const ownerId = req.params.id
-            const mascotas = await this.service.obtenerMascotas(ownerId)            
+            const mascotas = await this.serviceMascota.obtenerMascotas()        
+
             res.json(mascotas)
         }catch(error){
             console.log('Error en ControllerMascota.obtenerMascotas() --> ', error)
@@ -19,7 +41,8 @@ class ControllerMascota {
     guardarMascota = async (req, res) => {
         try{
             const mascota = req.body
-            const mascotaSaved = await this.service.guardarMascota(mascota)            
+            const mascotaSaved = await this.serviceMascota.guardarMascota(mascota)     
+
             res.json(mascotaSaved)
         }catch(error){
             console.log('Error en ControllerMascota.guardarMascota() --> ', error)
@@ -28,8 +51,10 @@ class ControllerMascota {
 
     actualizarMascota = async (req, res) => {
         try{
+            const id = req.params.id
             const mascota = req.body
-            const mascotaUpdated = await this.service.actualizarMascota(mascota)            
+            const mascotaUpdated = await this.serviceMascota.actualizarMascota(id, mascota)     
+
             res.json(mascotaUpdated)
         }catch(error){
             console.log('Error en ControllerMascota.actualizarMascota() --> ', error)
@@ -39,7 +64,8 @@ class ControllerMascota {
     eliminarMascota = async (req, res) => {
         try{
             const id = req.params.id
-            const mascotaDeleted = await this.service.eliminarMascota(id)            
+            const mascotaDeleted = await this.serviceMascota.eliminarMascota(id)    
+
             res.json(mascotaDeleted)
         }catch(error){
             console.log('Error en ControllerMascota.eliminarMascota() --> ', error)

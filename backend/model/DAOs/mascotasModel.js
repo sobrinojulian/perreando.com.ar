@@ -1,80 +1,74 @@
-import fs from 'fs'
+import { ObjectId } from 'mongodb'
+import ConnectionMongoDB from '../ConnectionMongoDB.js'
 
 class Mascota {
 
-    constructor() {
-        this.MASCOTASFILE = '../backend/files/mascotas.json'
-    }
+    constructor() { }
 
-    getNewId = mascotas => {
-        const longitud = mascotas.length
-        const newId = (mascotas[longitud - 1]?.id || 0) + 1
-        return newId
-    }
-
-    async readFile() {
-        return await fs.promises.readFile(this.MASCOTASFILE, 'utf-8')
-    }
-
-    async writeFile(mascotas) {
-        await fs.promises.writeFile(this.MASCOTASFILE, JSON.stringify(mascotas, null, '\t'))
-    }
-
-    obtenerMascotas = async ownerId => {
+    obtenerMascotasByOwner = async ownerId => {
         try {
-            const mascotas = JSON.parse(await this.readFile())
+            let mascotas = []
+            if (!ConnectionMongoDB.connection) return ownerId ? {} : []
 
             if (ownerId) {
-                const mascota = mascotas.filter(m => m.ownerId == ownerId)
-                return mascota || {}
+                mascotas = await ConnectionMongoDB.db.collection('mascotas').find({ ownerId: ownerId }).toArray()
             } else {
-                return mascotas
+                mascotas = await ConnectionMongoDB.db.collection('mascotas').find().toArray()
             }
+            return mascotas
+        } catch (error) {
+            console.log('Error en Mascota.obtenerMascotasByOwner() --> ', error)
+            return ownerId ? {} : []
+        }
+    }
+
+    obtenerMascotasById = async id => {
+        try {
+            if (!ConnectionMongoDB.connection) return {}
+
+            const mascota = await ConnectionMongoDB.db.collection('mascotas').findOne({ _id: new ObjectId(id) })
+            return mascota
+        } catch (error) {
+            console.log('Error en Mascota.obtenerMascotasById() --> ', error)
+            return {}
+        }
+    }
+
+    obtenerMascotas = async () => {
+        try {
+            if (!ConnectionMongoDB.connection) return []
+
+            const mascotas = await ConnectionMongoDB.db.collection('mascotas').find().toArray()
+            return mascotas
         } catch (error) {
             console.log('Error en Mascota.obtenerMascotas() --> ', error)
-            return ownerId ? {} : []
+            return []
         }
     }
 
     guardarMascota = async mascota => {
         try {
-            let mascotas = []
-            try {
-                mascotas = JSON.parse(await this.readFile())
-            } catch { }
+            if (!ConnectionMongoDB.connection) return {}
 
-            const id = this.getNewId(mascotas)
-            const newMascota = { id, ...mascota }
-            newMascota.vacunado = parseInt(newMascota.vacunado)
-            mascotas.push(newMascota)
-            await this.writeFile(mascotas)
-            return newMascota
+            await ConnectionMongoDB.db.collection('mascotas').insertOne(mascota)
+            return mascota
         } catch (error) {
             console.log('Error en Mascota.guardarMascota() --> ', error)
             return {}
         }
-
     }
 
-    actualizarMascota = async mascota => {
+    actualizarMascota = async (id, mascota) => {
         try {
-            let mascotas = []
-            try {
-                mascotas = JSON.parse(await this.readFile())
-            } catch { }
+            if (!ConnectionMongoDB.connection) return {}
 
-            console.log(mascota);
-            const index = mascotas.findIndex(m => m.id == mascota.id)
-            if (index != -1) { //Retorna -1 sino existe el id ingresado
-                const oldMascota = mascotas[index]
-                const newMascota = { ...oldMascota, ...mascota }
-                newMascota.vacunado = parseInt(newMascota.vacunado)
-                mascotas.splice(index, 1, newMascota)
-                await this.writeFile(mascotas)
-                return newMascota
-            } else {
-                console.log('No existe la mascota a actualizar')
-            }
+            await ConnectionMongoDB.db.collection('mascotas').updateOne(
+                { _id: new ObjectId(id) },
+                { $set: mascota }
+            )
+
+            const mascotaUpdated = await this.obtenerMascotasById(id)
+            return mascotaUpdated
         } catch (error) {
             console.log('Error en Mascota.actualizarMascota() --> ', error)
             return {}
@@ -83,19 +77,12 @@ class Mascota {
 
     eliminarMascota = async id => {
         try {
-            let mascotas = []
-            try {
-                mascotas = JSON.parse(await this.readFile())
-            } catch { }
+            if (!ConnectionMongoDB.connection) return {}
 
-            const index = mascotas.findIndex(m => m.id == id)
-            if (index != -1) { //Retorna -1 sino existe el id ingresado
-                const mascota = mascotas.splice(index, 1)[0]
-                await this.writeFile(mascotas)
-                return mascota
-            } else {
-                console.log('No existe la mascota a eliminar')
-            }
+            const mascotaDeleted = await this.obtenerMascotasById(id)
+            await ConnectionMongoDB.db.collection('mascotas').deleteOne({ _id: new ObjectId(id) })
+
+            return mascotaDeleted
         } catch (error) {
             console.log('Error en Mascota.eliminarMascota() --> ', error)
             return {}

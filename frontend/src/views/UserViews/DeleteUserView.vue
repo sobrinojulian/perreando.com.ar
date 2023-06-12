@@ -1,7 +1,7 @@
 <script>
 import { storeToRefs } from 'pinia'
-import { useUserStore } from '../stores/user.js'
-import userService from '../services/userService.js'
+import { useUserStore } from '../../stores/user.js'
+import userService from '../../services/userService.js'
 
 export default {
   setup() {
@@ -29,8 +29,8 @@ export default {
     };
   },
   methods: {
-    eliminar: (username, userBlank, vue) => {
-      userService.deleteUser(username, userBlank)
+    eliminar: (userBlank, vue) => {
+      userService.deleteUser(vue.user.id)
         .then(response => {
             vue.user = userBlank
             alert('Usuario eliminado correctamente.')
@@ -49,7 +49,7 @@ export default {
   <div class="container">
     <h2 class="mb-4">Eliminar usuario</h2><hr>
 
-    <form @submit.prevent="eliminar(username, userBlank, vue)">
+    <form @submit.prevent="eliminar(userBlank, vue)">
       <div class="form-group">
         <label for="username">¿Esta seguro que desea eliminar su usuario <b>{{ username }}</b>?</label>
       </div>

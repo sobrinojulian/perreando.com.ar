@@ -1,10 +1,9 @@
 <script>
 import { storeToRefs } from 'pinia'
-import { usePaseadorStore } from '../stores/paseador.js'
-import { useUserStore } from '../stores/user.js'
-import paseoService from '../services/paseoService.js'
-import mascotaService from '../services/mascotas-service.js'
-//import mascotaService from '../services/mascotaService.js'
+import { usePaseadorStore } from '../../stores/paseador.js'
+import { useUserStore } from '../../stores/user.js'
+import paseoService from '../../services/paseoService.js'
+import mascotaService from '../../services/mascotaService.js'
 
 export default {
     setup() {
@@ -44,25 +43,15 @@ export default {
     },
     methods: {
         obtenerMascotas: (ownerId, vue) => {
-            mascotaService.getAll()
+            mascotaService.obtenerMascotasByOwner(ownerId)
                 .then(response => {
-                    vue.mascotas = response.filter((pet) => {
-                        return pet.ownerId == ownerId;
-                    });
+                    vue.mascotas = response.data
+                    vue.mascotaExist = true
                 })
                 .catch(error => {
                     alert("Error: No se pudo obtener las mascotas del paseador.");
                     console.log(error)
                 });
-            // mascotaService.obtenerMascotas(ownerId)
-            //     .then(response => {
-            //         vue.mascotas = response.data
-            //         vue.mascotaExist = true
-            //     })
-            //     .catch(error => {
-            //         alert("Error: No se pudo obtener las mascotas del paseador.");
-            //         console.log(error)
-            //     });
         },
         seleccionarMascota: (id, nombre, vue) => {
             vue.mascotaSeleccionada.id = id
@@ -148,7 +137,7 @@ export default {
 
         <div class="form-group">
             <h5 for="select">Seleccionar mascota</h5>
-            <button class="btn btn-primary" v-on:click="obtenerMascotas(user.dni, vue)" style="margin-bottom: 10px"
+            <button class="btn btn-primary" v-on:click="obtenerMascotas(user.id, vue)" style="margin-bottom: 10px"
                 :disabled="mascotaExist">Search</button>
             <br>
 
@@ -165,7 +154,7 @@ export default {
                 </thead>
                 <tbody>
                     <tr v-for="m in mascotas">
-                        <th scope="row"><button class="btn btn-primary" v-on:click="seleccionarMascota(m.id, m.name, vue)"
+                        <th scope="row"><button class="btn btn-primary" v-on:click="seleccionarMascota(m._id, m.name, vue)"
                                 :disabled="seleccion">+</button></th>
                         <td>{{ m.name }}</td>
                         <td>{{ m.breed }}</td>

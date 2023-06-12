@@ -1,7 +1,7 @@
 <script>
 import { storeToRefs } from 'pinia'
-import { usePaseadorStore } from '../stores/paseador.js'
-import paseadorService from '../services/paseadorService.js'
+import { usePaseadorStore } from '../../stores/paseador.js'
+import paseadorService from '../../services/disponibilidadService.js'
 
 export default {
   setup() {
@@ -84,7 +84,7 @@ export default {
         });
     },
     guardarPosibleContrato: (dispoId, vue) => {
-      const paseador = vue.paseadores.find(p => p.disponibilidadId === dispoId)
+      const paseador = vue.paseadores.find(p => p._id === dispoId)
       vue.paseador.paseadorId = paseador.paseadorId
       vue.paseador.nombre = paseador.nombre
       vue.paseador.apellido = paseador.apellido
@@ -95,7 +95,7 @@ export default {
       vue.paseador.horario = paseador.horario
       vue.paseador.precio = paseador.precio
       vue.paseador.estado = paseador.estado
-      vue.paseador.disponibilidadId = paseador.disponibilidadId
+      vue.paseador.disponibilidadId = paseador._id
     }
   }
 }
@@ -118,8 +118,21 @@ export default {
       </div>
       <div class="form-group">
         <label for="time">Horario:</label>
-        <input v-model="horario" type="time" class="form-control" id="time" min="09:00" max="21:00" step="3600"
-          :disabled="busquedaRealizada">
+        <select v-model="horario" class="form-control" id="role">
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+          <option value="11:00">11:00</option>
+          <option value="12:00">12:00</option>
+          <option value="13:00">13:00</option>
+          <option value="14:00">14:00</option>
+          <option value="15:00">15:00</option>
+          <option value="16:00">16:00</option>
+          <option value="17:00">17:00</option>
+          <option value="18:00">18:00</option>
+          <option value="19:00">19:00</option>
+          <option value="20:00">20:00</option>
+          <option value="21:00">21:00</option>
+        </select>
       </div>
 
       <br>
@@ -151,7 +164,7 @@ export default {
             <th scope="row">
               <RouterLink to="/contratarPaseador">
                 <button type="submit" class="btn btn-primary"
-                  v-on:click="guardarPosibleContrato(p.disponibilidadId, vue)">Contratar</button>
+                  v-on:click="guardarPosibleContrato(p._id, vue)">Contratar</button>
               </RouterLink>
             </th>
             <td>{{ p.nombre }}</td>

@@ -10,94 +10,83 @@ const router = createRouter({
       component: HomeView
     },
 
-    //Rutas de Usuario
-    {
-      path: '/user',
-      name: 'user',
-      component: () => import('../views/UserView.vue')
-    },
-    {
-      path: '/editUser',
-      name: 'editUser',
-      component: () => import('../views/EditUserView.vue')
-    },
-    {
-      path: '/deleteUser',
-      name: 'deleteUser',
-      component: () => import('../views/DeleteUserView.vue')
-    },
+    //----- Vistas de Usuario -----
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/LoginView.vue')
+      component: () => import('../views/UserViews/LoginView.vue')
     },
     {
       path: '/registrar',
       name: 'registrar',
-      component: () => import('../views/RegistrarView.vue')
-    },
-
-    {
-      path: '/paseosProgramados',
-      name: 'paseosProgramados',
-      component: () => import('../views/PaseosProgramadosView.vue')
+      component: () => import('../views/UserViews/RegistrarView.vue')
     },
     {
-      path: '/historialPaseos',
-      name: 'historialPaseos',
-      component: () => import('../views/HistorialPaseosView.vue')
+      path: '/user',
+      name: 'informacionUser',
+      component: () => import('../views/UserViews/InformacionUserView.vue')
     },
+    {
+      path: '/editUser',
+      name: 'editUser',
+      component: () => import('../views/UserViews/EditUserView.vue')
+    },
+    {
+      path: '/deleteUser',
+      name: 'deleteUser',
+      component: () => import('../views/UserViews/DeleteUserView.vue')
+    },
+    //-----------------------------
 
-
-
+    //----- Vistas de Mascota -----    
     {
       path: '/mascotas',
       name: 'mascotas',
-      component: () => import('../views/MascotasView.vue')
+      component: () => import('../views/MascotaViews/MascotasView.vue')
     },
     {
       path: '/mascotas/add',
       name: 'add',
-      component: () => import('../views/AddMascotasView.vue')
+      component: () => import('../views/MascotaViews/AddMascotasView.vue')
     },
-    
-    // {
-    //   path: '/mascotas',
-    //   name: 'mascotas',
-    //   component: () => import('../views/MascotasABMView.vue')
-    // },
-    // {
-    //   path: '/agregarMascota',
-    //   name: 'agregarMascota',
-    //   component: () => import('../views/MascotasABMViewAdd.vue')
-    // },
-    // {
-    //   path: '/editarMascota',
-    //   name: 'editarMascota',
-    //   component: () => import('../views/MascotasABMViewEdit.vue')
-    // },
+    //-----------------------------
 
-
-
+    //----- Vistas de Reportes -----
     {
-      path: '/busquedaPaseadores',
-      name: 'busquedaPaseadores',
-      component: () => import('../views/BusquedaPaseadoresView.vue')
+      path: '/paseosProgramados',
+      name: 'paseosProgramados',
+      component: () => import('../views/ResportesViews/PaseosProgramadosView.vue')
     },
     {
-      path: '/contratarPaseador',
-      name: 'contratarPaseador',
-      component: () => import('../views/ContratarPaseadorView.vue')
+      path: '/historialPaseos',
+      name: 'historialPaseos',
+      component: () => import('../views/ResportesViews/HistorialPaseosView.vue')
     },
+    //-----------------------------
+
+    //----- Vistas de Disponibilidad Paseador -----
     {
       path: '/disponibilidadPaseador',
       name: 'disponibilidadPaseador',
-      component: () => import('../views/DisponibilidadPaseadorView.vue')
+      component: () => import('../views/DisponibilidadPaseadorViews/DisponibilidadPaseadorView.vue')
     },
     {
       path: '/addDisponibilidades',
       name: 'addDisponibilidades',
-      component: () => import('../views/CargarDisposPaseadorView.vue')
+      component: () => import('../views/DisponibilidadPaseadorViews/CargarDisposPaseadorView.vue')
+    },
+    //-----------------------------
+
+    //----- Vistas de Contratacion -----
+    {
+      path: '/busquedaPaseadores',
+      name: 'busquedaPaseadores',
+      component: () => import('../views/ContratarPaseoViews/BusquedaPaseadoresView.vue')
+    },
+    {
+      path: '/contratarPaseador',
+      name: 'contratarPaseador',
+      component: () => import('../views/ContratarPaseoViews/ContratarPaseadorView.vue')
     }
   ]
 })

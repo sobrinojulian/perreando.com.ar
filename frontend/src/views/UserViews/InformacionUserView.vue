@@ -1,6 +1,6 @@
 <script>
 import { storeToRefs } from 'pinia'
-import { useUserStore } from '../stores/user.js'
+import { useUserStore } from '../../stores/user.js'
 
 export default {
   setup() {
@@ -50,6 +50,14 @@ export default {
       </div>
       <div class="form-group">
         <label for="telefono">Telefono: <b>{{ vue.user.telefono }}</b></label>
+      </div>
+
+      <!-- Datos de Direccion de usuario -->
+      <br>
+      <h5 class="mb-4">Ubicacion</h5>
+
+      <div class="form-group">
+        <label for="direccion">Direccion: <b>{{ vue.user.direccion }}</b></label>
       </div>
 
       <!-- Datos de Saldo de usuario -->

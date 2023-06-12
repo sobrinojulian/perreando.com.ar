@@ -1,19 +1,70 @@
 <script>
 import { storeToRefs } from 'pinia'
-import { useUserStore } from '../stores/user.js'
-import userService from '../services/userService.js'
+import { useUserStore } from '../../stores/user.js'
+import userService from '../../services/userService.js'
 
 export default {
   setup() {
     const storeUser = useUserStore()
     const { user } = storeToRefs(storeUser)
+    const ubicaciones = [
+      'Almagro',
+      'Balvanera',
+      'Barracas',
+      'Belgrano',
+      'Boedo',
+      'Caballito',
+      'Chacarita',
+      'Coghlan',
+      'Colegiales',
+      'Constitución',
+      'Flores',
+      'Floresta',
+      'La Boca',
+      'Liniers',
+      'Mataderos',
+      'Monte Castro',
+      'Montserrat',
+      'Nueva Pompeya',
+      'Nuñez',
+      'Palermo',
+      'Parque Avellaneda',
+      'Parque Chacabuco',
+      'Parque Patricios',
+      'Puerto Madero',
+      'Recoleta',
+      'Retiro',
+      'Saavedra',
+      'San Cristobal',
+      'San Nicolás',
+      'San Telmo',
+      'Velez Sarsfield',
+      'Versalles',
+      'Villa Crespo',
+      'Villa del Parque',
+      'Villa Devoto',
+      'Villa Lugano',
+      'Villa Luro',
+      'Villa Ortúzar',
+      'Villa Pueyrredón',
+      'Villa Real',
+      'Villa Riachuelo',
+      'Villa Santa Rita',
+      'Villa Soldati',
+      'Villa Urquiza'
+    ]
     return {
-      user
+      user,
+      ubicaciones
     }
   },
   data() {
     return {
       vue: this,
+      direccion: {
+        calle: "",
+        zona: ""
+      },
       user: {
         username: "",
         email: "",
@@ -23,6 +74,7 @@ export default {
         dni: "",
         fechaNacimiento: "",
         telefono: "",
+        direccion: "",
         role: "",
         saldo: 0
       }
@@ -30,20 +82,27 @@ export default {
   },
   methods: {
     registrar: (user, vue) => {
-      userService.register(user)
+      user.direccion = `${vue.direccion.calle}, ${vue.direccion.zona}`
+      userService.registerUser(user)
         .then(response => {
-          vue.user.username = response.data.username
-          vue.user.email = response.data.email
-          vue.user.password = response.data.password
-          vue.user.nombre = response.data.nombre
-          vue.user.apellido = response.data.apellido
-          vue.user.dni = response.data.dni
-          vue.user.fechaNacimiento = response.data.fechaNacimiento
-          vue.user.telefono = response.data.telefono
-          vue.user.role = response.data.role
-          vue.user.saldo = response.data.saldo
-          alert('Usuario registrado correctamente.')
-          vue.$router.push("/");
+          if (response.data.respuesta) {
+            vue.user.id = response.data._id
+            vue.user.username = response.data.username
+            vue.user.email = response.data.email
+            vue.user.password = response.data.password
+            vue.user.nombre = response.data.nombre
+            vue.user.apellido = response.data.apellido
+            vue.user.dni = response.data.dni
+            vue.user.fechaNacimiento = response.data.fechaNacimiento
+            vue.user.telefono = response.data.telefono
+            vue.user.direccion = response.data.direccion
+            vue.user.role = response.data.role
+            vue.user.saldo = response.data.saldo
+            alert('Usuario registrado correctamente.')
+            vue.$router.push("/");
+          } else {
+            alert(response.data.error)
+          }
         })
         .catch(error => {
           alert("Error: Valide los datos ingresados.");
@@ -97,7 +156,7 @@ export default {
 
       <!-- Datos de Contacto de usuario -->
       <br>
-      <h5 class="mb-4">Datos de Contacto</h5>
+      <h5 class="mb-4">Contacto</h5>
 
       <div class="form-group">
         <label for="email">Email:</label>
@@ -108,6 +167,23 @@ export default {
         <label for="telefono">Telefono:</label>
         <input v-model="user.telefono" type="number" class="form-control" id="telefono" placeholder="Phone Number"
           required>
+      </div>
+
+      <!-- Datos de Direccion de usuario -->
+      <br>
+      <h5 class="mb-4">Ubicacion</h5>
+
+      <div class="form-group">
+        <label for="direccion">Direccion:</label>
+        <input v-model="direccion.calle" type="text" class="form-control" id="calle" placeholder="Street Address"
+          required>
+
+        <label for="location">Zona:</label>
+        <input v-model="direccion.zona" type="text" class="form-control" id="location" placeholder="Location"
+          list="ubicacionesList" required>
+        <datalist id="ubicacionesList">
+          <option v-for="ubicacion in ubicaciones" :value="ubicacion"></option>
+        </datalist>
       </div>
 
       <!-- Asignar Rol del usuario -->

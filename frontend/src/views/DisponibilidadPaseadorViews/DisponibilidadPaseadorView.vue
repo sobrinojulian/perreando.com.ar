@@ -1,8 +1,8 @@
 <script>
 import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useUserStore } from '../stores/user.js'
-import paseadorService from '../services/paseadorService.js'
+import { useUserStore } from '../../stores/user.js'
+import paseadorService from '../../services/disponibilidadService.js'
 
 export default {
   setup() {
@@ -12,9 +12,9 @@ export default {
     const disponibilidades = ref([])
     const dispoExists = ref(false)
 
-    const obtenerPaseadorDisponibilidades = id => {
+    const obtenerPaseadorDisponibilidades = paseadorId => {
       paseadorService
-        .obtenerDisponibilidades(id)
+        .obtenerDisponibilidadesByPaseador(paseadorId)
         .then(response => {
           disponibilidades.value = response.data
           dispoExists.value = true
@@ -32,8 +32,12 @@ export default {
           paseadorService
             .deleteDisponibilidad(id)
             .then(response => {
-              obtenerPaseadorDisponibilidades(user.value.id)
-              alert('Disponibilidad eliminada correctamente.')
+              if (response.data.respuesta) {
+                obtenerPaseadorDisponibilidades(user.value.id)
+                alert('Disponibilidad eliminada correctamente.')
+              } else {
+                alert(response.data.error)
+              }
             })
             .catch(error => {
               alert('Error: No se pudo eliminar la disponibilidad.')
@@ -81,7 +85,7 @@ export default {
           <tr v-for="d in disponibilidades">
             <td>
               <button class="btn btn-danger" style="margin-right: 10px"
-                v-on:click="eliminarDisponibilidad(d.disponibilidadId, d.estado, vue)">X</button>
+                v-on:click="eliminarDisponibilidad(d._id, d.estado, vue)">X</button>
             </td>
             <td>{{ d.zona }}</td>
             <td>{{ d.horario }}</td>

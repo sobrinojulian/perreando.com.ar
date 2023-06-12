@@ -3,50 +3,37 @@ import UserService from '../services/usersService.js'
 class ControllerUser {
 
     constructor(){
-        this.service = new UserService()
+        this.serviceUser = new UserService()
     }
 
     loguearUsuario = async (req, res) => {
-        const username = req.params.username
-        const password = req.params.password
-        const userLogin = await this.service.loguearUsuario(username, password)
+        try {
+            const username = req.params.username
+            const password = req.params.password
+            const userLogin = await this.serviceUser.loguearUsuario(username, password)
 
-        if(userLogin != null){
             res.json(userLogin)
-        }else{
-            res.sendStatus(400)
+        } catch (error) {
+            console.log('Error en ControllerUser.loguearUsuario() --> ', error)
         }
     }
 
     registrarUsuario = async (req, res) => {
-        const user = req.body
-        const userRegistered = await this.service.registrarUsuario(user)
-
-        if(userRegistered != null){
+        try {
+            const user = req.body
+            const userRegistered = await this.serviceUser.registrarUsuario(user)
+    
             res.json(userRegistered)
-        }else{
-            res.sendStatus(400)
+        } catch (error) {
+            console.log('Error en ControllerUser.registrarUsuario() --> ', error)
         }
-    }
-
-    obtenerUsuarios = async (req, res) => {
-        const { username } = req.params
-        const users = await this.service.obtenerUsuarios(username)
-
-        res.json(users)
-    }
-
-    guardarUsuario = async (req, res) => {
-        const user = req.body
-        const userSaved = await this.service.guardarUsuario(user)
-
-        res.json(userSaved)
     }
 
     actualizarUsuario = async (req, res) => {
         try{
+            const id = req.params.id
             const user = req.body
-            const userUpdated = await this.service.actualizarUsuario(user)
+            const userUpdated = await this.serviceUser.actualizarUsuario(id, user)
     
             res.json(userUpdated)
         }catch(error){
@@ -56,8 +43,8 @@ class ControllerUser {
 
     eliminarUsuario = async (req, res) => {
         try{
-            const username = req.params.username
-            const userDeleted = await this.service.eliminarUsuario(username)
+            const id = req.params.id
+            const userDeleted = await this.serviceUser.eliminarUsuario(id)
     
             res.json(userDeleted)
         }catch(error){

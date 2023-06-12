@@ -1,9 +1,9 @@
 import fs from 'fs'
 
-class PaseadorModel {
+class DisponibilidadModel {
 
     constructor() {
-        this.DISPONIBILIDADFILE = '../backend/files/disponibilidadPaseador.json'
+        this.DISPONIBILIDADFILE = '.../backend/files/disponibilidades.json'
     }
 
     getNewDispoId = disponibilidades => {
@@ -34,7 +34,7 @@ class PaseadorModel {
                 return disponibilidades
             }
         } catch (error) {
-            console.log('Error en PaseadorModel.obtenerDisponibilidades() --> ', error)
+            console.log('Error en DisponibilidadModel.obtenerDisponibilidades() --> ', error)
             return paseadorId ? {} : []
         }
     }
@@ -58,7 +58,7 @@ class PaseadorModel {
             }
 
         } catch (error) {
-            console.log('Error en PaseadorModel.actualizarDisponibilidad() --> ', error)
+            console.log('Error en DisponibilidadModel.actualizarDisponibilidad() --> ', error)
         }
 
     }
@@ -80,7 +80,7 @@ class PaseadorModel {
                 console.log('No existe la disponibilidad a eliminar')
             }
         } catch (error) {
-            console.log('Error en PaseadorModel.eliminarDisponibilidad() --> ', error)
+            console.log('Error en DisponibilidadModel.eliminarDisponibilidad() --> ', error)
         }
     }
 
@@ -97,11 +97,11 @@ class PaseadorModel {
             await this.writeFile(disponibilidades)
             return newdisponibilidad
         } catch (error) {
-            console.log('Error en PaseadorModel.cargarDisponibilidad() --> ', error)
+            console.log('Error en DisponibilidadModel.cargarDisponibilidad() --> ', error)
             return {}
         }
     }
 
 }
 
-export default PaseadorModel
+export default DisponibilidadModel

@@ -11,6 +11,7 @@ class ControllerPaseo {
             const role = req.params.role
             const id = req.params.id
             const paseos = await this.service.obtenerPaseosProgramados(role, id)
+            
             res.json(paseos)
         } catch (error) {
             console.log('Error en ControllerPaseo.obtenerPaseosProgramados() --> ', error)
@@ -22,6 +23,7 @@ class ControllerPaseo {
             const role = req.params.role
             const id = req.params.id
             const paseos = await this.service.obtenerPaseosHistorial(role, id)
+
             res.json(paseos)
         } catch (error) {
             console.log('Error en ControllerPaseo.obtenerPaseosHistorial() --> ', error)
