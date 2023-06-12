@@ -54,8 +54,13 @@ export default {
         <thead class="text-light bg-primary">
           <tr>
             <th scope="col">Zona</th>
-            <th scope="col">Horario</th>
             <th scope="col">Fecha</th>
+            <th scope="col">Horario</th>
+<<<<<<< HEAD:frontend/src/views/ResportesViews/PaseosProgramadosView.vue
+            <th scope="col">Fecha</th>
+=======
+            <th scope="col">Total Abonado</th>
+>>>>>>> 904c670b2d8f28897d01f326bdc6feac7fbb238e:frontend/src/views/PaseosProgramadosView.vue
             <th scope="col">Nombre Mascota</th>
             <th scope="col">Nombre {{ role }}</th>
             <th scope="col">Apellido {{ role }}</th>
@@ -69,8 +74,13 @@ export default {
         <tbody>
           <tr v-for="p in paseos">
             <td>{{ p.zona }}</td>
-            <td>{{ p.horario }}</td>
             <td>{{ p.fecha }}</td>
+            <td>{{ p.horario }}</td>
+<<<<<<< HEAD:frontend/src/views/ResportesViews/PaseosProgramadosView.vue
+            <td>{{ p.fecha }}</td>
+=======
+            <td>{{ p.total }}</td>
+>>>>>>> 904c670b2d8f28897d01f326bdc6feac7fbb238e:frontend/src/views/PaseosProgramadosView.vue
             <td>{{ p.nombreMascota }}</td>
             <td>{{ p.nombrePersona }}</td>
             <td>{{ p.apellidoPersona }}</td>
