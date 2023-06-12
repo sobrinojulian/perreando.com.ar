@@ -56,7 +56,6 @@ export default {
             <th scope="col">Zona</th>
             <th scope="col">Fecha</th>
             <th scope="col">Horario</th>
-            <th scope="col">Fecha</th>
             <th scope="col">Nombre Mascota</th>
             <th scope="col">Nombre {{ role }}</th>
             <th scope="col">Apellido {{ role }}</th>
@@ -72,7 +71,6 @@ export default {
             <td>{{ p.zona }}</td>
             <td>{{ p.fecha }}</td>
             <td>{{ p.horario }}</td>
-            <td>{{ p.fecha }}</td>
             <td>{{ p.nombreMascota }}</td>
             <td>{{ p.nombrePersona }}</td>
             <td>{{ p.apellidoPersona }}</td>
