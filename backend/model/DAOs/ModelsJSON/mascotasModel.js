@@ -63,7 +63,6 @@ class Mascota {
                 mascotas = JSON.parse(await this.readFile())
             } catch { }
 
-            console.log(mascota);
             const index = mascotas.findIndex(m => m.id == mascota.id)
             if (index != -1) { //Retorna -1 sino existe el id ingresado
                 const oldMascota = mascotas[index]

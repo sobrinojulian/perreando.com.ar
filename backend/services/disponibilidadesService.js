@@ -92,7 +92,6 @@ class ServiceDisponibilidad {
                     dsCount = disponibilidadesPaseador.find(d => d.horario === dispo.horario && d.zona === dispo.zona)
                 }
 
-                console.log(dsCount);
                 if (dsCount == null) {
                     const disponibilidad = await this.modelDisponibilidad.cargarDisponibilidad(dispo)
                     return { ...disponibilidad, ...{ respuesta: true } }

@@ -123,7 +123,6 @@ class ServicePaseo {
             let paseadorModified = await this.modelUser.actualizarUsuario(paseador._id, paseadorActualizado)
 
             //Cambiar estado de la disponibilidad
-            console.log(paseo);
             const paseadorDispo = await this.modelDisponibilidad.obtenerDisponibilidadesById(paseo.disponibilidadId)
             const dispoActualizado = {
                 estado: 1 // 0 = Disponible - 1 = Contratado
