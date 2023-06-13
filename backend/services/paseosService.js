@@ -76,7 +76,7 @@ class ServicePaseo {
             let paseos = await this.modelPaseo.obtenerPaseos()
 
             paseos = this.filtrarPorRole(role, id, paseos, usuarios, mascotas) 
-            paseos = paseos.filter(p => new Date(p.fecha) >= new Date(fecha))
+            paseos = paseos.filter(p => p.fecha >= fecha)
             paseos = paseos.sort((a,b) => b.fecha.localeCompare(a.fecha))
             paseos = paseos.sort((a,b) => b.horario.localeCompare(a.horario))
             
@@ -94,8 +94,8 @@ class ServicePaseo {
             const fecha = this.getFechaActual()
             let paseos = await this.modelPaseo.obtenerPaseos()
 
-            paseos = this.filtrarPorRole(role, id, paseos, usuarios, mascotas) 
-            paseos = paseos.filter(p => new Date(p.fecha) < new Date(fecha))
+            paseos = this.filtrarPorRole(role, id, paseos, usuarios, mascotas)
+            paseos = paseos.filter(p => p.fecha < fecha)
             paseos = paseos.sort((a,b) => b.fecha.localeCompare(a.fecha))
             paseos = paseos.sort((a,b) => b.horario.localeCompare(a.horario))
             
