@@ -2,8 +2,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js"
+    "start": "node index.js",
+    "watch": "nodemon index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

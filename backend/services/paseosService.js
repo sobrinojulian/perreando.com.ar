@@ -68,6 +68,12 @@ class ServicePaseo {
         return paseosFilter
     }
 
+    compareFechaHorario(a, b) {
+        const dateTimeA = `${a.fecha} ${a.horario}`;
+        const dateTimeB = `${b.fecha} ${b.horario}`;
+        return dateTimeB.localeCompare(dateTimeA);
+    }
+
     obtenerPaseosProgramados = async (role, id) => {
         try {
             const usuarios = await this.modelUser.obtenerUsuarios()
@@ -77,9 +83,8 @@ class ServicePaseo {
 
             paseos = this.filtrarPorRole(role, id, paseos, usuarios, mascotas) 
             paseos = paseos.filter(p => p.fecha >= fecha)
-            paseos = paseos.sort((a,b) => b.fecha.localeCompare(a.fecha))
-            paseos = paseos.sort((a,b) => b.horario.localeCompare(a.horario))
-            
+            paseos = paseos.sort((a, b) => this.compareFechaHorario(a, b))
+
             return paseos
         } catch (error) {
             console.log('Error en ServicePaseo.obtenerPaseosProgramados() --> ', error)
@@ -96,9 +101,8 @@ class ServicePaseo {
 
             paseos = this.filtrarPorRole(role, id, paseos, usuarios, mascotas)
             paseos = paseos.filter(p => p.fecha < fecha)
-            paseos = paseos.sort((a,b) => b.fecha.localeCompare(a.fecha))
-            paseos = paseos.sort((a,b) => b.horario.localeCompare(a.horario))
-            
+            paseos = paseos.sort((a, b) => this.compareFechaHorario(a, b))
+
             return paseos
         } catch (error) {
             console.log('Error en ServicePaseo.obtenerPaseosHistorial() --> ', error)
@@ -127,7 +131,6 @@ class ServicePaseo {
             const dispoActualizado = {
                 estado: 1 // 0 = Disponible - 1 = Contratado
             }
-            console.log(paseadorDispo);
             let paseadorDispoModified = await this.modelDisponibilidad.actualizarDisponibilidad(paseadorDispo._id, dispoActualizado)
 
             //Guardar fecha del dia
