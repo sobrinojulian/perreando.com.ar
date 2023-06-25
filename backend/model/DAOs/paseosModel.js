@@ -2,96 +2,117 @@ import { ObjectId } from 'mongodb'
 import ConnectionMongoDB from '../ConnectionMongoDB.js'
 
 class Paseo {
-    
-    constructor(){ }
+  constructor() {}
 
-    obtenerPaseosByCliente = async clienteId => {
-        try {
-            let paseos = []
-            if (!ConnectionMongoDB.connection) return []
+  obtenerPaseosByCliente = async clienteId => {
+    try {
+      let paseos = []
+      if (!ConnectionMongoDB.connection) return []
 
-            if (clienteId) {
-                paseos = await ConnectionMongoDB.db.collection('paseos').find({ clienteId: clienteId }).toArray()
-            } else {
-                paseos = await ConnectionMongoDB.db.collection('paseos').find().toArray()
-            }
-            return paseos
-        } catch (error) {
-            console.log('Error en Paseo.obtenerPaseosByCliente() --> ', error)
-            return []
-        }
+      if (clienteId) {
+        paseos = await ConnectionMongoDB.db
+          .collection('paseos')
+          .find({ clienteId: clienteId })
+          .toArray()
+      } else {
+        paseos = await ConnectionMongoDB.db
+          .collection('paseos')
+          .find()
+          .toArray()
+      }
+      return paseos
+    } catch (error) {
+      console.log('Error en Paseo.obtenerPaseosByCliente() --> ', error)
+      return []
     }
+  }
 
-    obtenerPaseosByPaseador = async paseadorId => {
-        try {
-            let paseos = []
-            if (!ConnectionMongoDB.connection) return []
+  obtenerPaseosByPaseador = async paseadorId => {
+    try {
+      let paseos = []
+      if (!ConnectionMongoDB.connection) return []
 
-            if (paseadorId) {
-                paseos = await ConnectionMongoDB.db.collection('paseos').find({ paseadorId: paseadorId }).toArray()
-            } else {
-                paseos = await ConnectionMongoDB.db.collection('paseos').find().toArray()
-            }
-            return paseos
-        } catch (error) {
-            console.log('Error en Paseo.obtenerPaseosByPaseador() --> ', error)
-            return []
-        }
+      if (paseadorId) {
+        paseos = await ConnectionMongoDB.db
+          .collection('paseos')
+          .find({ paseadorId: paseadorId })
+          .toArray()
+      } else {
+        paseos = await ConnectionMongoDB.db
+          .collection('paseos')
+          .find()
+          .toArray()
+      }
+      return paseos
+    } catch (error) {
+      console.log('Error en Paseo.obtenerPaseosByPaseador() --> ', error)
+      return []
     }
+  }
 
-    obtenerPaseosByMascota = async mascotaId => {
-        try {
-            let paseos = []
-            if (!ConnectionMongoDB.connection) return []
+  obtenerPaseosByMascota = async mascotaId => {
+    try {
+      let paseos = []
+      if (!ConnectionMongoDB.connection) return []
 
-            if (mascotaId) {
-                paseos = await ConnectionMongoDB.db.collection('paseos').find({ mascotaId: mascotaId }).toArray()
-            } else {
-                paseos = await ConnectionMongoDB.db.collection('paseos').find().toArray()
-            }
-            return paseos
-        } catch (error) {
-            console.log('Error en Paseo.obtenerPaseosByMascota() --> ', error)
-            return []
-        }
+      if (mascotaId) {
+        paseos = await ConnectionMongoDB.db
+          .collection('paseos')
+          .find({ mascotaId: mascotaId })
+          .toArray()
+      } else {
+        paseos = await ConnectionMongoDB.db
+          .collection('paseos')
+          .find()
+          .toArray()
+      }
+      return paseos
+    } catch (error) {
+      console.log('Error en Paseo.obtenerPaseosByMascota() --> ', error)
+      return []
     }
+  }
 
-    obtenerPaseoById = async id => {
-        try {
-            if (!ConnectionMongoDB.connection) return {}
+  obtenerPaseoById = async id => {
+    try {
+      if (!ConnectionMongoDB.connection) return {}
 
-            const paseo = await ConnectionMongoDB.db.collection('paseos').findOne({ _id: new ObjectId(id) })
-            return paseo
-        } catch (error) {
-            console.log('Error en Paseo.obtenerPaseoById() --> ', error)
-            return {}
-        }
+      const paseo = await ConnectionMongoDB.db
+        .collection('paseos')
+        .findOne({ _id: new ObjectId(id) })
+      return paseo
+    } catch (error) {
+      console.log('Error en Paseo.obtenerPaseoById() --> ', error)
+      return {}
     }
+  }
 
-    obtenerPaseos = async () => {
-        try {
-            if (!ConnectionMongoDB.connection) return []
+  obtenerPaseos = async () => {
+    try {
+      if (!ConnectionMongoDB.connection) return []
 
-            const paseos = await ConnectionMongoDB.db.collection('paseos').find().toArray()
-            return paseos
-        } catch (error) {
-            console.log('Error en Paseo.obtenerPaseos() --> ', error)
-            return []
-        }
+      const paseos = await ConnectionMongoDB.db
+        .collection('paseos')
+        .find()
+        .toArray()
+      return paseos
+    } catch (error) {
+      console.log('Error en Paseo.obtenerPaseos() --> ', error)
+      return []
     }
+  }
 
-    guardarPaseo = async paseo => {
-        try {
-            if (!ConnectionMongoDB.connection) return {}
+  guardarPaseo = async paseo => {
+    try {
+      if (!ConnectionMongoDB.connection) return {}
 
-            await ConnectionMongoDB.db.collection('paseos').insertOne(paseo)
-            return paseo
-        } catch (error) {
-            console.log('Error en Paseo.guardarPaseo() --> ', error)
-            return {}
-        }
+      await ConnectionMongoDB.db.collection('paseos').insertOne(paseo)
+      return paseo
+    } catch (error) {
+      console.log('Error en Paseo.guardarPaseo() --> ', error)
+      return {}
     }
-
+  }
 }
 
 export default Paseo

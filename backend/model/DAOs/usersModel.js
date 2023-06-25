@@ -2,81 +2,87 @@ import { ObjectId } from 'mongodb'
 import ConnectionMongoDB from '../ConnectionMongoDB.js'
 
 class User {
+  constructor() {}
 
-    constructor() { }
+  obtenerUsuarioByUsername = async username => {
+    try {
+      if (!ConnectionMongoDB.connection) return id ? {} : []
 
-    obtenerUsuarioByUsername = async username => {
-        try {
-            if (!ConnectionMongoDB.connection) return id ? {} : []
-
-            const user = await ConnectionMongoDB.db.collection('usuarios').findOne({ username: username })
-            return user
-        } catch (error) {
-            console.log('Error en User.obtenerUsuarioByUsername() --> ', error)
-            return {}
-        }
+      const user = await ConnectionMongoDB.db
+        .collection('usuarios')
+        .findOne({ username: username })
+      return user
+    } catch (error) {
+      console.log('Error en User.obtenerUsuarioByUsername() --> ', error)
+      return {}
     }
+  }
 
-    obtenerUsuarios = async id => {
-        try {
-            if (!ConnectionMongoDB.connection) return id ? {} : []
+  obtenerUsuarios = async id => {
+    try {
+      if (!ConnectionMongoDB.connection) return id ? {} : []
 
-            if (id) {
-                const user = await ConnectionMongoDB.db.collection('usuarios').findOne({ _id: new ObjectId(id) })
-                return user
-            } else {
-                const users = await ConnectionMongoDB.db.collection('usuarios').find().toArray()
-                return users
-            }
-        } catch (error) {
-            console.log('Error en User.obtenerUsuarios() --> ', error)
-            return id ? {} : []
-        }
+      if (id) {
+        const user = await ConnectionMongoDB.db
+          .collection('usuarios')
+          .findOne({ _id: new ObjectId(id) })
+        return user
+      } else {
+        const users = await ConnectionMongoDB.db
+          .collection('usuarios')
+          .find()
+          .toArray()
+        return users
+      }
+    } catch (error) {
+      console.log('Error en User.obtenerUsuarios() --> ', error)
+      return id ? {} : []
     }
+  }
 
-    guardarUsuario = async user => {
-        try {
-            if (!ConnectionMongoDB.connection) return {}
+  guardarUsuario = async user => {
+    try {
+      if (!ConnectionMongoDB.connection) return {}
 
-            await ConnectionMongoDB.db.collection('usuarios').insertOne(user)
-            return user
-        } catch (error) {
-            console.log('Error en User.guardarUsuario() --> ', error)
-            return {}
-        }
+      await ConnectionMongoDB.db.collection('usuarios').insertOne(user)
+      return user
+    } catch (error) {
+      console.log('Error en User.guardarUsuario() --> ', error)
+      return {}
     }
+  }
 
-    actualizarUsuario = async (id, user) => {
-        try {
-            if (!ConnectionMongoDB.connection) return {}
+  actualizarUsuario = async (id, user) => {
+    try {
+      if (!ConnectionMongoDB.connection) return {}
 
-            await ConnectionMongoDB.db.collection('usuarios').updateOne(
-                { _id: new ObjectId(id) },
-                { $set: user }
-            )
+      await ConnectionMongoDB.db
+        .collection('usuarios')
+        .updateOne({ _id: new ObjectId(id) }, { $set: user })
 
-            const userUpdated = await this.obtenerUsuarios(id)
-            return userUpdated
-        } catch (error) {
-            console.log('Error en User.actualizarUsuario() --> ', error)
-            return {}
-        }
+      const userUpdated = await this.obtenerUsuarios(id)
+      return userUpdated
+    } catch (error) {
+      console.log('Error en User.actualizarUsuario() --> ', error)
+      return {}
     }
+  }
 
-    eliminarUsuario = async id => {
-        try {
-            if (!ConnectionMongoDB.connection) return {}
+  eliminarUsuario = async id => {
+    try {
+      if (!ConnectionMongoDB.connection) return {}
 
-            const userDeleted = await this.obtenerUsuarios(id)
-            await ConnectionMongoDB.db.collection('usuarios').deleteOne({ _id: new ObjectId(id) })
+      const userDeleted = await this.obtenerUsuarios(id)
+      await ConnectionMongoDB.db
+        .collection('usuarios')
+        .deleteOne({ _id: new ObjectId(id) })
 
-            return userDeleted
-        } catch (error) {
-            console.log('Error en User.eliminarUsuario() --> ', error)
-            return {}
-        }
+      return userDeleted
+    } catch (error) {
+      console.log('Error en User.eliminarUsuario() --> ', error)
+      return {}
     }
-
+  }
 }
 
 export default User

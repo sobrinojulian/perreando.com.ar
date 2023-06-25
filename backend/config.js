@@ -7,7 +7,7 @@ const STRCNX = process.env.STRCNX
 const DB = process.env.DB
 
 export default {
-    PORT,
-    STRCNX,
-    DB
+  PORT,
+  STRCNX,
+  DB
 }
