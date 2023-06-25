@@ -31,6 +31,17 @@ class ControllerUser {
     }
   }
 
+  verificarEmailUsuario = async (req, res) => {
+    try {
+      const token = req.params.verificationToken
+      const userVerified = await this.serviceUser.validarEmailUsuario(token)
+
+      res.json(userVerified)
+    } catch (error) {
+      console.log('Error in ControllerUser.verificarEmailUsuario() -->', error)
+    }
+  }
+
   actualizarUsuario = async (req, res) => {
     try {
       const id = req.params.id

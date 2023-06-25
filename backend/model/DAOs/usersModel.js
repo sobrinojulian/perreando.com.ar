@@ -18,6 +18,22 @@ class User {
     }
   }
 
+  obtenerUsuarioByVerificationToken = async verificationToken => {
+    try {
+      if (!ConnectionMongoDB.connection) return null
+
+      console.log(verificationToken)
+      const user = await ConnectionMongoDB.db
+        .collection('usuarios')
+        .findOne({ verificationToken: verificationToken })
+      console.log(user)
+      return user
+    } catch (error) {
+      console.log('Error in User.obtenerUsuarioByVerificationToken() -->', error)
+      return null
+    }
+  }
+
   obtenerUsuarios = async id => {
     try {
       if (!ConnectionMongoDB.connection) return id ? {} : []
