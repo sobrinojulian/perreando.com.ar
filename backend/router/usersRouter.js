@@ -15,7 +15,10 @@ class RouterUser {
     this.router.post('/register', this.controller.registrarUsuario)
     this.router.put('/edit/:id', this.controller.actualizarUsuario)
     this.router.delete('/delete/:id', this.controller.eliminarUsuario)
-    this.router.get('/verify/:verificationToken', this.controller.verificarEmailUsuario)
+    this.router.get(
+      '/verify/:verificationToken',
+      this.controller.verificarEmailUsuario
+    )
 
     return this.router
   }

@@ -29,7 +29,10 @@ class User {
       console.log(user)
       return user
     } catch (error) {
-      console.log('Error in User.obtenerUsuarioByVerificationToken() -->', error)
+      console.log(
+        'Error in User.obtenerUsuarioByVerificationToken() -->',
+        error
+      )
       return null
     }
   }

@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon index.js"
+    "watch": "nodemon index.js",
+    "pretty": "prettier --write ."
   },
   "dependencies": {
     "cors": "^2.8.5",
