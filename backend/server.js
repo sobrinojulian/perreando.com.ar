@@ -6,6 +6,7 @@ import UserRouter from './router/usersRouter.js'
 import DisponibilidadesRouter from './router/disponibilidadesRouter.js'
 import PaseoRouter from './router/paseoRouter.js'
 import MascotaRouter from './router/mascotaRouter.js'
+import ForecastRouter from './router/forecastRouter.js'
 import cors from 'cors'
 import ConnectionMongoDB from './model/ConnectionMongoDB.js'
 
@@ -24,6 +25,7 @@ class Server {
     this.app.use('/api/mascotas', new MascotaRouter().start())
     this.app.use('/api/disponibilidades', new DisponibilidadesRouter().start())
     this.app.use('/api/paseos', new PaseoRouter().start())
+    this.app.use('/api/forecast', new ForecastRouter().start())
     await ConnectionMongoDB.conectar()
 
     // ---------------------------------------
