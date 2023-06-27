@@ -5,16 +5,14 @@
     "start": "node index.js",
     "watch": "nodemon index.js",
     "pretty": "prettier --write .",
-    "test-api-in-mascota": "mocha ./test/api.in.mascota.test.js --timeout 10000",
-    "test": "mocha test/*.test.js --timeout 10000"
+    "test": "mocha test/*.test.js --timeout 10000",
+    "test-mascota": "mocha test/api.mascota.test.js --timeout 10000",
+    "test-user": "mocha test/api.users.test.js --timeout 10000"
   },
   "dependencies": {
-    "@faker-js/faker": "^8.0.2",
     "cors": "^2.8.5",
-    "dai": "^0.20.2203015",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "faker": "^6.6.6",
     "joi": "^17.9.2",
     "moment": "^2.29.4",
     "mongodb": "^5.6.0",
