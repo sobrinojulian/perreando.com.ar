@@ -32,7 +32,10 @@ class ServiceDisponibilidad {
       //Asigno todas las disponibilidades a los usuarios
       paseadores.forEach(paseador => {
         let disponibilidades = disponibilidad.filter(
-          d => d.paseadorId === paseador._id.toString() && d.estado === 0 && d.fecha >= this.getFechaActual()
+          d =>
+            d.paseadorId === paseador._id.toString() &&
+            d.estado === 0 &&
+            d.fecha >= this.getFechaActual()
         ) //Solo los disponibles
         disponibilidades.forEach(dp => {
           paseadoresCompleto = { ...paseador, ...dp }
@@ -128,7 +131,10 @@ class ServiceDisponibilidad {
 
         if (disponibilidadesPaseador.length > 0) {
           dsCount = disponibilidadesPaseador.find(
-            d => d.horario === dispo.horario && d.fecha === dispo.fecha && d.zona === dispo.zona
+            d =>
+              d.horario === dispo.horario &&
+              d.fecha === dispo.fecha &&
+              d.zona === dispo.zona
           )
         }
 

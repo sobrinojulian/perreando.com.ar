@@ -173,7 +173,9 @@ class ServicePaseo {
       )
 
       //Obtener Mascota
-      const mascota = await this.modelMascota.obtenerMascotasById(paseo.mascotaId)
+      const mascota = await this.modelMascota.obtenerMascotasById(
+        paseo.mascotaId
+      )
 
       //Cambiar estado de la disponibilidad
       const paseadorDispo =
@@ -201,7 +203,12 @@ class ServicePaseo {
         //const verificationToken = crypto.randomBytes(20).toString('hex')
 
         //Enviar mail a paseador y cliente
-        await this.sendEmailContratacion(paseadorModified, clienteModified, paseoSaved, mascota)
+        await this.sendEmailContratacion(
+          paseadorModified,
+          clienteModified,
+          paseoSaved,
+          mascota
+        )
 
         return paseoSaved
       } else {
