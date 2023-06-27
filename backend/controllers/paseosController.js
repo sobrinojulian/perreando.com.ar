@@ -11,12 +11,13 @@ class ControllerPaseo {
       const id = req.params.id
       const paseos = await this.service.obtenerPaseosProgramados(role, id)
 
-      res.json(paseos)
+      res.status(200).json(paseos)
     } catch (error) {
       console.log(
         'Error en ControllerPaseo.obtenerPaseosProgramados() --> ',
         error
       )
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 
@@ -26,12 +27,13 @@ class ControllerPaseo {
       const id = req.params.id
       const paseos = await this.service.obtenerPaseosHistorial(role, id)
 
-      res.json(paseos)
+      res.status(200).json(paseos)
     } catch (error) {
       console.log(
         'Error en ControllerPaseo.obtenerPaseosHistorial() --> ',
         error
       )
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 
@@ -40,9 +42,10 @@ class ControllerPaseo {
       const paseo = req.body
       const paseoSaved = await this.service.guardarPaseo(paseo)
 
-      res.json(paseoSaved)
+      res.status(201).json(paseoSaved)
     } catch (error) {
       console.log('Error en ControllerPaseo.guardarPaseo() --> ', error)
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 }

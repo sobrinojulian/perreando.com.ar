@@ -10,12 +10,13 @@ class ControllerMascota {
       const ownerId = req.params.ownerId
       const mascotas = await this.serviceMascota.obtenerMascotasByOwner(ownerId)
 
-      res.json(mascotas)
+      res.status(200).json(mascotas)
     } catch (error) {
       console.log(
         'Error en ControllerMascota.obtenerMascotasByOwner() --> ',
         error
       )
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 
@@ -24,12 +25,18 @@ class ControllerMascota {
       const id = req.params.id
       const mascotas = await this.serviceMascota.obtenerMascotasById(id)
 
-      res.json(mascotas)
+      if (mascotas) {
+        res.status(200).json(mascotas)
+      } else {
+        // res.status(404).json({ error: 'Mascota not found' })
+        res.status(404).json(mascotas)
+      }
     } catch (error) {
       console.log(
         'Error en ControllerMascota.obtenerMascotasById() --> ',
         error
       )
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 
@@ -37,9 +44,10 @@ class ControllerMascota {
     try {
       const mascotas = await this.serviceMascota.obtenerMascotas()
 
-      res.json(mascotas)
+      res.status(200).json(mascotas)
     } catch (error) {
       console.log('Error en ControllerMascota.obtenerMascotas() --> ', error)
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 
@@ -48,9 +56,10 @@ class ControllerMascota {
       const mascota = req.body
       const mascotaSaved = await this.serviceMascota.guardarMascota(mascota)
 
-      res.json(mascotaSaved)
+      res.status(201).json(mascotaSaved)
     } catch (error) {
       console.log('Error en ControllerMascota.guardarMascota() --> ', error)
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 
@@ -63,9 +72,15 @@ class ControllerMascota {
         mascota
       )
 
-      res.json(mascotaUpdated)
+      if (mascotaUpdated) {
+        res.status(200).json(mascotaUpdated)
+      } else {
+        // res.status(404).json({ error: 'Mascota not found' })
+        res.status(404).json(mascotaUpdated)
+      }
     } catch (error) {
       console.log('Error en ControllerMascota.actualizarMascota() --> ', error)
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 
@@ -74,9 +89,15 @@ class ControllerMascota {
       const id = req.params.id
       const mascotaDeleted = await this.serviceMascota.eliminarMascota(id)
 
-      res.json(mascotaDeleted)
+      if (mascotaDeleted) {
+        res.status(200).json(mascotaDeleted)
+      } else {
+        res.status(404).json({ error: 'Mascota not found' })
+        //res.status(404).json(mascotaDeleted)
+      }
     } catch (error) {
       console.log('Error en ControllerMascota.eliminarMascota() --> ', error)
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 }

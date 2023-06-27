@@ -11,12 +11,13 @@ class ControllerDisponibilidad {
       const horario = req.params.horario
       const paseadores = await this.service.filtrarPaseadores(zona, horario)
 
-      res.json(paseadores)
+      res.status(200).json(paseadores)
     } catch (error) {
       console.log(
         'Error en ControllerDisponibilidad.filtrarPaseadores() --> ',
         error
       )
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 
@@ -26,12 +27,13 @@ class ControllerDisponibilidad {
       const paseadores = await this.service.obtenerDisponibilidadesByPaseador(
         paseadorId
       )
-      res.json(paseadores)
+      res.status(200).json(paseadores)
     } catch (error) {
       console.log(
         'Error en ControllerDisponibilidad.obtenerDisponibilidadesByPaseador() --> ',
         error
       )
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 
@@ -39,12 +41,13 @@ class ControllerDisponibilidad {
     try {
       const id = req.params.id
       const dispoDeleted = await this.service.eliminarDisponibilidad(id)
-      res.json(dispoDeleted)
+      res.status(200).json(dispoDeleted)
     } catch (error) {
       console.log(
         'Error en ControllerDisponibilidad.eliminarDisponibilidad() --> ',
         error
       )
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 
@@ -52,12 +55,13 @@ class ControllerDisponibilidad {
     try {
       const dispo = req.body
       const disponibilidad = await this.service.cargarDisponibilidades(dispo)
-      res.json(disponibilidad)
+      res.status(201).json(disponibilidad)
     } catch (error) {
       console.log(
         'Error en ControllerDisponibilidad.cargarDisponibilidades() --> ',
         error
       )
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   }
 }
