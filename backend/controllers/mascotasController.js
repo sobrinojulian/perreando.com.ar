@@ -10,6 +10,8 @@ class ControllerMascota {
       const ownerId = req.params.ownerId
       const mascotas = await this.serviceMascota.obtenerMascotasByOwner(ownerId)
 
+      //throw new Excepcion() /*Probar excepciones*/
+
       res.status(200).json(mascotas)
     } catch (error) {
       console.log(

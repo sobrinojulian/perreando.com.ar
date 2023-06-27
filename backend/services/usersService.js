@@ -82,22 +82,35 @@ class ServiceUser {
   registrarUsuario = async user => {
     try {
       const validate = this.validateUser.validarUser(user)
+      let userExist = null
+      let mensajeError = ''
 
       if (validate.respuesta) {
-        const verificationToken = crypto.randomBytes(20).toString('hex')
-        const userWithVerification = {
-          ...user,
-          verificationToken,
-          isVerified: false
+
+        userExist = await this.modelUser.obtenerUsuarioByUsername(user.username)
+
+        if (userExist == null) {
+
+          const verificationToken = crypto.randomBytes(20).toString('hex')
+          const userWithVerification = {
+            ...user,
+            verificationToken,
+            isVerified: false
+          }
+          await this.sendVerificationEmail(user.email, verificationToken)
+          const userRegistered = await this.modelUser.guardarUsuario(
+            userWithVerification
+          )
+          return { ...userRegistered, ...validate }
+
+        } else {
+          mensajeError = 'El nombre de usuario ya existe en el sistema, debe ingresar otro.'
+          console.log(mensajeError)
+          return { respuesta: false, error: mensajeError }
         }
-        await this.sendVerificationEmail(user.email, verificationToken)
-        const userRegistered = await this.modelUser.guardarUsuario(
-          userWithVerification
-        )
-        return { ...userRegistered, ...validate }
+
       } else {
-        const mensajeError =
-          'Error al registrar el usuario, valide los datos ingresados.'
+        mensajeError = 'Error al registrar el usuario, valide los datos ingresados.'
         console.log(mensajeError)
         return { respuesta: validate.respuesta, error: mensajeError }
       }

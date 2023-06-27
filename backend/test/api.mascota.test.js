@@ -24,6 +24,7 @@ describe('Test /mascotas/', () => {
   describe('GET    /api/mascotas/:ownerId', () => {
     it('Consultar mascotas de un mismo dueño, debe retornar codigo de status 200', async () => {
       const response = await request.get(`/api/mascotas/${ownerId}`)
+      console.log(response.body)
       expect(response.status).to.eql(200)
     })
   })
@@ -33,13 +34,15 @@ describe('Test /mascotas/', () => {
   describe('POST   /api/mascotas/', () => {
     it('Incorporar una nueva mascota', async () => {
       const mascotaGenerada = generaMascota.getMascota()
-      // console.log(mascotaGenerada)
+      console.log('Mascota generada')
+      console.log(mascotaGenerada)
 
       const response = await request.post('/api/mascotas').send(mascotaGenerada)
       expect(response.status).to.eql(201)
 
       const mascotaRecibida = response.body
-      // console.log(mascotaRecibida)
+      console.log('Mascota recibida')
+      console.log(mascotaRecibida)
       expect(mascotaRecibida).to.include.keys(
         'name',
         'vaccinated',
