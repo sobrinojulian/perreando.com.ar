@@ -38,6 +38,8 @@ class ForecastService {
     try {
       const response = await fetch(geocodeUrl)
       const data = await response.json()
+      const notFound = !data.results
+      if (notFound) return []
       return data.results.filter(result => result.country === country)
     } catch (error) {
       console.log('Error:', error)
