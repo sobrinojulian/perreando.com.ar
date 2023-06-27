@@ -33,13 +33,13 @@ describe('Test /mascotas/', () => {
   describe('POST   /api/mascotas/', () => {
     it('Incorporar una nueva mascota', async () => {
       const mascotaGenerada = generaMascota.getMascota()
-      console.log(mascotaGenerada)
+      // console.log(mascotaGenerada)
 
       const response = await request.post('/api/mascotas').send(mascotaGenerada)
       expect(response.status).to.eql(201)
 
       const mascotaRecibida = response.body
-      console.log(mascotaRecibida)
+      // console.log(mascotaRecibida)
       expect(mascotaRecibida).to.include.keys(
         'name',
         'vaccinated',

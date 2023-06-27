@@ -3,7 +3,7 @@ import supertest from 'supertest'
 import Server from '../server.js'
 import config from '../config.js'
 
-describe('Server Tests', () => {
+describe('Test /users/', () => {
   let server
   let app
   let request
@@ -93,9 +93,46 @@ describe('Server Tests', () => {
 
       expect(response.body.respuesta).to.be.false
     })
+
+    // it('debería no permitir registrar un usuario con email o username ya registrado'), async () => {})
   })
-  describe('GET    /users/login/:username/:password', () => {})
+
+  describe('GET    /users/login/:username/:password', () => {
+    it('debería devolver un mensaje de éxito para credenciales válidas', async () => {
+      const username = 'julian'
+      const password = '123456'
+
+      const response = await request.get(
+        `/api/users/login/${username}/${password}`
+      )
+      expect(response.status).to.eql(200)
+
+      //expect(response.body).to.be.an('object')
+      //expect(response.body).to.have.property('message', 'Login successful')
+      //expect(response.body).to.have.property('username', username)
+      expect(response.body.respuesta).to.be.true
+    })
+
+    it('debería devolver un mensaje de error para credenciales inválidas', async () => {
+      const username = 'noexiste'
+      const password = 'invalidpassword'
+
+      const response = await request.get(
+        `/api/users/login/${username}/${password}`
+      )
+      //expect(response.status).to.eql(401)
+      //console.log(response.status)
+
+      //expect(response.body).to.be.an('object')
+      //expect(response.body).to.have.property('message', 'Invalid username or password')
+      expect(response.body.respuesta).to.be.false
+    })
+
+    // it('debería no permitir registrar un usuario con email o username ya registrado'), async () => {})
+  })
+
   describe('PUT    /users/edit/:id', () => {})
+
   describe('DELETE /users/delete/:id', () => {})
   // describe('GET    /users/verify/:verificationToken', () => {})
 })
