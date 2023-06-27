@@ -19,7 +19,7 @@ describe('Test /forecast/', () => {
   })
 
   describe('GET /api/forecast/:neighborhood', () => {
-    it('should return the forecast data for a specific neighborhood', async () => {
+    it('debería devolver los datos del pronóstico para un barrio específico', async () => {
       const neighborhood = 'almagro'
       const response = await request.get(`/api/forecast/${neighborhood}`)
       expect(response.status).to.eql(200)
@@ -34,10 +34,10 @@ describe('Test /forecast/', () => {
         expect(day).to.have.property('precipitation_probability_max')
       })
     })
-    it('should return an empty array for an unreal neighborhood', async () => {
+    it('debería devolver un arreglo vacío para un barrio inexistente.', async () => {
       const neighborhood = 'unrealneighborhood'
       const response = await request.get(`/api/forecast/${neighborhood}`)
-      expect(response.status).to.eql(200)
+      expect(response.status).to.eql(404)
 
       const forecast = response.body
       expect(forecast).to.be.an('array')
