@@ -10,6 +10,15 @@ class ServiceDisponibilidad {
     this.validateDispo = new DispoValidate()
   }
 
+  getFechaActual = () => {
+    const fecha = new Date()
+    const day = fecha.getDate()
+    const month = fecha.getMonth() + 1
+    const year = fecha.getFullYear()
+
+    return `${day}/${month}/${year}`
+  }
+
   filtrarPaseadores = async (zona, horario) => {
     let paseadoresCompleto = []
     let listaPaseadores = []
@@ -23,7 +32,7 @@ class ServiceDisponibilidad {
       //Asigno todas las disponibilidades a los usuarios
       paseadores.forEach(paseador => {
         let disponibilidades = disponibilidad.filter(
-          d => d.paseadorId === paseador._id.toString() && d.estado === 0
+          d => d.paseadorId === paseador._id.toString() && d.estado === 0 && d.fecha >= this.getFechaActual()
         ) //Solo los disponibles
         disponibilidades.forEach(dp => {
           paseadoresCompleto = { ...paseador, ...dp }
@@ -106,6 +115,8 @@ class ServiceDisponibilidad {
       //Guardar paseo
       let mensajeError = ''
       let dsCount = null
+      dispo.fecha = this.getFechaActual()
+
       const validate = this.validateDispo.validarDispo(dispo)
 
       if (validate.respuesta) {
@@ -117,7 +128,7 @@ class ServiceDisponibilidad {
 
         if (disponibilidadesPaseador.length > 0) {
           dsCount = disponibilidadesPaseador.find(
-            d => d.horario === dispo.horario && d.zona === dispo.zona
+            d => d.horario === dispo.horario && d.fecha === dispo.fecha && d.zona === dispo.zona
           )
         }
 

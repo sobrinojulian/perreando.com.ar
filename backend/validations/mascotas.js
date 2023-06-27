@@ -15,7 +15,7 @@ class MascotaValidate {
     const mascotaSchema = Joi.object({
       name: Joi.string(),
       vaccinated: Joi.bool(),
-      size: Joi.string(),
+      size: Joi.string().valid('small','medium', 'big'),
       breed: Joi.string(),
       weight: Joi.string(),
       ownerId: Joi.string()

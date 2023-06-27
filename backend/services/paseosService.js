@@ -3,6 +3,8 @@ import UserModel from '../model/DAOs/usersModel.js'
 import DisponibilidadModel from '../model/DAOs/disponibilidadesModel.js'
 import MascotaModel from '../model/DAOs/mascotasModel.js'
 import PaseoValidate from '../validations/paseos.js'
+import nodemailer from 'nodemailer'
+import config from '../config.js'
 
 class ServicePaseo {
   constructor() {
@@ -119,6 +121,35 @@ class ServicePaseo {
     }
   }
 
+  sendEmailContratacion = async (paseador, cliente, paseo, mascota) => {
+    try {
+      const dia = `${paseo.fecha} ${paseo.horario}hs`
+      const emailConfig = {
+        service: 'Gmail',
+        auth: {
+          user: config.GMAIL_USER,
+          pass: config.GMAIL_PASSWORD
+        }
+      }
+      const mailOptions = {
+        from: config.GMAIL_USER,
+        to: [paseador.email, cliente.email],
+        subject: `Paseo de Mascotas - Paseo contratado el dia ${dia}`,
+        html: `<p>Se contrato el paseo para el dia ${dia} por el precio total de $${paseo.total}.</p>
+                <a>&nbsp; <b>Contratado por:</b> ${cliente.apellido}, ${cliente.nombre} - ${cliente.dni}</a><br>
+                <a>&nbsp; <b>Mascota asignada:</b> Se llama <b>${mascota.name}</b> - ${mascota.breed}</a><br>
+                <a>&nbsp; <b>Direccion de retiro:</b> ${cliente.direccion}</a><br>
+                <a>&nbsp; <b>Datos de contacto del contratador:</b> ${cliente.email} - ${cliente.telefono}</a><br><br>
+                <p>&copy; 2023 Paseo de Mascotas. Todos los derechos reservados.</p>`
+      }
+
+      const transporter = nodemailer.createTransport(emailConfig)
+      await transporter.sendMail(mailOptions)
+    } catch (error) {
+      console.log('Error in ServicePaseo.sendEmailContratacion() -->', error)
+    }
+  }
+
   guardarPaseo = async paseo => {
     try {
       //Aplicar descuento a cliente
@@ -140,6 +171,9 @@ class ServicePaseo {
         paseador._id,
         paseadorActualizado
       )
+
+      //Obtener Mascota
+      const mascota = await this.modelMascota.obtenerMascotasById(paseo.mascotaId)
 
       //Cambiar estado de la disponibilidad
       const paseadorDispo =
@@ -164,6 +198,11 @@ class ServicePaseo {
 
       if (validate.respuesta) {
         const paseoSaved = await this.modelPaseo.guardarPaseo(paseo)
+        //const verificationToken = crypto.randomBytes(20).toString('hex')
+
+        //Enviar mail a paseador y cliente
+        await this.sendEmailContratacion(paseadorModified, clienteModified, paseoSaved, mascota)
+
         return paseoSaved
       } else {
         mensajeError = 'Error al grabar el paseo.'

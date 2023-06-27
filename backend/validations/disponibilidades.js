@@ -6,6 +6,7 @@ class DisponibilidadValidate {
   validarDispo = dispo => {
     const dispoSchema = Joi.object({
       zona: Joi.string().required(),
+      fecha: Joi.string().required(),
       horario: Joi.string().required(),
       precio: Joi.number().required(),
       estado: Joi.number().integer().required(),

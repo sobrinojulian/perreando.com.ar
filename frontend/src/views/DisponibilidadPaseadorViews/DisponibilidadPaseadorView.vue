@@ -74,23 +74,25 @@ export default {
       <table class="table">
         <thead class="text-light bg-primary">
           <tr>
-            <th scope="col"></th>
             <th scope="col">Zona</th>
+            <th scope="col">Fecha</th>
             <th scope="col">Horario</th>
             <th scope="col">Precio</th>
             <th scope="col">Estado</th>
+            <th scope="col">Accion</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="d in disponibilidades">
-            <td>
-              <button class="btn btn-danger" style="margin-right: 10px"
-                v-on:click="eliminarDisponibilidad(d._id, d.estado, vue)">X</button>
-            </td>
             <td>{{ d.zona }}</td>
+            <td>{{ d.fecha }}</td>
             <td>{{ d.horario }}</td>
             <td>{{ d.precio }}</td>
             <td>{{ d.estado == 0 ? 'Disponible' : 'Contratado' }}</td>
+            <td>
+              <button class="btn btn-danger" style="margin-right: 10px"
+                v-on:click="eliminarDisponibilidad(d._id, d.estado, vue)">Eliminar</button>
+            </td>
           </tr>
         </tbody>
       </table>
