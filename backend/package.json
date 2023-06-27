@@ -17,7 +17,10 @@
     "nodemailer": "^6.9.3"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.22",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "supertest": "^6.3.3"
   }
 }
