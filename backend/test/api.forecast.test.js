@@ -1,15 +1,15 @@
 import { expect } from 'chai'
 import supertest from 'supertest'
 import Server from '../server.js'
-import { faker } from '@faker-js/faker'
+import config from '../config.js'
 
-describe('Server Tests', () => {
+describe('Test /forecast/', () => {
   let server
   let app
   let request
 
   before(async () => {
-    server = new Server(8080)
+    server = new Server(config.PORT)
     app = await server.start()
     request = supertest(app)
   })
