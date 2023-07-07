@@ -1,21 +1,21 @@
-import { defineStore } from "pinia"
+import { defineStore } from "pinia";
 
 export const usePaseadorStore = defineStore("paseador", {
-    state: () => {
-        return {
-            paseador: {
-                paseadorId: "",
-                nombre: "",
-                apellido: "",
-                dni: "",
-                email: "",
-                telefono: "",
-                zona: "",
-                horario: "",
-                precio: "",
-                estado: "",
-                disponibilidadId: ""
-            }
-        }
-    }
-})
+  state: () => {
+    return {
+      paseador: {
+        paseadorId: "",
+        nombre: "",
+        apellido: "",
+        dni: "",
+        email: "",
+        telefono: "",
+        zona: "",
+        horario: "",
+        precio: "",
+        estado: "",
+        disponibilidadId: "",
+      },
+    };
+  },
+});

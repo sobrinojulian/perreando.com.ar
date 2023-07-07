@@ -1,26 +1,24 @@
 <script>
-import { RouterLink } from 'vue-router'
-import { useUserStore } from '../stores/user.js'
+import { RouterLink } from "vue-router";
+import { useUserStore } from "../stores/user.js";
 
 export default {
   components: {
-    RouterLink
+    RouterLink,
   },
   methods: {
     logout() {
       const store = useUserStore();
-      store.user.username = '';
-      store.user.role = '';
-    }
-  }
-}
+      store.user.username = "";
+      store.user.role = "";
+    },
+  },
+};
 </script>
 <template>
   <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
     <li class="nav-item">
-      <RouterLink to="/user" class="nav-link">
-        Información Usuario
-      </RouterLink>
+      <RouterLink to="/user" class="nav-link"> Información Usuario </RouterLink>
     </li>
     <li class="nav-item">
       <RouterLink to="/paseosProgramados" class="nav-link">
@@ -33,9 +31,7 @@ export default {
       </RouterLink>
     </li>
     <li class="nav-item">
-      <RouterLink to="/mascotas" class="nav-link">
-        Mascotas
-      </RouterLink>
+      <RouterLink to="/mascotas" class="nav-link"> Mascotas </RouterLink>
     </li>
     <li class="nav-item">
       <RouterLink to="/busquedaPaseadores" class="nav-link">
@@ -43,9 +39,7 @@ export default {
       </RouterLink>
     </li>
     <li class="nav-item">
-      <RouterLink to="/" class="nav-link" @click="logout">
-        Logout
-      </RouterLink>
+      <RouterLink to="/" class="nav-link" @click="logout"> Logout </RouterLink>
     </li>
   </ul>
 </template>

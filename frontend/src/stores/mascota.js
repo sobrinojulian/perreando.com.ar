@@ -1,17 +1,17 @@
-import { defineStore } from "pinia"
+import { defineStore } from "pinia";
 
 export const useMascotaStore = defineStore("mascota", {
-    state: () => {
-        return {
-            mascota: {
-                id: "",
-                nombre: "",
-                vacunado: "",
-                tamanio: "",
-                raza: "",
-                peso: "",
-                ownerId: ""
-            }
-        }
-    }
-})
+  state: () => {
+    return {
+      mascota: {
+        id: "",
+        nombre: "",
+        vacunado: "",
+        tamanio: "",
+        raza: "",
+        peso: "",
+        ownerId: "",
+      },
+    };
+  },
+});

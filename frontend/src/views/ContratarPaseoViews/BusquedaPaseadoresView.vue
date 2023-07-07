@@ -1,62 +1,62 @@
 <script>
-import { storeToRefs } from 'pinia'
-import { usePaseadorStore } from '../../stores/paseador.js'
-import paseadorService from '../../services/disponibilidadService.js'
+import { storeToRefs } from "pinia";
+import { usePaseadorStore } from "../../stores/paseador.js";
+import paseadorService from "../../services/disponibilidadService.js";
 
 export default {
   setup() {
-    const storePaseador = usePaseadorStore()
-    const { paseador } = storeToRefs(storePaseador)
+    const storePaseador = usePaseadorStore();
+    const { paseador } = storeToRefs(storePaseador);
     const ubicaciones = [
-      'Almagro',
-      'Balvanera',
-      'Barracas',
-      'Belgrano',
-      'Boedo',
-      'Caballito',
-      'Chacarita',
-      'Coghlan',
-      'Colegiales',
-      'Constitución',
-      'Flores',
-      'Floresta',
-      'La Boca',
-      'Liniers',
-      'Mataderos',
-      'Monte Castro',
-      'Montserrat',
-      'Nueva Pompeya',
-      'Nuñez',
-      'Palermo',
-      'Parque Avellaneda',
-      'Parque Chacabuco',
-      'Parque Patricios',
-      'Puerto Madero',
-      'Recoleta',
-      'Retiro',
-      'Saavedra',
-      'San Cristobal',
-      'San Nicolás',
-      'San Telmo',
-      'Velez Sarsfield',
-      'Versalles',
-      'Villa Crespo',
-      'Villa del Parque',
-      'Villa Devoto',
-      'Villa Lugano',
-      'Villa Luro',
-      'Villa Ortúzar',
-      'Villa Pueyrredón',
-      'Villa Real',
-      'Villa Riachuelo',
-      'Villa Santa Rita',
-      'Villa Soldati',
-      'Villa Urquiza'
-    ]
+      "Almagro",
+      "Balvanera",
+      "Barracas",
+      "Belgrano",
+      "Boedo",
+      "Caballito",
+      "Chacarita",
+      "Coghlan",
+      "Colegiales",
+      "Constitución",
+      "Flores",
+      "Floresta",
+      "La Boca",
+      "Liniers",
+      "Mataderos",
+      "Monte Castro",
+      "Montserrat",
+      "Nueva Pompeya",
+      "Nuñez",
+      "Palermo",
+      "Parque Avellaneda",
+      "Parque Chacabuco",
+      "Parque Patricios",
+      "Puerto Madero",
+      "Recoleta",
+      "Retiro",
+      "Saavedra",
+      "San Cristobal",
+      "San Nicolás",
+      "San Telmo",
+      "Velez Sarsfield",
+      "Versalles",
+      "Villa Crespo",
+      "Villa del Parque",
+      "Villa Devoto",
+      "Villa Lugano",
+      "Villa Luro",
+      "Villa Ortúzar",
+      "Villa Pueyrredón",
+      "Villa Real",
+      "Villa Riachuelo",
+      "Villa Santa Rita",
+      "Villa Soldati",
+      "Villa Urquiza",
+    ];
     return {
       paseador,
-      ubicaciones
-    }
+      ubicaciones,
+    };
   },
   data() {
     return {
@@ -66,52 +66,70 @@ export default {
       busquedaRealizada: false,
       textoSearch: "",
       paseadores: [],
-      textHelp: ""
+      textHelp: "",
     };
   },
   methods: {
     buscar: (zona, horario, vue) => {
-      paseadorService.busquedaPaseadores(zona, horario)
-        .then(response => {
-          vue.paseadores = response.data
-          vue.textoSearch = (zona != '' && horario != '') ? "zona y horario" : (zona != '') ? "zona" : (horario != '') ? "horario" : ""
-          vue.busquedaRealizada = true
-          vue.textHelp = vue.paseadores.length == 0 ? 'No existen paseos disponibles en la zona y/o horario solicitado.' : 'Se listan los paseos disponibles para contratar.'
+      paseadorService
+        .busquedaPaseadores(zona, horario)
+        .then((response) => {
+          vue.paseadores = response.data;
+          vue.textoSearch =
+            zona != "" && horario != ""
+              ? "zona y horario"
+              : zona != ""
+              ? "zona"
+              : horario != ""
+              ? "horario"
+              : "";
+          vue.busquedaRealizada = true;
+          vue.textHelp =
+            vue.paseadores.length == 0
+              ? "No existen paseos disponibles en la zona y/o horario solicitado."
+              : "Se listan los paseos disponibles para contratar.";
         })
-        .catch(error => {
+        .catch((error) => {
           alert("Error: No se pudo realizar la busqueda.");
           console.log(error);
         });
     },
     guardarPosibleContrato: (dispoId, vue) => {
-      const paseador = vue.paseadores.find(p => p._id === dispoId)
-      vue.paseador.paseadorId = paseador.paseadorId
-      vue.paseador.nombre = paseador.nombre
-      vue.paseador.apellido = paseador.apellido
-      vue.paseador.dni = paseador.dni
-      vue.paseador.email = paseador.email
-      vue.paseador.telefono = paseador.telefono
-      vue.paseador.zona = paseador.zona
-      vue.paseador.horario = paseador.horario
-      vue.paseador.precio = paseador.precio
-      vue.paseador.estado = paseador.estado
-      vue.paseador.disponibilidadId = paseador._id
-    }
-  }
-}
+      const paseador = vue.paseadores.find((p) => p._id === dispoId);
+      vue.paseador.paseadorId = paseador.paseadorId;
+      vue.paseador.nombre = paseador.nombre;
+      vue.paseador.apellido = paseador.apellido;
+      vue.paseador.dni = paseador.dni;
+      vue.paseador.email = paseador.email;
+      vue.paseador.telefono = paseador.telefono;
+      vue.paseador.zona = paseador.zona;
+      vue.paseador.horario = paseador.horario;
+      vue.paseador.precio = paseador.precio;
+      vue.paseador.estado = paseador.estado;
+      vue.paseador.disponibilidadId = paseador._id;
+    },
+  },
+};
 </script>
 
 <template>
   <div class="container mt-4">
     <h2 class="mb-4">Busqueda</h2>
-    <hr>
+    <hr />
 
     <!-- Buscar paseadores -->
     <form @submit.prevent="buscar(zona, horario, vue)">
       <div class="form-group">
         <label for="location">Ubicacion:</label>
-        <input v-model="zona" type="text" class="form-control" id="location" placeholder="Location"
-          :disabled="busquedaRealizada" list="ubicacionesList">
+        <input
+          v-model="zona"
+          type="text"
+          class="form-control"
+          id="location"
+          placeholder="Location"
+          :disabled="busquedaRealizada"
+          list="ubicacionesList"
+        />
         <datalist id="ubicacionesList">
           <option v-for="ubicacion in ubicaciones" :value="ubicacion"></option>
         </datalist>
@@ -135,15 +153,25 @@ export default {
         </select>
       </div>
 
-      <br>
-      <button v-show="zona != '' || horario != ''" type="submit" class="btn btn-primary" style="margin-right: 10px"
-        :disabled="busquedaRealizada">Buscar</button>
+      <br />
+      <button
+        v-show="zona != '' || horario != ''"
+        type="submit"
+        class="btn btn-primary"
+        style="margin-right: 10px"
+        :disabled="busquedaRealizada"
+      >
+        Buscar
+      </button>
     </form>
-    <br>
+    <br />
 
     <!-- Seleccionar de paseadores filtrados -->
     <form v-show="busquedaRealizada">
-      <h5 class="mb-4">Paseadores (<a v-if="textoSearch != ''">Busqueda realizada por </a>{{ textoSearch }})</h5>
+      <h5 class="mb-4">
+        Paseadores (<a v-if="textoSearch != ''">Busqueda realizada por </a
+        >{{ textoSearch }})
+      </h5>
       <p id="help" class="form-text text-muted">{{ textHelp }}</p>
       <table class="table">
         <thead class="text-light bg-primary">
@@ -163,8 +191,13 @@ export default {
           <tr v-for="p in paseadores">
             <th scope="row">
               <RouterLink to="/contratarPaseador">
-                <button type="submit" class="btn btn-primary"
-                  v-on:click="guardarPosibleContrato(p._id, vue)">Contratar</button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  v-on:click="guardarPosibleContrato(p._id, vue)"
+                >
+                  Contratar
+                </button>
               </RouterLink>
             </th>
             <td>{{ p.nombre }}</td>
@@ -179,12 +212,19 @@ export default {
         </tbody>
       </table>
     </form>
-    <br>
-    <button class="btn btn-primary" v-show="busquedaRealizada" v-on:click="busquedaRealizada = false;
-    zona = '';
-    horario = '';
-    textHelp = '';
-    textoSearch = ''">Volver</button>
-
+    <br />
+    <button
+      class="btn btn-primary"
+      v-show="busquedaRealizada"
+      v-on:click="
+        busquedaRealizada = false;
+        zona = '';
+        horario = '';
+        textHelp = '';
+        textoSearch = '';
+      "
+    >
+      Volver
+    </button>
   </div>
 </template>

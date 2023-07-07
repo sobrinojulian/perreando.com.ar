@@ -1,54 +1,61 @@
 <script>
-import { onMounted, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '../../stores/user.js'
-import paseoService from '../../services/paseoService.js'
+import { onMounted, ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useUserStore } from "../../stores/user.js";
+import paseoService from "../../services/paseoService.js";
 
 import MascotasService from "../../services/mascotaService"; //Mascota
 
 export default {
   setup() {
-    const storeUser = useUserStore()
-    const { user } = storeToRefs(storeUser)
+    const storeUser = useUserStore();
+    const { user } = storeToRefs(storeUser);
 
-    const paseos = ref([])
-    const paseoExists = ref(false)
-    const role = user.value.role === 'CLIENTE' ? 'Paseador' : user.value.role === 'PASEADOR' ? 'Cliente' : ''
+    const paseos = ref([]);
+    const paseoExists = ref(false);
+    const role =
+      user.value.role === "CLIENTE"
+        ? "Paseador"
+        : user.value.role === "PASEADOR"
+        ? "Cliente"
+        : "";
 
     const obtenerPaseos = () => {
       paseoService
         .obtenerPaseosHistorial(user.value.role, user.value.id)
-        .then(response => {
-          paseos.value = response.data          
-          paseoExists.value = true
+        .then((response) => {
+          paseos.value = response.data;
+          paseoExists.value = true;
         })
-        .catch(error => {
-          alert('Error: No se pudo obtener los paseos programados.')
-          console.log(error)
-        })
-    }
+        .catch((error) => {
+          alert("Error: No se pudo obtener los paseos programados.");
+          console.log(error);
+        });
+    };
 
     onMounted(() => {
-      obtenerPaseos()
-    })
+      obtenerPaseos();
+    });
 
     return {
       user,
       paseos,
       paseoExists,
       role,
-      obtenerPaseos
-    }
-  }
-}
+      obtenerPaseos,
+    };
+  },
+};
 </script>
 
 <template>
   <div class="container mt-4">
     <h2 class="mb-4">Historial de paseos (DNI: {{ user.dni }})</h2>
-    <hr>
+    <hr />
 
-    <p v-if="paseos.length <= 0 && paseoExists">No tiene historial de paseos concretados</p>
+    <p v-if="paseos.length <= 0 && paseoExists">
+      No tiene historial de paseos concretados
+    </p>
     <div v-if="paseos.length >= 1" class="form-group">
       <table class="table">
         <thead class="text-light bg-primary">

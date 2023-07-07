@@ -1,6 +1,6 @@
 <script setup>
-import { RouterView } from 'vue-router';
-import Menu from './components/Menu.vue';
+import { RouterView } from "vue-router";
+import Menu from "./components/Menu.vue";
 import PieView from "./views/PieView.vue";
 </script>
 

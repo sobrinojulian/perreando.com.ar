@@ -1,75 +1,81 @@
 <script>
-import { onMounted, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '../../stores/user.js'
-import paseadorService from '../../services/disponibilidadService.js'
+import { onMounted, ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useUserStore } from "../../stores/user.js";
+import paseadorService from "../../services/disponibilidadService.js";
 
 export default {
   setup() {
-    const storeUser = useUserStore()
-    const { user } = storeToRefs(storeUser)
+    const storeUser = useUserStore();
+    const { user } = storeToRefs(storeUser);
 
-    const disponibilidades = ref([])
-    const dispoExists = ref(false)
+    const disponibilidades = ref([]);
+    const dispoExists = ref(false);
 
-    const obtenerPaseadorDisponibilidades = paseadorId => {
+    const obtenerPaseadorDisponibilidades = (paseadorId) => {
       paseadorService
         .obtenerDisponibilidadesByPaseador(paseadorId)
-        .then(response => {
-          disponibilidades.value = response.data
-          dispoExists.value = true
+        .then((response) => {
+          disponibilidades.value = response.data;
+          dispoExists.value = true;
         })
-        .catch(error => {
-          alert('Error: No se pudo obtener las disponibilidades del paseador.')
-          console.log(error)
-        })
-    }
+        .catch((error) => {
+          alert("Error: No se pudo obtener las disponibilidades del paseador.");
+          console.log(error);
+        });
+    };
 
     const eliminarDisponibilidad = (id, estado) => {
-      let result = confirm('¿Está seguro de querer eliminar la disponibilidad?')
+      let result = confirm(
+        "¿Está seguro de querer eliminar la disponibilidad?",
+      );
       if (result) {
         if (estado === 0) {
           paseadorService
             .deleteDisponibilidad(id)
-            .then(response => {
+            .then((response) => {
               if (response.data.respuesta) {
-                obtenerPaseadorDisponibilidades(user.value.id)
-                alert('Disponibilidad eliminada correctamente.')
+                obtenerPaseadorDisponibilidades(user.value.id);
+                alert("Disponibilidad eliminada correctamente.");
               } else {
-                alert(response.data.error)
+                alert(response.data.error);
               }
             })
-            .catch(error => {
-              alert('Error: No se pudo eliminar la disponibilidad.')
-              console.log(error)
-            })
+            .catch((error) => {
+              alert("Error: No se pudo eliminar la disponibilidad.");
+              console.log(error);
+            });
         } else {
-          alert('No se puede eliminar la disponibilidad porque está reservada para un paseo.')
+          alert(
+            "No se puede eliminar la disponibilidad porque está reservada para un paseo.",
+          );
         }
       }
-    }
+    };
 
     onMounted(() => {
-      obtenerPaseadorDisponibilidades(user.value.id)
-    })
+      obtenerPaseadorDisponibilidades(user.value.id);
+    });
 
     return {
       user,
       disponibilidades,
       dispoExists,
       obtenerPaseadorDisponibilidades,
-      eliminarDisponibilidad
-    }
-  }
-}
+      eliminarDisponibilidad,
+    };
+  },
+};
 </script>
 
 <template>
   <div class="container mt-4">
     <h2 class="mb-4">Disponibilidades de paseador (DNI: {{ user.dni }})</h2>
-    <hr>
+    <hr />
 
-    <p v-if="disponibilidades.length === 0 && dispoExists">No tiene disponibilidades cargadas</p>
+    <p v-if="disponibilidades.length === 0 && dispoExists">
+      No tiene disponibilidades cargadas
+    </p>
     <div class="form-group">
       <table class="table">
         <thead class="text-light bg-primary">
@@ -88,19 +94,26 @@ export default {
             <td>{{ d.fecha }}</td>
             <td>{{ d.horario }}</td>
             <td>{{ d.precio }}</td>
-            <td>{{ d.estado == 0 ? 'Disponible' : 'Contratado' }}</td>
+            <td>{{ d.estado == 0 ? "Disponible" : "Contratado" }}</td>
             <td>
-              <button class="btn btn-danger" style="margin-right: 10px"
-                v-on:click="eliminarDisponibilidad(d._id, d.estado, vue)">Eliminar</button>
+              <button
+                class="btn btn-danger"
+                style="margin-right: 10px"
+                v-on:click="eliminarDisponibilidad(d._id, d.estado, vue)"
+              >
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <br>
+    <br />
 
     <RouterLink to="/addDisponibilidades" v-if="dispoExists">
-      <button class="btn btn-primary" style="margin-right: 10px">Agregar</button>
+      <button class="btn btn-primary" style="margin-right: 10px">
+        Agregar
+      </button>
     </RouterLink>
   </div>
 </template>
