@@ -1,27 +1,40 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
-export const useUserStore = defineStore("user", {
+export const useUserStore = defineStore('user', {
   state: () => {
     return {
       user: {
-        id: "",
-        username: "",
-        email: "",
-        password: "",
-        nombre: "",
-        apellido: "",
-        dni: "",
-        fechaNacimiento: "",
-        telefono: "",
-        direccion: "",
-        role: "",
-        saldo: 0,
-      },
-    };
+        id: '',
+        username: '',
+        email: '',
+        password: '',
+        nombre: '',
+        apellido: '',
+        dni: '',
+        fechaNacimiento: '',
+        telefono: '',
+        direccion: '',
+        role: '',
+        saldo: 0
+      }
+    }
   },
   actions: {
     updateUser(user) {
-      this.user = user;
+      this.user = user
     },
-  },
-});
+    logout() {
+      this.user.username = ''
+      this.user.role = ''
+    },
+    esAnonimo() {
+      return this.user.username === ''
+    },
+    esPaseador() {
+      return this.user.role === 'PASEADOR'
+    },
+    esCliente() {
+      return this.user.role === 'CLIENTE'
+    }
+  }
+})

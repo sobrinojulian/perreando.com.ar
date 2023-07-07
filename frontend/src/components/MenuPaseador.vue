@@ -1,19 +1,7 @@
-<script>
-import { RouterLink } from "vue-router";
-import { useUserStore } from "../stores/user.js";
-
-export default {
-  components: {
-    RouterLink,
-  },
-  methods: {
-    logout() {
-      const store = useUserStore();
-      store.user.username = "";
-      store.user.role = "";
-    },
-  },
-};
+<script setup>
+import { RouterLink } from 'vue-router'
+import { useUserStore } from '../stores/user.js'
+const store = useUserStore()
 </script>
 <template>
   <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -36,7 +24,7 @@ export default {
       </RouterLink>
     </li>
     <li class="nav-item">
-      <RouterLink to="/" class="nav-link" @click="logout"> Logout </RouterLink>
+      <RouterLink to="/" class="nav-link" @click="store.logout()"> Logout </RouterLink>
     </li>
   </ul>
 </template>
