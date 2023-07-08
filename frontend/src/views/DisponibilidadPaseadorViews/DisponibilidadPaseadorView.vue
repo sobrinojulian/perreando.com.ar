@@ -97,9 +97,10 @@ export default {
             <td>{{ d.estado == 0 ? "Disponible" : "Contratado" }}</td>
             <td>
               <button
-                class="btn btn-danger"
+                class="btn btn-danger disa"
                 style="margin-right: 10px"
                 v-on:click="eliminarDisponibilidad(d._id, d.estado, vue)"
+                :disabled="d.estado !== 0"
               >
                 Eliminar
               </button>
