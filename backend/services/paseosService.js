@@ -79,7 +79,7 @@ class ServicePaseo {
   compareFechaHorario(a, b) {
     const dateTimeA = `${a.fecha} ${a.horario}`
     const dateTimeB = `${b.fecha} ${b.horario}`
-    return dateTimeB.localeCompare(dateTimeA)
+    return dateTimeA.localeCompare(dateTimeB)
   }
 
   obtenerPaseosProgramados = async (role, id) => {
