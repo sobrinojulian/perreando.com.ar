@@ -13,8 +13,12 @@ class ControllerUser {
         username,
         password
       )
-
-      res.status(200).json(userLogin)
+      if (userLogin.success) {
+        res.status(200).json(userLogin.data)
+      }
+      if (!userLogin.success) {
+        res.status(401).json({ error: userLogin.message })
+      }
     } catch (error) {
       console.log('Error en ControllerUser.loguearUsuario() --> ', error)
       res.status(500).json({ error: 'Internal Server Error' })
@@ -72,4 +76,3 @@ class ControllerUser {
 }
 
 export default ControllerUser
-2

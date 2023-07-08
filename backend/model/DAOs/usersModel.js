@@ -18,6 +18,20 @@ class User {
     }
   }
 
+  obtenerUsuarioByUsernameAndPassword = async (username, password) => {
+    try {
+      if (!ConnectionMongoDB.connection) return {}
+
+      const user = await ConnectionMongoDB.db
+        .collection('usuarios')
+        .findOne({ username: username, password: password })
+      return user
+    } catch (error) {
+      console.log('Error en User.obtenerUsuarioByUsernameAndPassword() --> ', error)
+      return {}
+    }
+  }
+
   obtenerUsuarioByVerificationToken = async verificationToken => {
     try {
       if (!ConnectionMongoDB.connection) return null

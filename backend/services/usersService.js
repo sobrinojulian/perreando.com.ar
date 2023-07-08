@@ -12,32 +12,20 @@ class ServiceUser {
 
   loguearUsuario = async (username, password) => {
     try {
-      let mensajeError = ''
-      const userLogin = await this.modelUser.obtenerUsuarioByUsername(username)
+      const userLogin = await this.modelUser.obtenerUsuarioByUsernameAndPassword(username, password);
 
-      //Valido que exista el nombre de usuario ingresado
       if (userLogin != null) {
-        //Valido que coincidan el nombre de usuario y la constraseña
-        if (
-          userLogin.username === username &&
-          userLogin.password === password
-        ) {
-          return { ...userLogin, ...{ respuesta: true } }
-        } else {
-          mensajeError = 'La constraseña ingresada es incorrecta.'
-          console.log(mensajeError)
-          return { respuesta: false, error: mensajeError }
-        }
+        return { success: true, data: userLogin };
       } else {
-        mensajeError = 'El nombre de usuario ingresado no existe.'
-        console.log(mensajeError)
-        return { respuesta: false, error: mensajeError }
+        return { success: false, message: 'Username y/o Password ingresados son incorrectos.' };
       }
     } catch (error) {
-      console.log('Error en ServiceUser.loguearUsuario() --> ', error)
-      return {}
+      console.log('Error en ServiceUser.loguearUsuario() --> ', error);
+      return { success: false, message: 'Internal Server Error' };
     }
   }
+
+
 
   validarEmailUsuario = async token => {
     try {
@@ -86,11 +74,9 @@ class ServiceUser {
       let mensajeError = ''
 
       if (validate.respuesta) {
-
         userExist = await this.modelUser.obtenerUsuarioByUsername(user.username)
 
         if (userExist == null) {
-
           const verificationToken = crypto.randomBytes(20).toString('hex')
           const userWithVerification = {
             ...user,
@@ -102,15 +88,15 @@ class ServiceUser {
             userWithVerification
           )
           return { ...userRegistered, ...validate }
-
         } else {
-          mensajeError = 'El nombre de usuario ya existe en el sistema, debe ingresar otro.'
+          mensajeError =
+            'El nombre de usuario ya existe en el sistema, debe ingresar otro.'
           console.log(mensajeError)
           return { respuesta: false, error: mensajeError }
         }
-
       } else {
-        mensajeError = 'Error al registrar el usuario, valide los datos ingresados.'
+        mensajeError =
+          'Error al registrar el usuario, valide los datos ingresados.'
         console.log(mensajeError)
         return { respuesta: validate.respuesta, error: mensajeError }
       }

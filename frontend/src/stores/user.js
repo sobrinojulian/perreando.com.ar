@@ -47,6 +47,20 @@ export const useUserStore = defineStore('user', {
     updateUser(user) {
       this.user = user
     },
+    login(response) {
+      this.user.id = response.data._id
+      this.user.username = response.data.username
+      this.user.email = response.data.email
+      this.user.password = response.data.password
+      this.user.nombre = response.data.nombre
+      this.user.apellido = response.data.apellido
+      this.user.dni = response.data.dni
+      this.user.fechaNacimiento = response.data.fechaNacimiento
+      this.user.telefono = response.data.telefono
+      this.user.direccion = response.data.direccion
+      this.user.role = response.data.role
+      this.user.saldo = response.data.saldo
+    },
     update(response) {
       this.user.username = response.data.username
       this.user.email = response.data.email
