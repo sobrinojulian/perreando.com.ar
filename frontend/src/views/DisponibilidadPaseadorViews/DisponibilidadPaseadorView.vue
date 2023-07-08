@@ -1,70 +1,67 @@
 <script>
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
-import { useUserStore } from "../../stores/user.js";
-import paseadorService from "../../services/disponibilidadService.js";
+import { useUserStore } from "@/stores/user.js";
+import paseadorService from "@/services/disponibilidadService.js";
+
+import ChartDisponibilidad from "@/components/ChartDisponibilidad.vue";
 
 export default {
-  setup() {
-    const storeUser = useUserStore();
-    const { user } = storeToRefs(storeUser);
-
-    const disponibilidades = ref([]);
-    const dispoExists = ref(false);
-
-    const obtenerPaseadorDisponibilidades = (paseadorId) => {
-      paseadorService
-        .obtenerDisponibilidadesByPaseador(paseadorId)
-        .then((response) => {
-          disponibilidades.value = response.data;
-          dispoExists.value = true;
-        })
-        .catch((error) => {
-          alert("Error: No se pudo obtener las disponibilidades del paseador.");
-          console.log(error);
-        });
-    };
-
-    const eliminarDisponibilidad = (id, estado) => {
-      let result = confirm(
-        "¿Está seguro de querer eliminar la disponibilidad?",
-      );
-      if (result) {
-        if (estado === 0) {
-          paseadorService
-            .deleteDisponibilidad(id)
-            .then((response) => {
-              if (response.data.respuesta) {
-                obtenerPaseadorDisponibilidades(user.value.id);
-                alert("Disponibilidad eliminada correctamente.");
-              } else {
-                alert(response.data.error);
-              }
+    setup() {
+        const storeUser = useUserStore();
+        const { user } = storeToRefs(storeUser);
+        const disponibilidades = ref([]);
+        const dispoExists = ref(false);
+        const obtenerPaseadorDisponibilidades = (paseadorId) => {
+            paseadorService
+                .obtenerDisponibilidadesByPaseador(paseadorId)
+                .then((response) => {
+                disponibilidades.value = response.data;
+                dispoExists.value = true;
             })
-            .catch((error) => {
-              alert("Error: No se pudo eliminar la disponibilidad.");
-              console.log(error);
+                .catch((error) => {
+                alert("Error: No se pudo obtener las disponibilidades del paseador.");
+                console.log(error);
             });
-        } else {
-          alert(
-            "No se puede eliminar la disponibilidad porque está reservada para un paseo.",
-          );
-        }
-      }
-    };
-
-    onMounted(() => {
-      obtenerPaseadorDisponibilidades(user.value.id);
-    });
-
-    return {
-      user,
-      disponibilidades,
-      dispoExists,
-      obtenerPaseadorDisponibilidades,
-      eliminarDisponibilidad,
-    };
-  },
+        };
+        const eliminarDisponibilidad = (id, estado) => {
+            let result = confirm("¿Está seguro de querer eliminar la disponibilidad?");
+            if (result) {
+                if (estado === 0) {
+                    paseadorService
+                        .deleteDisponibilidad(id)
+                        .then((response) => {
+                        if (response.data.respuesta) {
+                            obtenerPaseadorDisponibilidades(user.value.id);
+                            alert("Disponibilidad eliminada correctamente.");
+                        }
+                        else {
+                            alert(response.data.error);
+                        }
+                    })
+                        .catch((error) => {
+                        alert("Error: No se pudo eliminar la disponibilidad.");
+                        console.log(error);
+                    });
+                }
+                else {
+                    alert("No se puede eliminar la disponibilidad porque está reservada para un paseo.");
+                }
+            }
+        };
+        onMounted(() => {
+            obtenerPaseadorDisponibilidades(user.value.id);
+        });
+        return {
+            user,
+            disponibilidades,
+            dispoExists,
+            obtenerPaseadorDisponibilidades,
+            eliminarDisponibilidad,
+            ChartDisponibilidad
+        };
+    },
+    components: { ChartDisponibilidad }
 };
 </script>
 
@@ -72,6 +69,7 @@ export default {
   <div class="container mt-4">
     <h2 class="mb-4">Disponibilidades de paseador (DNI: {{ user.dni }})</h2>
     <hr />
+    <ChartDisponibilidad v-if="disponibilidades.length !== 0" :disponibilidades="disponibilidades"/>
 
     <p v-if="disponibilidades.length === 0 && dispoExists">
       No tiene disponibilidades cargadas
