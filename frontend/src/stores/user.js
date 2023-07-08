@@ -46,6 +46,13 @@ export const useUserStore = defineStore('user', {
     },
     logout() {
       this.user.username = ''
+      this.user.email = ''
+      this.user.password = ''
+      this.user.nombre = ''
+      this.user.apellido = ''
+      this.user.dni = ''
+      this.user.fechaNacimiento = ''
+      this.user.telefono = ''
       this.user.role = ''
     },
     esAnonimo() {
