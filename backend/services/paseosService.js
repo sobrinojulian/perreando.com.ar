@@ -221,6 +221,23 @@ class ServicePaseo {
       return {}
     }
   }
+
+  calificarPaseo = async (id, calificacion) => {
+    try {
+      const paseo = await this.modelPaseo.obtenerPaseoById(id)
+      if (!paseo) {
+        throw new Error('Paseo not found')
+      }
+
+      paseo.calificacion = calificacion
+      await this.modelPaseo.actualizarPaseo(id, paseo)
+
+      return { message: 'Calificación saved successfully' }
+    } catch (error) {
+      console.log('Error in ServicePaseo.calificarPaseo() -->', error)
+      throw error
+    }
+  }
 }
 
 export default ServicePaseo

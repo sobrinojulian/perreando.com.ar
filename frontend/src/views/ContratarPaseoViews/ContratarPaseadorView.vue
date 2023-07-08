@@ -36,6 +36,7 @@ export default {
         mascotaId: "",
         total: 0,
         fecha: "",
+        calificacion: -1
       },
       mascotas: [],
       mascotaExist: false,

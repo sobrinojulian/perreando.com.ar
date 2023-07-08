@@ -13,8 +13,13 @@ const obtenerPaseosHistorial = (role, id) => {
   return apiClient.get(`/api/paseos/historial/${role}/${id}`);
 };
 
+const calificar = (id, calificacion) => {
+  return apiClient.post(`/api/paseos/calificar/${id}`, { calificacion });
+};
+
 export default {
   grabarPaseo,
   obtenerPaseosProgramados,
   obtenerPaseosHistorial,
+  calificar
 };

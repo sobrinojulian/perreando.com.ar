@@ -15,7 +15,8 @@ class PaseoValidate {
       clienteId: Joi.string().required(),
       paseadorId: Joi.string().required(),
       disponibilidadId: Joi.string().required(),
-      mascotaId: Joi.string().required()
+      mascotaId: Joi.string().required(),
+      calificacion: Joi.number().optional()
     })
 
     const { error } = paseoSchema.validate(paseo)

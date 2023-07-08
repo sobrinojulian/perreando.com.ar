@@ -48,6 +48,19 @@ class ControllerPaseo {
       res.status(500).json({ error: 'Internal Server Error' })
     }
   }
+
+  calificarPaseo = async (req, res) => {
+    try {
+      const id = req.params.id
+      const calificacion = req.body.calificacion
+      await this.service.calificarPaseo(id, calificacion)
+
+      res.status(200).json({ message: 'Calificación saved successfully' })
+    } catch (error) {
+      console.log('Error in ControllerPaseo.calificarPaseo() -->', error)
+      res.status(500).json({ error: 'Internal Server Error' })
+    }
+  }
 }
 
 export default ControllerPaseo

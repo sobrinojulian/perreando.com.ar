@@ -18,6 +18,7 @@ class PaseoRouter {
       '/historial/:role/:id',
       this.controller.obtenerPaseosHistorial
     )
+    this.router.post('/calificar/:id', this.controller.calificarPaseo)
 
     return this.router
   }

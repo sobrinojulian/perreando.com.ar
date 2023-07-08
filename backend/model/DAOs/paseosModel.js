@@ -113,6 +113,25 @@ class Paseo {
       return {}
     }
   }
+
+  actualizarPaseo = async (id, paseo) => {
+    try {
+      if (!ConnectionMongoDB.connection) return {};
+
+      const paseoId = new ObjectId(id);
+      const updatedPaseo = { $set: paseo };
+
+      await ConnectionMongoDB.db
+        .collection('paseos')
+        .updateOne({ _id: paseoId }, updatedPaseo);
+
+      return paseo;
+    } catch (error) {
+      console.log('Error en Paseo.actualizarPaseo() --> ', error);
+      return {};
+    }
+  };
+
 }
 
 export default Paseo
