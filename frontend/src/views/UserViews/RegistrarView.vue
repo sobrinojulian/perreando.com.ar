@@ -1,117 +1,51 @@
-<script>
-import { storeToRefs } from "pinia";
-import { useUserStore } from "../../stores/user.js";
-import userService from "../../services/userService.js";
+<script setup>
+import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
-export default {
-  setup() {
-    const storeUser = useUserStore();
-    const { user } = storeToRefs(storeUser);
-    const ubicaciones = [
-      "Almagro",
-      "Balvanera",
-      "Barracas",
-      "Belgrano",
-      "Boedo",
-      "Caballito",
-      "Chacarita",
-      "Coghlan",
-      "Colegiales",
-      "Constitución",
-      "Flores",
-      "Floresta",
-      "La Boca",
-      "Liniers",
-      "Mataderos",
-      "Monte Castro",
-      "Montserrat",
-      "Nueva Pompeya",
-      "Nuñez",
-      "Palermo",
-      "Parque Avellaneda",
-      "Parque Chacabuco",
-      "Parque Patricios",
-      "Puerto Madero",
-      "Recoleta",
-      "Retiro",
-      "Saavedra",
-      "San Cristobal",
-      "San Nicolás",
-      "San Telmo",
-      "Velez Sarsfield",
-      "Versalles",
-      "Villa Crespo",
-      "Villa del Parque",
-      "Villa Devoto",
-      "Villa Lugano",
-      "Villa Luro",
-      "Villa Ortúzar",
-      "Villa Pueyrredón",
-      "Villa Real",
-      "Villa Riachuelo",
-      "Villa Santa Rita",
-      "Villa Soldati",
-      "Villa Urquiza",
-    ];
-    return {
-      user,
-      ubicaciones,
-    };
-  },
-  data() {
-    return {
-      vue: this,
-      direccion: {
-        calle: "",
-        zona: "",
-      },
-      user: {
-        username: "",
-        email: "",
-        password: "",
-        nombre: "",
-        apellido: "",
-        dni: "",
-        fechaNacimiento: "",
-        telefono: "",
-        direccion: "",
-        role: "",
-        saldo: 0,
-      },
-    };
-  },
-  methods: {
-    registrar: (user, vue) => {
-      user.direccion = `${vue.direccion.calle}, ${vue.direccion.zona}`;
-      userService
-        .registerUser(user)
-        .then((response) => {
-          if (response.data.respuesta) {
-            vue.user.id = response.data._id;
-            vue.user.username = response.data.username;
-            vue.user.email = response.data.email;
-            vue.user.password = response.data.password;
-            vue.user.nombre = response.data.nombre;
-            vue.user.apellido = response.data.apellido;
-            vue.user.dni = response.data.dni;
-            vue.user.fechaNacimiento = response.data.fechaNacimiento;
-            vue.user.telefono = response.data.telefono;
-            vue.user.direccion = response.data.direccion;
-            vue.user.role = response.data.role;
-            vue.user.saldo = response.data.saldo;
-            alert("Usuario registrado correctamente.");
-            vue.$router.push("/");
-          } else {
-            alert(response.data.error);
-          }
-        })
-        .catch((error) => {
-          alert("Error: Valide los datos ingresados.");
-          console.log(error);
-        });
-    },
-  },
-};
+import { useUserStore } from '@/stores/user.js'
+import userService from '@/services/userService.js'
+import { useZonaStore } from '@/stores/zona.js'
+
+const router = useRouter()
+
+const userStore = useUserStore()
+const user = storeToRefs(userStore)
+
+const storeZona = useZonaStore()
+const ubicaciones = storeZona.getZonasDisponibles()
+
+const direccion = {
+  calle: '',
+  zona: ''
+}
+
+const registrar = async () => {
+  try {
+    const registerUser = {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      nombre: user.nombre,
+      apellido: user.apellido,
+      dni: user.dni,
+      fechaNacimiento: user.fechaNacimiento,
+      telefono: user.telefono,
+      direccion: `${direccion.calle}, ${direccion.zona}`,
+      role: user.role,
+      saldo: user.saldo
+    }
+    const response = await userService.registerUser(registerUser)
+    userStore.login(response)
+    alert('Usuario registrado correctamente.')
+    router.push('/')
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      alert(error.response.data.error)
+    } else {
+      alert(error.message)
+    }
+  }
+}
 </script>
 
 <template>
@@ -119,7 +53,7 @@ export default {
     <h2 class="mb-4">Registro de usuario</h2>
     <hr />
 
-    <form @submit.prevent="registrar(user, vue)">
+    <form @submit.prevent="registrar">
       <div class="form-group">
         <label for="username">Nombre de usuario:</label>
         <input
@@ -128,8 +62,7 @@ export default {
           class="form-control"
           id="username"
           placeholder="Username"
-          required
-        />
+          required />
       </div>
 
       <div class="form-group">
@@ -140,8 +73,7 @@ export default {
           class="form-control"
           id="password"
           placeholder="Password"
-          required
-        />
+          required />
       </div>
 
       <!-- Datos Personales de usuario -->
@@ -156,8 +88,7 @@ export default {
           class="form-control"
           id="nombre"
           placeholder="Name"
-          required
-        />
+          required />
       </div>
 
       <div class="form-group">
@@ -168,8 +99,7 @@ export default {
           class="form-control"
           id="apellido"
           placeholder="Last Name"
-          required
-        />
+          required />
       </div>
 
       <div class="form-group">
@@ -180,8 +110,7 @@ export default {
           class="form-control"
           id="dni"
           placeholder="DNI"
-          required
-        />
+          required />
       </div>
 
       <div class="form-group">
@@ -192,8 +121,7 @@ export default {
           class="form-control"
           id="fechaNacimiento"
           placeholder="Date of Birth"
-          required
-        />
+          required />
       </div>
 
       <!-- Datos de Contacto de usuario -->
@@ -208,8 +136,7 @@ export default {
           class="form-control"
           id="email"
           placeholder="Email Address"
-          required
-        />
+          required />
       </div>
 
       <div class="form-group">
@@ -220,8 +147,7 @@ export default {
           class="form-control"
           id="telefono"
           placeholder="Phone Number"
-          required
-        />
+          required />
       </div>
 
       <!-- Datos de Direccion de usuario -->
@@ -236,8 +162,7 @@ export default {
           class="form-control"
           id="calle"
           placeholder="Street Address"
-          required
-        />
+          required />
 
         <label for="location">Zona:</label>
         <input
@@ -247,8 +172,7 @@ export default {
           id="location"
           placeholder="Location"
           list="ubicacionesList"
-          required
-        />
+          required />
         <datalist id="ubicacionesList">
           <option v-for="ubicacion in ubicaciones" :value="ubicacion"></option>
         </datalist>
@@ -268,11 +192,11 @@ export default {
 
       <!-- Asignar Saldo del usuario -->
       <br />
-      <h5 class="mb-4">Saldo en cuenta del Usuario</h5>
-      <div class="form-group" v-if="user.role == 'PASEADOR'">
+      <h5 class="mb-4" v-if="user.role === 'PASEADOR' || user.role === 'CLIENTE'">Saldo en cuenta del Usuario</h5>
+      <div class="form-group" v-if="user.role === 'PASEADOR'">
         <p>Al registrarse como paseador, el saldo inicial es 0</p>
       </div>
-      <div class="form-group" v-if="user.role == 'CLIENTE'">
+      <div class="form-group" v-if="user.role === 'CLIENTE'">
         <p>
           Al registrarse como cliente, debe ingresar el monto con el que puede
           operar para contratar los paseos. Puede aumentar el importe en
@@ -284,8 +208,7 @@ export default {
           class="form-control"
           id="saldo"
           placeholder="Saldo"
-          required
-        />
+          required />
       </div>
 
       <br />

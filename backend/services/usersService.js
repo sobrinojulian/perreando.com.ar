@@ -12,20 +12,25 @@ class ServiceUser {
 
   loguearUsuario = async (username, password) => {
     try {
-      const userLogin = await this.modelUser.obtenerUsuarioByUsernameAndPassword(username, password);
+      const userLogin =
+        await this.modelUser.obtenerUsuarioByUsernameAndPassword(
+          username,
+          password
+        )
 
       if (userLogin != null) {
-        return { success: true, data: userLogin };
+        return { success: true, data: userLogin }
       } else {
-        return { success: false, message: 'Username y/o Password ingresados son incorrectos.' };
+        return {
+          success: false,
+          message: 'Username y/o Password ingresados son incorrectos.'
+        }
       }
     } catch (error) {
-      console.log('Error en ServiceUser.loguearUsuario() --> ', error);
-      return { success: false, message: 'Internal Server Error' };
+      console.log('Error en ServiceUser.loguearUsuario() --> ', error)
+      return { success: false, message: 'Internal Server Error' }
     }
   }
-
-
 
   validarEmailUsuario = async token => {
     try {
@@ -70,39 +75,47 @@ class ServiceUser {
   registrarUsuario = async user => {
     try {
       const validate = this.validateUser.validarUser(user)
-      let userExist = null
-      let mensajeError = ''
-
-      if (validate.respuesta) {
-        userExist = await this.modelUser.obtenerUsuarioByUsername(user.username)
-
-        if (userExist == null) {
-          const verificationToken = crypto.randomBytes(20).toString('hex')
-          const userWithVerification = {
-            ...user,
-            verificationToken,
-            isVerified: false
-          }
-          await this.sendVerificationEmail(user.email, verificationToken)
-          const userRegistered = await this.modelUser.guardarUsuario(
-            userWithVerification
-          )
-          return { ...userRegistered, ...validate }
-        } else {
-          mensajeError =
-            'El nombre de usuario ya existe en el sistema, debe ingresar otro.'
-          console.log(mensajeError)
-          return { respuesta: false, error: mensajeError }
+      if (!validate.success) {
+        return {
+          success: false,
+          message: 'Error al registrar el usuario. Valide los datos ingresados.'
         }
-      } else {
-        mensajeError =
-          'Error al registrar el usuario, valide los datos ingresados.'
-        console.log(mensajeError)
-        return { respuesta: validate.respuesta, error: mensajeError }
+      }
+
+      const userExist = await this.modelUser.obtenerUsuarioByUsername(
+        user.username
+      )
+      if (userExist !== null) {
+        return {
+          success: false,
+          message:
+            'El nombre de usuario ya existe en el sistema. Por favor, ingrese otro.'
+        }
+      }
+
+      const verificationToken = crypto.randomBytes(20).toString('hex')
+      const userWithVerification = {
+        ...user,
+        verificationToken,
+        isVerified: false
+      }
+
+      await this.sendVerificationEmail(user.email, verificationToken)
+      const userRegistered = await this.modelUser.guardarUsuario(
+        userWithVerification
+      )
+
+      return {
+        success: true,
+        data: userRegistered,
+        message: 'Usuario registrado correctamente.'
       }
     } catch (error) {
       console.log('Error en ServiceUser.registrarUsuario() --> ', error)
-      return {}
+      return {
+        success: false,
+        message: 'Error interno del servidor.'
+      }
     }
   }
 

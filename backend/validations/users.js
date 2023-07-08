@@ -4,19 +4,6 @@ class UserValidate {
   constructor() {}
 
   validarUser = user => {
-    // const userSchema = Joi.object({
-    //     username: Joi.string().required(),
-    //     email: Joi.string().required(),
-    //     password: Joi.string().required(),
-    //     nombre: Joi.string().required(),
-    //     apellido: Joi.string().required(),
-    //     dni: Joi.number().required(),
-    //     fechaNacimiento: Joi.date().required(),
-    //     telefono: Joi.number().required(),
-    //     direccion: Joi.string().required(),
-    //     role: Joi.string().uppercase().required(),
-    //     saldo: Joi.number().min(0).required()
-    // })
     const userSchema = Joi.object({
       username: Joi.string(),
       email: Joi.string(),
@@ -34,9 +21,9 @@ class UserValidate {
     const { error } = userSchema.validate(user)
 
     if (error) {
-      return { respuesta: false, error }
+      return { success: false, error }
     }
-    return { respuesta: true }
+    return { success: true }
   }
 }
 

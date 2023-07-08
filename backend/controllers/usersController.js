@@ -7,11 +7,9 @@ class ControllerUser {
 
   loguearUsuario = async (req, res) => {
     try {
-      const username = req.params.username
-      const password = req.params.password
       const userLogin = await this.serviceUser.loguearUsuario(
-        username,
-        password
+        req.params.username,
+        req.params.password
       )
       if (userLogin.success) {
         res.status(200).json(userLogin.data)
@@ -29,8 +27,12 @@ class ControllerUser {
     try {
       const user = req.body
       const userRegistered = await this.serviceUser.registrarUsuario(user)
-
-      res.status(201).json(userRegistered)
+      if (userRegistered.success) {
+        res.status(201).json(userRegistered.data)
+      }
+      if (!userRegistered.success) {
+        res.status(400).json({ error: userRegistered.message })
+      }
     } catch (error) {
       console.log('Error en ControllerUser.registrarUsuario() --> ', error)
       res.status(500).json({ error: 'Internal Server Error' })
