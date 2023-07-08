@@ -1,73 +1,55 @@
-<script>
-import { storeToRefs } from "pinia";
-import { useUserStore } from "../../stores/user.js";
-import userService from "../../services/userService.js";
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
-export default {
-  setup() {
-    const storeUser = useUserStore();
-    const { user } = storeToRefs(storeUser);
-    return {
-      user,
-    };
-  },
-  data() {
-    return {
-      vue: this,
-      user: {
-        username: this.user.username,
-        email: this.user.email,
-        password: this.user.password,
-        nombre: this.user.nombre,
-        apellido: this.user.apellido,
-        dni: this.user.dni,
-        fechaNacimiento: this.user.fechaNacimiento,
-        telefono: this.user.telefono,
-        direccion: this.user.direccion,
-        role: this.user.role,
-        saldo: 0,
-      },
-    };
-  },
-  methods: {
-    editar: (user, vue) => {
-      user.saldo = user.saldo + vue.user.saldo;
-      userService
-        .editUser(vue.user.id, user)
-        .then((response) => {
-          if (response.data.respuesta) {
-            vue.user.username = response.data.username;
-            vue.user.email = response.data.email;
-            vue.user.password = response.data.password;
-            vue.user.nombre = response.data.nombre;
-            vue.user.apellido = response.data.apellido;
-            vue.user.dni = response.data.dni;
-            vue.user.fechaNacimiento = response.data.fechaNacimiento;
-            vue.user.telefono = response.data.telefono;
-            vue.user.direccion = response.data.direccion;
-            vue.user.role = response.data.role;
-            vue.user.saldo = response.data.saldo;
-            alert("Datos de usuario actualizado correctamente.");
-            vue.$router.push("/user");
-          } else {
-            alert(response.data.error);
-          }
-        })
-        .catch((error) => {
-          alert("Error: Valide los datos ingresados.");
-          console.log(error);
-        });
-    },
-  },
-};
+import { useUserStore } from '@/stores/user.js'
+import userService from '@/services/userService.js'
+
+const userStore = useUserStore()
+const user = storeToRefs(userStore).user
+
+const router = useRouter()
+const incrementoSaldo = ref(0)
+
+const editar = () => {
+  const updatedUser = {
+    username: user.value.username,
+    email: user.value.email,
+    password: user.value.password,
+    nombre: user.value.nombre,
+    apellido: user.value.apellido,
+    dni: user.value.dni,
+    fechaNacimiento: user.value.fechaNacimiento,
+    telefono: user.value.telefono,
+    direccion: user.value.direccion,
+    role: user.value.role,
+    saldo: user.value.saldo + incrementoSaldo.value
+  }
+
+  userService
+    .editUser(user.value.id, updatedUser)
+    .then(response => {
+      if (response.status === 200) {
+        userStore.update(response)
+        alert('Datos de usuario actualizado correctamente.')
+        router.push('/user')
+      } else {
+        alert(response.data.error)
+      }
+    })
+    .catch(error => {
+      alert('Error: Valide los datos ingresados.')
+      console.log(error)
+    })
+}
 </script>
-
 <template>
   <div class="container">
-    <h2 class="mb-4">Editar informacion de usuario</h2>
+    <h2 class="mb-4">Editar información de usuario</h2>
     <hr />
 
-    <form @submit.prevent="editar(user, vue)">
+    <form @submit.prevent="editar">
       <!-- Datos Personales de usuario -->
       <h5 class="mb-4">Datos Personales</h5>
 
@@ -78,8 +60,7 @@ export default {
           type="text"
           class="form-control"
           id="nombre"
-          placeholder="Name"
-        />
+          placeholder="Name" />
       </div>
 
       <div class="form-group">
@@ -89,8 +70,7 @@ export default {
           type="text"
           class="form-control"
           id="apellido"
-          placeholder="Last Name"
-        />
+          placeholder="Last Name" />
       </div>
 
       <div class="form-group">
@@ -100,8 +80,7 @@ export default {
           type="number"
           class="form-control"
           id="dni"
-          placeholder="DNI"
-        />
+          placeholder="DNI" />
       </div>
 
       <div class="form-group">
@@ -111,8 +90,7 @@ export default {
           type="date"
           class="form-control"
           id="fechaNacimiento"
-          placeholder="Date of Birth"
-        />
+          placeholder="Date of Birth" />
       </div>
 
       <!-- Datos de Contacto de usuario -->
@@ -126,8 +104,7 @@ export default {
           type="email"
           class="form-control"
           id="email"
-          placeholder="Email Address"
-        />
+          placeholder="Email Address" />
       </div>
 
       <div class="form-group">
@@ -137,8 +114,7 @@ export default {
           type="number"
           class="form-control"
           id="telefono"
-          placeholder="Phone Number"
-        />
+          placeholder="Phone Number" />
       </div>
 
       <!-- Datos de Direccion de usuario -->
@@ -152,46 +128,28 @@ export default {
           type="text"
           class="form-control"
           id="direccion"
-          placeholder="Direccion"
-        />
+          placeholder="Direccion" />
       </div>
-
-      <!-- Asignar Rol del usuario -->
-      <!-- <br>
-      <h5 class="mb-4">Rol del Usuario</h5>
-
-      <div class="form-group">
-        <label for="role">Rol:</label>
-        <select v-model="user.role" class="form-control" id="role">
-          <option value="CLIENTE">Cliente</option>
-          <option value="PASEADOR">Paseador</option>
-        </select>
-      </div> -->
 
       <!-- Asignar Saldo del usuario -->
       <br />
-      <div class="form-group" v-if="user.role == 'CLIENTE'">
+      <div class="form-group" v-if="userStore.esCliente()">
         <h5 class="mb-4">Saldo en cuenta del Cliente</h5>
         <input
-          v-model="user.saldo"
+          v-model="incrementoSaldo"
           type="number"
           class="form-control"
           id="saldo"
-          placeholder="Saldo"
-        />
+          placeholder="Saldo" />
         <small id="help" class="form-text text-muted"
           >Solo puede aumentar el importe.</small
         >
       </div>
 
       <br />
-      <button type="submit" class="btn btn-primary" style="margin-right: 10px">
-        Editar
-      </button>
+      <button type="submit" class="btn btn-primary me-2">Editar</button>
       <RouterLink to="/user">
-        <button class="btn btn-primary" style="margin-right: 10px">
-          Volver
-        </button>
+        <button class="btn btn-primary me-2">Volver</button>
       </RouterLink>
     </form>
   </div>
