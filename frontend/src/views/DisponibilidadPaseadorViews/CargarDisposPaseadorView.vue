@@ -146,11 +146,11 @@ export default {
       </div>
 
       <br />
-      <button type="submit" class="btn btn-primary" style="margin-right: 10px">
+      <button type="submit" class="btn btn-primary me-2">
         Cargar
       </button>
       <RouterLink to="/disponibilidadPaseador">
-        <button class="btn btn-primary" style="margin-right: 10px">
+        <button class="btn btn-primary me-2">
           Volver
         </button>
       </RouterLink>

@@ -111,7 +111,7 @@ export default {
     <br />
 
     <RouterLink to="/addDisponibilidades" v-if="dispoExists">
-      <button class="btn btn-primary" style="margin-right: 10px">
+      <button class="btn btn-primary me-2">
         Agregar
       </button>
     </RouterLink>

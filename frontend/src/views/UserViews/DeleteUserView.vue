@@ -38,11 +38,11 @@ const eliminar = () => {
       </div>
 
       <br />
-      <button type="submit" class="btn btn-primary" style="margin-right: 10px">
+      <button type="submit" class="btn btn-primary me-2">
         Si
       </button>
       <RouterLink to="/user">
-        <button class="btn btn-primary" style="margin-right: 10px">No</button>
+        <button class="btn btn-primary me-2">No</button>
       </RouterLink>
     </form>
   </div>

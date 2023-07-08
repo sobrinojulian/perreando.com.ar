@@ -228,7 +228,7 @@ export default {
         Contratar
       </button>
       <RouterLink to="/busquedaPaseadores">
-        <button class="btn btn-primary" style="margin-right: 10px">
+        <button class="btn btn-primary me-2">
           Volver a Busqueda
         </button>
       </RouterLink>
