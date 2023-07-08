@@ -90,11 +90,11 @@ export default {
         </thead>
         <tbody>
           <tr v-for="d in disponibilidades">
-            <td>{{ d.zona }}</td>
-            <td>{{ d.fecha }}</td>
-            <td>{{ d.horario }}</td>
-            <td>{{ d.precio }}</td>
-            <td>{{ d.estado == 0 ? "Disponible" : "Contratado" }}</td>
+            <td :class="{'text-success': d.estado !== 0, 'text-danger': d.estado === 0}">{{ d.zona }}</td>
+            <td :class="{'text-success': d.estado !== 0, 'text-danger': d.estado === 0}">{{ d.fecha }}</td>
+            <td :class="{'text-success': d.estado !== 0, 'text-danger': d.estado === 0}">{{ d.horario }}</td>
+            <td :class="{'text-success': d.estado !== 0, 'text-danger': d.estado === 0}">{{ d.precio }}</td>
+            <td :class="{'text-success': d.estado !== 0, 'text-danger': d.estado === 0}">{{ d.estado == 0 ? "Disponible" : "Contratado" }}</td>
             <td>
               <button
                 class="btn btn-danger disa"
