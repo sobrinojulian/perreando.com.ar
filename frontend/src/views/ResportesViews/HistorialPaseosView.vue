@@ -32,7 +32,7 @@ export default {
         })
     }
     const calificarPaseo = async (paseo) => {
-      console.log(paseo)
+      //console.log(paseo)
       const calificacion = prompt('Ingrese la calificación (0-5):')
       if (calificacion !== null && calificacion !== '') {
         const parsedCalificacion = parseFloat(calificacion)
@@ -107,13 +107,13 @@ export default {
             <td>{{ p.direccionPersona }}</td>
             <td>{{ p.total }}</td>
             <td>
-              <template v-if="p.calificacion === -1">
+              <template v-if="user.role == 'CLIENTE' && p.calificacion === -1">
                 <button class="btn btn-primary" @click="calificarPaseo(p)">
                   Calificar
                 </button>
               </template>
               <template v-else>
-                {{ p.calificacion }}
+                {{ p.calificacion === -1 ? 'Sin calificacion' : p.calificacion }}
               </template>
             </td>
           </tr>

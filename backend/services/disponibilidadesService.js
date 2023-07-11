@@ -19,6 +19,12 @@ class ServiceDisponibilidad {
     return `${day}/${month}/${year}`
   }
 
+  convertFecha = fecha => {
+    let fechaSplit = fecha.split('/')
+    let date = new Date(fechaSplit[1] + "/" + fechaSplit[0] + "/" + fechaSplit[2]);
+    return date;
+  }
+
   filtrarPaseadores = async (zona, horario) => {
     let paseadoresCompleto = []
     let listaPaseadores = []
@@ -35,7 +41,7 @@ class ServiceDisponibilidad {
           d =>
             d.paseadorId === paseador._id.toString() &&
             d.estado === 0 &&
-            d.fecha >= this.getFechaActual()
+            new Date(this.convertFecha(d.fecha)) >= new Date(this.convertFecha(this.getFechaActual()))
         ) //Solo los disponibles
         disponibilidades.forEach(dp => {
           paseadoresCompleto = { ...paseador, ...dp }

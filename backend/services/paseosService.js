@@ -24,6 +24,12 @@ class ServicePaseo {
     return `${day}/${month}/${year}`
   }
 
+  convertFecha = fecha => {
+    let fechaSplit = fecha.split('/')
+    let date = new Date(fechaSplit[1] + "/" + fechaSplit[0] + "/" + fechaSplit[2]);
+    return date;
+  }
+
   agregarDatosPersona = (id, usuarios) => {
     const usuario = usuarios.find(u => u._id.toString() === id)
     let nombrePersona = usuario.nombre
@@ -89,16 +95,13 @@ class ServicePaseo {
       const fecha = this.getFechaActual()
       let paseos = await this.modelPaseo.obtenerPaseos()
 
-      paseos = this.filtrarPorRole(role, id, paseos, usuarios, mascotas)
-      paseos = paseos.filter(p => p.fecha >= fecha)
+      paseos = this.filtrarPorRole(role, id, paseos, usuarios, mascotas)      
+      paseos = paseos.filter(p => new Date(this.convertFecha(p.fecha)) >= new Date(this.convertFecha(fecha)))
       paseos = paseos.sort((a, b) => this.compareFechaHorario(a, b))
 
       return paseos
     } catch (error) {
-      console.log(
-        'Error en ServicePaseo.obtenerPaseosProgramados() --> ',
-        error
-      )
+      console.log('Error en ServicePaseo.obtenerPaseosProgramados() --> ', error)
       return []
     }
   }
@@ -111,7 +114,7 @@ class ServicePaseo {
       let paseos = await this.modelPaseo.obtenerPaseos()
 
       paseos = this.filtrarPorRole(role, id, paseos, usuarios, mascotas)
-      paseos = paseos.filter(p => p.fecha < fecha)
+      paseos = paseos.filter(p => new Date(this.convertFecha(p.fecha)) < new Date(this.convertFecha(fecha)))
       paseos = paseos.sort((a, b) => this.compareFechaHorario(a, b))
 
       return paseos

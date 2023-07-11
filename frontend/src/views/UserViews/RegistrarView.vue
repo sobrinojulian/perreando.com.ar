@@ -32,7 +32,7 @@ const registrar = async () => {
       telefono: user.telefono,
       direccion: `${direccion.calle}, ${direccion.zona}`,
       role: user.role,
-      saldo: user.saldo
+      saldo: user.saldo == null ? 0 : user.saldo
     }
     const response = await userService.registerUser(registerUser)
     userStore.login(response)

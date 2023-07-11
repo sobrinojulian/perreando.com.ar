@@ -124,14 +124,14 @@ class ServiceUser {
       let mensajeError = ''
       const validate = this.validateUser.validarUser(user)
 
-      if (validate.respuesta) {
+      if (validate.success) {
         const userUpdated = await this.modelUser.actualizarUsuario(id, user)
         return { ...userUpdated, ...validate }
       } else {
         mensajeError =
           'Error al actualizar el usuario, valide los datos ingresados.'
         console.log(mensajeError)
-        return { respuesta: validate.respuesta, error: mensajeError }
+        return { respuesta: validate.success, error: mensajeError }
       }
     } catch (error) {
       console.log('Error en ServiceUser.actualizarUsuario() --> ', error)
