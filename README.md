@@ -1,5 +1,5 @@
 # Proyecto:
-> [Figma](https://www.figma.com/file/TRh3g5jnVZPjriqIjMLoqk/Untitled)
+> [Figma](https://www.figma.com/file/TRh3g5jnVZPjriqIjMLoqk/PaseaPerros)
 
 Sistema encargado de gestionar los paseos de perros para los clientes. A su vez, los paseadores podran gestionar los paseos realizados.
 
